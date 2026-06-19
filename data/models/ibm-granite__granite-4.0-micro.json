@@ -1,0 +1,104 @@
+{
+  "id": "ibm-granite/granite-4.0-micro",
+  "slug": "ibm-granite__granite-4.0-micro",
+  "name": "granite-4.0-micro",
+  "family": "granitemoehybrid",
+  "architecture": "GraniteMoeHybridForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.4,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 69552,
+    "likes": 273,
+    "lastModified": "2025-11-03T19:39:06.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 40,
+    "numHeads": 40,
+    "numKVHeads": 8,
+    "headDim": 64,
+    "intermediateSize": 8192,
+    "vocabSize": 100352,
+    "contextLen": 131072,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000000
+    },
+    "layerTypes": [
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention",
+      "attention"
+    ]
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.0-micro/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:07.516Z"
+}

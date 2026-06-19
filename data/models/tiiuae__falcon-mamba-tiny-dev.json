@@ -1,0 +1,59 @@
+{
+  "id": "tiiuae/falcon-mamba-tiny-dev",
+  "slug": "tiiuae__falcon-mamba-tiny-dev",
+  "name": "falcon-mamba-tiny-dev",
+  "family": "falcon_mamba",
+  "architecture": "FalconMambaForCausalLM",
+  "license": "unknown",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 0.01,
+  "dtype": "float32",
+  "stats": {
+    "downloads": 97681,
+    "likes": 2,
+    "lastModified": "2024-10-13T12:49:36.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 128,
+    "numLayers": 4,
+    "numHeads": 0,
+    "numKVHeads": 0,
+    "headDim": 0,
+    "intermediateSize": 256,
+    "vocabSize": 65024,
+    "contextLen": 0,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "mqa"
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/tiiuae/falcon-mamba-tiny-dev/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:53.808Z"
+}

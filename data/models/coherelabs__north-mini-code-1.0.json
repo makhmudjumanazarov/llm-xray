@@ -1,0 +1,118 @@
+{
+  "id": "CohereLabs/North-Mini-Code-1.0",
+  "slug": "coherelabs__north-mini-code-1.0",
+  "name": "North-Mini-Code-1.0",
+  "family": "cohere2_moe",
+  "architecture": "Cohere2MoeForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 30.48,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 15285,
+    "likes": 452,
+    "lastModified": "2026-06-15T04:32:41.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2048,
+    "numLayers": 49,
+    "numHeads": 32,
+    "numKVHeads": 4,
+    "headDim": 128,
+    "intermediateSize": 768,
+    "vocabSize": 262144,
+    "contextLen": 500000,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 50000
+    },
+    "slidingWindow": 4096,
+    "moe": {
+      "numExperts": 128,
+      "topK": 8
+    },
+    "layerTypes": [
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+    ]
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/CohereLabs/North-Mini-Code-1.0/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:01.653Z"
+}

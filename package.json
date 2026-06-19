@@ -1,0 +1,47 @@
+{
+  "name": "llm-xray",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "depcheck": "depcruise src app components workers --config .dependency-cruiser.cjs",
+    "ingest": "tsx workers/ingest.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:seed": "tsx workers/seed.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.3",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
+    "drizzle-orm": "^0.45.2",
+    "katex": "^0.17.0",
+    "next": "16.2.9",
+    "postgres": "^3.4.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-katex": "^3.1.0",
+    "three": "^0.184.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dependency-cruiser": "^17.4.3",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "tsx": "^4.22.4",
+    "typescript": "^5",
+    "vitest": "^4.1.9"
+  }
+}

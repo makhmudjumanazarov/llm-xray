@@ -1,0 +1,66 @@
+{
+  "id": "allenai/OLMoE-1B-7B-0125-Instruct",
+  "slug": "allenai__olmoe-1b-7b-0125-instruct",
+  "name": "OLMoE-1B-7B-0125-Instruct",
+  "family": "olmoe",
+  "architecture": "OlmoeForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 6.92,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 99099,
+    "likes": 65,
+    "lastModified": "2025-02-04T16:47:15.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2048,
+    "numLayers": 16,
+    "numHeads": 16,
+    "numKVHeads": 16,
+    "headDim": 128,
+    "intermediateSize": 1024,
+    "vocabSize": 50304,
+    "contextLen": 4096,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mha",
+    "rope": {
+      "theta": 10000
+    },
+    "moe": {
+      "numExperts": 64,
+      "topK": 8
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:57.728Z"
+}

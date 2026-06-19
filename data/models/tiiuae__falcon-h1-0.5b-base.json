@@ -1,0 +1,62 @@
+{
+  "id": "tiiuae/Falcon-H1-0.5B-Base",
+  "slug": "tiiuae__falcon-h1-0.5b-base",
+  "name": "Falcon-H1-0.5B-Base",
+  "family": "falcon_h1",
+  "architecture": "FalconH1ForCausalLM",
+  "license": "other",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 0.52,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 111696,
+    "likes": 17,
+    "lastModified": "2025-07-31T03:51:29.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 1024,
+    "numLayers": 36,
+    "numHeads": 8,
+    "numKVHeads": 2,
+    "headDim": 64,
+    "intermediateSize": 2048,
+    "vocabSize": 32784,
+    "contextLen": 16384,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 100000000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/tiiuae/Falcon-H1-0.5B-Base/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:53.377Z"
+}

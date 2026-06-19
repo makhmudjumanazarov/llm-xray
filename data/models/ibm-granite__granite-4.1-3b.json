@@ -1,0 +1,62 @@
+{
+  "id": "ibm-granite/granite-4.1-3b",
+  "slug": "ibm-granite__granite-4.1-3b",
+  "name": "granite-4.1-3b",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.4,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 276241,
+    "likes": 78,
+    "lastModified": "2026-05-04T17:36:00.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 40,
+    "numHeads": 40,
+    "numKVHeads": 8,
+    "headDim": 64,
+    "intermediateSize": 8192,
+    "vocabSize": 100352,
+    "contextLen": 131072,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.1-3b/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:05.262Z"
+}

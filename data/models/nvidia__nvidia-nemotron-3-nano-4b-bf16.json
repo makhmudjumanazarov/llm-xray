@@ -1,0 +1,59 @@
+{
+  "id": "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "slug": "nvidia__nvidia-nemotron-3-nano-4b-bf16",
+  "name": "NVIDIA-Nemotron-3-Nano-4B-BF16",
+  "family": "nemotron_h",
+  "architecture": "NemotronHForCausalLM",
+  "license": "other",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.97,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1364134,
+    "likes": 93,
+    "lastModified": "2026-03-20T20:50:41.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 3136,
+    "numLayers": 42,
+    "numHeads": 40,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 12544,
+    "vocabSize": 131072,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa"
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:03.607Z"
+}

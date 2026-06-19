@@ -1,0 +1,67 @@
+{
+  "id": "microsoft/Phi-tiny-MoE-instruct",
+  "slug": "microsoft__phi-tiny-moe-instruct",
+  "name": "Phi-tiny-MoE-instruct",
+  "family": "phimoe",
+  "architecture": "PhiMoEForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.76,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 734567,
+    "likes": 38,
+    "lastModified": "2025-12-10T18:21:11.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 32,
+    "numHeads": 16,
+    "numKVHeads": 4,
+    "headDim": 128,
+    "intermediateSize": 448,
+    "vocabSize": 32064,
+    "contextLen": 4096,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000
+    },
+    "slidingWindow": 2047,
+    "moe": {
+      "numExperts": 16,
+      "topK": 2
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/microsoft/Phi-tiny-MoE-instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:51.922Z"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "microsoft/phi-4",
+  "slug": "microsoft__phi-4",
+  "name": "phi-4",
+  "family": "phi3",
+  "architecture": "Phi3ForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 14.66,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 938043,
+    "likes": 2257,
+    "lastModified": "2025-11-24T16:57:37.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 5120,
+    "numLayers": 40,
+    "numHeads": 40,
+    "numKVHeads": 10,
+    "headDim": 128,
+    "intermediateSize": 17920,
+    "vocabSize": 100352,
+    "contextLen": 16384,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 250000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/microsoft/phi-4/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:51.003Z"
+}

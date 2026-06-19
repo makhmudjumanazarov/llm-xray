@@ -1,0 +1,58 @@
+{
+  "id": "distilbert/distilgpt2",
+  "slug": "distilbert__distilgpt2",
+  "name": "distilgpt2",
+  "family": "gpt2",
+  "architecture": "GPT2LMHeadModel",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 0.09,
+  "stats": {
+    "downloads": 4306658,
+    "likes": 629,
+    "lastModified": "2024-02-19T11:09:53.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 768,
+    "numLayers": 6,
+    "numHeads": 12,
+    "numKVHeads": 12,
+    "headDim": 64,
+    "intermediateSize": 3072,
+    "vocabSize": 50257,
+    "contextLen": 1024,
+    "activation": "gelu_new",
+    "normType": "layernorm",
+    "attentionType": "mha"
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/distilbert/distilgpt2/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:41.645Z"
+}

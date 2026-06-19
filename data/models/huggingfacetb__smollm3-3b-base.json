@@ -1,0 +1,62 @@
+{
+  "id": "HuggingFaceTB/SmolLM3-3B-Base",
+  "slug": "huggingfacetb__smollm3-3b-base",
+  "name": "SmolLM3-3B-Base",
+  "family": "smollm3",
+  "architecture": "SmolLM3ForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.08,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 238949,
+    "likes": 161,
+    "lastModified": "2025-08-14T16:41:36.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2048,
+    "numLayers": 36,
+    "numHeads": 16,
+    "numKVHeads": 4,
+    "headDim": 128,
+    "intermediateSize": 11008,
+    "vocabSize": 128256,
+    "contextLen": 65536,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 5000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:59.491Z"
+}

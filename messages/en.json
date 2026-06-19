@@ -1,0 +1,400 @@
+{
+  "site": {
+    "name": "llm-xray",
+    "tagline": "See inside every open-source LLM",
+    "description": "Rank the latest open-source LLMs by downloads and benchmarks, then x-ray any model's architecture layer by layer — attention, normalization, MLP, MoE — in interactive 2D and 3D."
+  },
+  "nav": {
+    "home": "Models",
+    "learn": "Learn",
+    "compare": "Compare",
+    "github": "GitHub"
+  },
+  "home": {
+    "heroTitle": "X-ray any open-source LLM",
+    "heroSubtitle": "Browse and rank the latest open models, then open any one to explore its architecture — every layer, attention pattern and formula — in 2D and 3D.",
+    "searchPlaceholder": "Search models…",
+    "resultsCount": "{count} models",
+    "empty": "No models match your filters.",
+    "exploreCta": "Explore architecture →"
+  },
+  "journey": {
+    "title": "From Zero to Hero: How an LLM Is Trained",
+    "subtitle": "Four stages turn random weights into a deployed assistant. Click through pretraining, fine-tuning, alignment, and evaluation — and watch its capability climb toward the leaderboard below.",
+    "capabilityLabel": "illustrative capability",
+    "capabilityNowLabel": "What it can do now",
+    "autoplayPlay": "Auto-play",
+    "autoplayStop": "Stop",
+    "prev": "Previous stage",
+    "next": "Next stage",
+    "stagesGroupLabel": "Training stages",
+    "analogyLabel": "Analogy",
+    "whatChangesLabel": "What changes in the weights",
+    "dataExampleLabel": "Example data",
+    "objectiveLabel": "Training objective",
+    "fullFtVsLora": {
+      "label": "Fine-tuning",
+      "full": "Full fine-tune",
+      "lora": "LoRA"
+    },
+    "bridgeCta": "See the rankings",
+    "capabilityCaptions": {
+      "init": "Random noise",
+      "pretraining": "Predicts text",
+      "sft": "Follows instructions",
+      "preference": "Aligned & helpful",
+      "eval": "Benchmarked & served"
+    },
+    "lossAxis": {
+      "pretraining": "NLL",
+      "sft": "masked CE",
+      "preference": "DPO loss",
+      "eval": "accuracy"
+    },
+    "diagram": {
+      "allTrainable": "all parameters trainable",
+      "frozenBase": "frozen base",
+      "adapter": "LoRA adapter",
+      "policy": "policy",
+      "reference": "frozen reference",
+      "klTether": "KL tether",
+      "quantized": "int4",
+      "prompt": "prompt",
+      "response": "response",
+      "lossOnResponse": "loss on response only",
+      "chosen": "chosen",
+      "rejected": "rejected",
+      "margin": "preference margin",
+      "predict": "predict next token",
+      "steps": "steps",
+      "sftPromptExample": "Explain photosynthesis…",
+      "sftResponseExample": "Plants make their own food using sunlight…",
+      "prefChosenExample": "Clear safety warning…",
+      "prefRejectedExample": "Casual, unsafe reply…"
+    },
+    "loop": {
+      "title": "One training step",
+      "intro": "Every training stage is the same loop — only the data, the loss, and which weights move change.",
+      "engineOn": "learning ON",
+      "engineOff": "learning OFF",
+      "gradientLabel": "∇ gradients flow back",
+      "repeat": "repeat",
+      "beginner": {
+        "data": "Show an example",
+        "forward": "Make a guess",
+        "predict": "Check the answer",
+        "loss": "Score the error",
+        "update": "Adjust the weights"
+      },
+      "expert": {
+        "data": "Data batch",
+        "forward": "Forward pass",
+        "predict": "Predict vs target",
+        "loss": "Loss",
+        "update": "Backprop → update"
+      },
+      "evalScore": "Score",
+      "frozenStamp": "weights frozen — forward pass only, just scored",
+      "evalNote": "Same machine, learning switched off: data goes in, a score comes out, nothing updates.",
+      "allWeights": "all weights update",
+      "adapterOnly": "adapter updates · base frozen",
+      "responseOnly": "loss on response tokens",
+      "rewardKl": "reward + KL leash",
+      "perStage": {
+        "pretraining": "Data = raw text · Loss = next-token · Adjusts = every weight",
+        "sft": "Data = example answers · Loss = on the response · Adjusts = weights (or a LoRA adapter)",
+        "preference": "Data = preferred answers · Loss = preference · Adjusts = the policy",
+        "eval": "Data = test questions · nothing is adjusted"
+      }
+    },
+    "method": {
+      "label": "Method",
+      "rlhf": "RLHF",
+      "dpo": "DPO"
+    },
+    "rlhf": {
+      "title": "RLHF — three steps",
+      "beginner": "Train a separate “reward model” from human comparisons, then push the assistant toward higher reward — kept on a leash so it doesn’t drift.",
+      "step1": "Humans pick the better of two answers (chosen ≻ rejected)",
+      "step1Tag": "y_w ≻ y_l",
+      "step2": "Train a Reward Model to score any answer",
+      "step2Expert": "Bradley–Terry on the comparisons",
+      "step3": "PPO nudges the policy toward reward — a KL leash keeps it close to the frozen SFT reference",
+      "reward": "reward",
+      "leash": "KL leash",
+      "policy": "Policy πθ",
+      "reference": "Frozen SFT reference π_ref",
+      "objective": "Maximize reward, minus β times how far it drifts from the frozen reference"
+    },
+    "dpo": {
+      "title": "DPO — the shortcut",
+      "beginner": "The shortcut: preference pairs update the assistant directly — no reward model, no RL loop.",
+      "direct": "directly",
+      "noRewardModel": "no reward model · no RL loop",
+      "caption": "Preference pairs update the policy directly, still β-leashed to the frozen reference",
+      "notClosedForm": "A reparameterization minimized by gradient descent — the closed form is the reward↔policy relation, not an analytic one-shot solution"
+    },
+    "lora": {
+      "title": "W = W₀ + (α/r)·B·A",
+      "frozenBase": "Frozen base W₀",
+      "adapter": "Trainable adapter B·A",
+      "scalar": "scale α/r",
+      "rankLabel": "rank r",
+      "equals": "updated W",
+      "plainFull": "Full fine-tune: every weight moves from the pretrained checkpoint",
+      "plainLora": "LoRA: freeze the base, train a tiny low-rank adapter (~1% of weights)",
+      "mergeable": "adapters merge back into W at inference — zero added latency",
+      "qlora": "QLoRA: W₀ in 4-bit NF4"
+    },
+    "legend": {
+      "frozen": "frozen",
+      "trainable": "trainable",
+      "frozenIcon": "❄",
+      "trainIcon": "🔥"
+    },
+    "stages": {
+      "pretraining": {
+        "title": "Pretraining",
+        "tagline": "Learn language from raw text",
+        "analogy": "Like reading every book in a giant library and, on each page, guessing the next word before you see it.",
+        "beginner": "The model starts as random numbers and plays this next-word game across trillions of words. By the end it has absorbed grammar, facts, and how ideas connect — but no one has shown it how to be helpful yet, so it just continues text instead of following instructions.",
+        "expert": "Self-supervised next-token prediction over trillions of tokens of raw web/text. All weights are initialized from scratch and trained by minimizing token-level cross-entropy (negative log-likelihood) of the true next token given every previous one — no labels, the corpus supervises itself. The result is the base/foundation model: a powerful predictor with broad world knowledge but no instruction-following or alignment.",
+        "whatChanges": "Every parameter is trainable and updated from random initialization — embeddings, all transformer blocks and the LM head light up at once. This is where most compute goes and where world knowledge is encoded.",
+        "dataExample": "Raw text, no labels: \"The Eiffel Tower is located in the city of ___\" → predict \"Paris\". The whole sequence is both input and target, shifted by one.",
+        "lossLabel": "Next-token cross-entropy (autoregressive NLL)",
+        "extraExpertNote": "Scaling laws (Chinchilla / compute-optimal) govern the parameters-vs-tokens trade-off: for a fixed compute budget, loss is minimized by training a proportionally smaller model on more tokens (≈20 tokens per parameter). This base checkpoint is the frozen starting point for SFT, which in turn feeds preference tuning.",
+        "chips": {
+          "tokens": "≈15T tokens",
+          "lr": "lr 3e-4 · cosine",
+          "epochs": "~1 epoch"
+        }
+      },
+      "sft": {
+        "title": "Supervised Fine-Tuning",
+        "tagline": "Teach it to follow instructions",
+        "analogy": "An apprenticeship with worked examples: show thousands of question-and-ideal-answer pairs and nudge the model to imitate the answers.",
+        "beginner": "We show the model example conversations — a question paired with a great answer — and train it to copy their style and format. The raw text predictor becomes an assistant that actually responds to what you ask.",
+        "expert": "Supervised fine-tuning on curated (instruction, response) demonstrations with the same cross-entropy loss, but masked to the response tokens only — the prompt is context, not a target. Either full fine-tuning (update all weights from the pretrained checkpoint) or parameter-efficient via LoRA/QLoRA: freeze the base W₀ and learn a low-rank update W = W₀ + (α/r)·B·A, training under ~1% of the parameters.",
+        "whatChanges": "Full fine-tuning updates all weights from the pretrained checkpoint. LoRA/QLoRA freezes the base W₀ and trains only the injected low-rank adapters A and B — a slim trainable stripe over a frozen base. Toggle Full FT ↔ LoRA to see which parameters move.",
+        "dataExample": "Labeled demonstration — prompt: \"Explain photosynthesis to a 10-year-old.\" → response: \"Plants make their own food using sunlight…\". Loss is computed only on the response tokens; the prompt is masked out.",
+        "lossLabel": "Masked cross-entropy on response tokens",
+        "extraExpertNote": "LoRA/QLoRA: rank r (≈8–64) and scaling α set adapter capacity; only A ∈ ℝ^{r×d} and B ∈ ℝ^{d×r} train while W₀ stays frozen, so adapters are tiny, swappable, and mergeable back into W at inference (zero added latency). QLoRA keeps W₀ in 4-bit NF4 and trains the adapters in higher precision — full-quality fine-tuning on a single GPU.",
+        "chips": {
+          "rank": "LoRA r = 16",
+          "alpha": "α = 32",
+          "lr": "lr 1e-4",
+          "epochs": "1–3 epochs"
+        }
+      },
+      "preference": {
+        "title": "Preference Tuning",
+        "tagline": "Align to human preference",
+        "analogy": "A mentor saying \"this answer is better\": people compare two responses and the model learns to lean toward the preferred one.",
+        "beginner": "The assistant can answer — but which answer is best? We show people two responses, let them pick the one they prefer, and train the model toward that style: more helpful, honest, and safe. It learns taste and alignment — not just a correct answer, but the kind people actually prefer.",
+        "expert": "Align the SFT model to human preference pairs (chosen y_w ≻ rejected y_l). RLHF trains a separate reward model on the comparisons, then optimizes the policy with PPO under a KL penalty to the SFT reference. DPO skips the reward model and the RL loop, minimizing an equivalent preference loss — derived from a closed-form policy-reward relation — by gradient descent directly on the pairs, widening the implied reward margin between chosen and rejected, regularized toward the reference by β.",
+        "whatChanges": "Weights shift from the SFT checkpoint toward preferred behavior, while a KL/reference term tethers the policy to the frozen SFT model so it doesn't drift too far (preventing reward hacking and mode collapse). DPO updates the policy directly; RLHF updates it via a reward model + PPO.",
+        "dataExample": "Preference pair for \"Is it safe to mix bleach and ammonia?\" — chosen: a clear safety warning about the toxic gas; rejected: a casual, unsafe reply. A human labels chosen ≻ rejected, so the model learns the ranking, not one gold answer.",
+        "lossLabel": "DPO preference loss (or RLHF reward model + PPO-KL)",
+        "extraExpertNote": "RLHF maximizes 𝔼[r_φ(x,y)] − β·KL(π_θ ‖ π_ref) via PPO, needing a trained reward model and an online RL loop. DPO uses the closed-form optimal-policy relation to fold the reward into a simple classification loss over the pairs — no reward model, no sampling. β controls how hard the KL tether resists drift from the SFT reference; too low and the policy can over-optimize and degrade.",
+        "chips": {
+          "method": "DPO / PPO",
+          "beta": "β = 0.1",
+          "lr": "lr 5e-7"
+        }
+      },
+      "eval": {
+        "title": "Evaluation & Deploy",
+        "tagline": "Benchmark, quantize, serve",
+        "analogy": "The final exam, then graduation: test the finished model on standardized exams, then shrink and package it to run fast for real users.",
+        "beginner": "We test the finished model on standardized exams — math, knowledge, coding, and safety — to see how good it really is, then compress it so it runs fast and cheap. The scores it earns are exactly the ones you'll compare on the leaderboard just below.",
+        "expert": "No weights train here — they're frozen and measured. Evaluate the aligned model on held-out benchmarks (MMLU, GSM8K, HumanEval, IFEval, GPQA, TruthfulQA) plus safety/red-team suites; the aggregate summarizes capability. Then post-training optimization — quantization (INT8/INT4) and an inference runtime — trades a small accuracy delta for large throughput and memory wins before serving.",
+        "whatChanges": "Nothing trains — all weights are frozen. Evaluation only measures them; quantization re-encodes the existing weights to lower precision (e.g. fp16 → int4) to shrink and speed up the model for serving, with no further gradient updates.",
+        "dataExample": "Held-out test item (GSM8K): \"Natalia sold clips to 48 friends in April and half as many in May. How many did she sell altogether?\" → graded against the gold answer 72. Accuracy is exact-match, averaged over thousands of items.",
+        "lossLabel": "No training loss — benchmark accuracy / pass@k",
+        "extraExpertNote": "Quantization for deployment: PTQ schemes (GPTQ, AWQ) and formats (INT8, INT4, GGUF, NF4) round trained weights to lower precision post-hoc — no gradients — typically costing a fraction of a point of accuracy for ≈2–4× memory and latency wins. pass@k (HumanEval) samples k completions and counts a problem solved if any passes the tests. These are the exact metrics plotted in the ranking below.",
+        "chips": {
+          "benchmarks": "MMLU · GSM8K · HumanEval",
+          "quant": "int4 / int8",
+          "metric": "accuracy · pass@k"
+        }
+      }
+    }
+  },
+  "filters": {
+    "title": "Filters",
+    "family": "Family",
+    "modality": "Modality",
+    "attention": "Attention",
+    "license": "License",
+    "moeOnly": "MoE only",
+    "all": "All",
+    "clear": "Clear filters"
+  },
+  "columns": {
+    "rank": "#",
+    "model": "Model",
+    "params": "Params",
+    "context": "Context",
+    "attention": "Attention",
+    "layers": "Layers",
+    "downloads": "Downloads",
+    "likes": "Likes",
+    "license": "License",
+    "benchmark": "MMLU"
+  },
+  "modality": {
+    "text": "Text",
+    "image": "Image",
+    "audio": "Audio",
+    "video": "Video"
+  },
+  "attentionType": {
+    "mha": "MHA",
+    "gqa": "GQA",
+    "mqa": "MQA",
+    "mla": "MLA"
+  },
+  "model": {
+    "architecture": "Architecture",
+    "overview": "Overview",
+    "view3d": "3D view",
+    "view2d": "2D diagram",
+    "params": "Parameters",
+    "layers": "Layers",
+    "hidden": "Hidden size",
+    "heads": "Attention heads",
+    "kvHeads": "KV heads",
+    "vocab": "Vocabulary",
+    "context": "Context length",
+    "activation": "Activation",
+    "norm": "Normalization",
+    "experts": "Experts",
+    "headDim": "Head dim",
+    "intermediate": "Intermediate size",
+    "attention": "Attention",
+    "comingSoon": "Interactive 2D/3D explorer is coming next."
+  },
+  "explorer": {
+    "title": "Architecture explorer",
+    "view2d": "2D diagram",
+    "view3d": "3D view",
+    "blockTitle": "Decoder block",
+    "repeated": "×{n} layers",
+    "selectHint": "Click any element to see its shape and what it does.",
+    "residual": "+ residual",
+    "pipelineTitle": "Forward pass",
+    "loading3d": "Loading 3D view…",
+    "noWebgl": "WebGL is not available in this browser — 3D view can't render.",
+    "drillHint": "Click a layer to open its internal block.",
+    "back": "← Back to stack",
+    "groups": {
+      "inputNorm": "Input norm",
+      "attention": "Self-attention",
+      "postAttnNorm": "Post-attention norm",
+      "mlp": "MLP (feed-forward)",
+      "moe": "Mixture of Experts",
+      "finalNorm": "Final norm"
+    },
+    "stages": {
+      "embedding": "Token embedding",
+      "decoderBlock": "Decoder block",
+      "finalNorm": "Final norm",
+      "logits": "Logits",
+      "sampling": "Sampling",
+      "visionEncoder": "Vision encoder",
+      "audioEncoder": "Audio encoder",
+      "projector": "Projector"
+    }
+  },
+  "ops": {
+    "shape": "Shape",
+    "params": "Params",
+    "input_norm": "Normalizes the residual stream before attention so values stay well-scaled.",
+    "post_attn_norm": "Normalizes again after attention, before the feed-forward network.",
+    "q_proj": "Projects the hidden state into Query vectors, one set per attention head.",
+    "k_proj": "Projects into Key vectors. With GQA/MQA there are fewer KV heads than query heads.",
+    "v_proj": "Projects into Value vectors — the content that attention mixes together.",
+    "kv_a_proj": "Compresses keys/values into a small latent vector (MLA), shrinking the KV cache.",
+    "kv_b_proj": "Expands the compressed latent back into full key/value space at use time.",
+    "sdpa": "Scaled dot-product attention: each token attends to others via softmax(QKᵀ/√d), then mixes Values.",
+    "o_proj": "Projects the attention output back to the model's hidden size and adds it to the residual.",
+    "gate_proj": "Gate projection of the gated MLP (SwiGLU/GeGLU): controls how much of each unit passes.",
+    "up_proj": "Expands the hidden state to the larger intermediate size.",
+    "down_proj": "Projects the intermediate activation back down to the hidden size.",
+    "router": "Scores experts per token and routes each token to its top-k experts.",
+    "expert_gate": "Gate projection inside one expert MLP (only the selected experts run).",
+    "expert_up": "Up projection inside one expert MLP.",
+    "expert_down": "Down projection inside one expert MLP."
+  },
+  "compare": {
+    "title": "Compare models",
+    "subtitle": "Select models to compare across benchmarks and architecture.",
+    "pick": "Models",
+    "benchmarks": "Benchmarks",
+    "architecture": "Architecture",
+    "metric": "Metric",
+    "need2": "Pick at least 2 models to compare.",
+    "disclaimer": "Benchmark scores are reported/approximate (public model cards & leaderboards); higher is better. Architecture values are exact, read from each model's config.",
+    "categories": {
+      "knowledge": "Knowledge",
+      "math": "Math",
+      "code": "Code",
+      "reasoning": "Reasoning",
+      "commonsense": "Commonsense",
+      "truthfulness": "Truthfulness",
+      "instruction": "Instruction following"
+    }
+  },
+  "scatter": {
+    "title": "Capability vs. size",
+    "hint": "Bubble = downloads · color = family · dashed line = efficient frontier (best score per parameter)",
+    "xAxis": "Parameters (log scale)",
+    "yAxis": "Metric"
+  },
+  "forward": {
+    "run": "▶ Run forward pass",
+    "stop": "■ Stop",
+    "sample": "How far is the Sun from Earth?",
+    "queryPlaceholder": "Type a question…",
+    "illustrative": "Illustrative — shows the order of computation, not real model output.",
+    "tokensLabel": "tokens",
+    "ofLayers": "of {n}",
+    "attnFull": "global attention",
+    "attnSliding": "sliding-window attention",
+    "genToken": "generating token {n}",
+    "stages": {
+      "tokenize": "Tokenize",
+      "embed": "Embed tokens",
+      "layer": "Decoder layer",
+      "logits": "Final norm → logits → softmax",
+      "sample": "Sample next token",
+      "done": "Done"
+    }
+  },
+  "learn": {
+    "title": "Learn",
+    "subtitle": "Understand how LLMs work — interactively, not from text walls.",
+    "beginner": "Beginner",
+    "expert": "Expert",
+    "comingSoon": "More lessons coming",
+    "softmax": {
+      "title": "Softmax & Temperature",
+      "blurb": "How a model turns raw scores (logits) into next-token probabilities — and how temperature controls randomness. Drag the slider.",
+      "temperature": "Temperature",
+      "beginnerText": "Higher temperature flattens the choices (more random, more creative). Lower temperature sharpens toward the single best token (more confident, more repetitive).",
+      "expertText": "Each logit is divided by temperature T before exponentiation. As T→0 the distribution approaches argmax (greedy decoding); as T→∞ it approaches uniform."
+    },
+    "concepts": {
+      "attention": "Attention",
+      "rope": "RoPE positions",
+      "moe": "Mixture of Experts",
+      "kvcache": "KV cache",
+      "tokenization": "Tokenization",
+      "norm": "Normalization"
+    }
+  },
+  "footer": {
+    "dataNote": "Architecture data is read directly from each model's config.json and safetensors index — no weights downloaded.",
+    "language": "Language"
+  }
+}

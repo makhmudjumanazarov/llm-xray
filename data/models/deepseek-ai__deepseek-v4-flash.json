@@ -1,0 +1,76 @@
+{
+  "id": "deepseek-ai/DeepSeek-V4-Flash",
+  "slug": "deepseek-ai__deepseek-v4-flash",
+  "name": "DeepSeek-V4-Flash",
+  "family": "deepseek_v4",
+  "architecture": "DeepseekV4ForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 158.07,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 2403213,
+    "likes": 1533,
+    "lastModified": "2026-06-08T06:03:43.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 43,
+    "numHeads": 64,
+    "numKVHeads": 1,
+    "headDim": 512,
+    "intermediateSize": 16384,
+    "vocabSize": 129280,
+    "contextLen": 1048576,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mla",
+    "rope": {
+      "type": "yarn",
+      "theta": 10000,
+      "scaling": {
+        "beta_fast": 32,
+        "beta_slow": 1,
+        "factor": 16,
+        "original_max_position_embeddings": 65536,
+        "type": "yarn"
+      }
+    },
+    "slidingWindow": 128,
+    "moe": {
+      "numExperts": 256,
+      "topK": 6,
+      "numSharedExperts": 1
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:49.777Z"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "HuggingFaceTB/SmolLM-135M",
+  "slug": "huggingfacetb__smollm-135m",
+  "name": "SmolLM-135M",
+  "family": "llama",
+  "architecture": "LlamaForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 0.13,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 137526,
+    "likes": 261,
+    "lastModified": "2024-08-01T20:12:34.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 576,
+    "numLayers": 30,
+    "numHeads": 9,
+    "numKVHeads": 3,
+    "headDim": 64,
+    "intermediateSize": 1536,
+    "vocabSize": 49152,
+    "contextLen": 2048,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM-135M/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:00.165Z"
+}

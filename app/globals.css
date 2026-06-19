@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   LLM X-ray design system — dark, technical, premium. Token-driven so a
+   redesign happens here, not in components. Existing aliases (--bg, --panel,
+   --acc…) are preserved so no component markup needs to change.
+---------------------------------------------------------------------------- */
+:root {
+  /* surfaces (kept close to brand, crisper borders) */
+  --bg: #0a0e1a;
+  --bg2: #0f1626;
+  --panel: #121a2e;
+  --panel2: #16203a;
+  --border: #253354;
+  --border2: #34426a;
+  /* text — `dim` raised to clear WCAG AA (was #5d6b8c ≈ 3.6:1, failed) */
+  --text: #e9eef8;
+  --muted: #a2afce;
+  --dim: #8290b3;
+
+  /* primary (violet) ramp + signature cyan */
+  --acc: #a78bfa;
+  --acc2: #7c5cff;
+  --acc-300: #c4b5fd;
+  --acc-400: #a78bfa;
+  --acc-500: #8b6dff;
+  --acc-600: #7c5cff;
+  --acc-700: #6d28d9;
+  --cyan: #22d3ee;
+
+  /* data-viz semantics (DO NOT reuse for UI state) */
+  --vis: #34d399;
+  --aud: #fbbf24;
+  --proj: #22d3ee;
+  --slide: #3b82f6;
+  --full: #f472b6;
+
+  /* UI-state semantics (distinct from viz palette) */
+  --success: #34d399;
+  --warn: #fbbf24;
+  --info: #38bdf8;
+  --danger: #fb7185;
+
+  /* tints (kills per-component opacity hacks) */
+  --acc-soft: color-mix(in oklab, var(--acc2) 16%, transparent);
+  --acc-ring: color-mix(in oklab, var(--acc2) 45%, transparent);
+
+  /* radii + elevation */
+  --radius: 14px;
+  --radius-s: 9px;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --ring-light: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 360ms;
+}
+
+/* Map tokens → Tailwind v4 utilities (bg-panel, text-muted, text-acc-400,
+   text-success, font-display, rounded-card …). */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel2);
+  --color-border: var(--border);
+  --color-border2: var(--border2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-acc: var(--acc);
+  --color-acc2: var(--acc2);
+  --color-acc-300: var(--acc-300);
+  --color-acc-400: var(--acc-400);
+  --color-acc-500: var(--acc-500);
+  --color-acc-600: var(--acc-600);
+  --color-acc-700: var(--acc-700);
+  --color-cyan: var(--cyan);
+  --color-vis: var(--vis);
+  --color-aud: var(--aud);
+  --color-proj: var(--proj);
+  --color-slide: var(--slide);
+  --color-full: var(--full);
+  --color-success: var(--success);
+  --color-warn: var(--warn);
+  --color-info: var(--info);
+  --color-danger: var(--danger);
+  --radius-card: var(--radius);
+  --font-display: var(--font-manrope), var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(900px 520px at 78% -8%, color-mix(in oklab, var(--acc2) 22%, transparent) 0%, transparent 60%),
+    radial-gradient(820px 480px at 2% 4%, color-mix(in oklab, var(--cyan) 12%, transparent) 0%, transparent 55%),
+    radial-gradient(1200px 700px at 50% 120%, color-mix(in oklab, var(--acc-700) 16%, transparent) 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* fine grain — one inline SVG, fixed, very low opacity, non-interactive */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+a {
+  color: var(--acc-400);
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease-out);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acc-ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--acc2) 35%, transparent);
+}
+
+/* ---- reusable surface + motion utilities ---- */
+.glass {
+  background: color-mix(in oklab, var(--panel) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  backdrop-filter: blur(12px) saturate(1.15);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-2), var(--ring-light);
+}
+.elev {
+  box-shadow: var(--ring-light), var(--shadow-1);
+}
+.elev-hover {
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.elev-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ring-light), var(--shadow-3);
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--panel2);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--text) 9%, transparent), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-rise {
+  animation: rise var(--dur-3) var(--ease-out) both;
+}
+
+/* ---- training-loop motion: a forward token, a backward gradient token, a
+   pulsing loss chip, a tugging KL leash. All pure CSS, so the reduced-motion
+   rule below neutralizes them; components also drop the classes when offscreen. */
+@keyframes loop-flow {
+  0% { left: 0%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes loop-flow-rev {
+  0% { left: 100%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 0%; opacity: 0; }
+}
+@keyframes loop-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@keyframes loop-leash {
+  0%, 100% { stroke-dashoffset: 0; }
+  50% { stroke-dashoffset: 7; }
+}
+.animate-loop-flow { animation: loop-flow 2.8s linear infinite; }
+.animate-loop-flow-rev { animation: loop-flow-rev 2.8s linear infinite; }
+.animate-loop-glow { animation: loop-glow 2.8s var(--ease-out) infinite; }
+.animate-leash { animation: loop-leash 2s var(--ease-out) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

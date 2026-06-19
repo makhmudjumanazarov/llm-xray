@@ -1,0 +1,79 @@
+{
+  "id": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+  "slug": "mistralai__mixtral-8x7b-instruct-v0.1",
+  "name": "Mixtral-8x7B-Instruct-v0.1",
+  "family": "mixtral",
+  "architecture": "MixtralForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 46.7,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 787285,
+    "likes": 4697,
+    "lastModified": "2025-07-24T16:41:06.000Z",
+    "benchmarks": {
+      "mmlu": 70.6,
+      "gsm8k": 65,
+      "math": 28.4,
+      "humaneval": 40.2,
+      "mbpp": 60.7,
+      "arc_c": 70,
+      "hellaswag": 86,
+      "winogrande": 81,
+      "truthfulqa": 64,
+      "gpqa": 30,
+      "bbh": 57.3,
+      "ifeval": 60
+    }
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 14336,
+    "vocabSize": 32000,
+    "contextLen": 32768,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 1000000
+    },
+    "moe": {
+      "numExperts": 8,
+      "topK": 2
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:40.122Z"
+}

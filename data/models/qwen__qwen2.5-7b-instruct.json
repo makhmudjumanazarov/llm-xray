@@ -1,0 +1,76 @@
+{
+  "id": "Qwen/Qwen2.5-7B-Instruct",
+  "slug": "qwen__qwen2.5-7b-instruct",
+  "name": "Qwen2.5-7B-Instruct",
+  "family": "qwen2",
+  "architecture": "Qwen2ForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 7.62,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 11459075,
+    "likes": 1370,
+    "lastModified": "2025-01-12T02:10:10.000Z",
+    "benchmarks": {
+      "mmlu": 74.2,
+      "gsm8k": 85.4,
+      "math": 49.8,
+      "humaneval": 84.8,
+      "mbpp": 79.2,
+      "arc_c": 63.7,
+      "hellaswag": 80,
+      "winogrande": 75,
+      "truthfulqa": 56,
+      "gpqa": 34,
+      "bbh": 67,
+      "ifeval": 74.7
+    }
+  },
+  "text": {
+    "hiddenSize": 3584,
+    "numLayers": 28,
+    "numHeads": 28,
+    "numKVHeads": 4,
+    "headDim": 128,
+    "intermediateSize": 18944,
+    "vocabSize": 152064,
+    "contextLen": 32768,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 1000000
+    },
+    "slidingWindow": 131072
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:39.590Z"
+}

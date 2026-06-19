@@ -1,0 +1,62 @@
+{
+  "id": "allenai/OLMo-2-0425-1B",
+  "slug": "allenai__olmo-2-0425-1b",
+  "name": "OLMo-2-0425-1B",
+  "family": "olmo2",
+  "architecture": "Olmo2ForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 1.48,
+  "dtype": "float32",
+  "stats": {
+    "downloads": 317774,
+    "likes": 79,
+    "lastModified": "2025-05-28T20:35:45.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2048,
+    "numLayers": 16,
+    "numHeads": 16,
+    "numKVHeads": 16,
+    "headDim": 128,
+    "intermediateSize": 8192,
+    "vocabSize": 100352,
+    "contextLen": 4096,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mha",
+    "rope": {
+      "theta": 500000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/allenai/OLMo-2-0425-1B/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:55.483Z"
+}

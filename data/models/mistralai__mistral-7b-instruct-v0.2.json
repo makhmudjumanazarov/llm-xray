@@ -1,0 +1,62 @@
+{
+  "id": "mistralai/Mistral-7B-Instruct-v0.2",
+  "slug": "mistralai__mistral-7b-instruct-v0.2",
+  "name": "Mistral-7B-Instruct-v0.2",
+  "family": "mistral",
+  "architecture": "MistralForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 7.24,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1132708,
+    "likes": 3161,
+    "lastModified": "2025-07-24T16:57:21.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 14336,
+    "vocabSize": 32000,
+    "contextLen": 32768,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 1000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:47.523Z"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "ibm-granite/granite-3.0-8b-instruct",
+  "slug": "ibm-granite__granite-3.0-8b-instruct",
+  "name": "granite-3.0-8b-instruct",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 8.17,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 70471,
+    "likes": 206,
+    "lastModified": "2024-12-19T19:44:27.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 40,
+    "numHeads": 32,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 12800,
+    "vocabSize": 49155,
+    "contextLen": 4096,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3.0-8b-instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:07.227Z"
+}

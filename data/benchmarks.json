@@ -1,0 +1,40 @@
+{
+  "_note": "Reported benchmark scores (approximate, from public model cards / leaderboards). Used for the compare page and the homepage MMLU column. Higher is better for all. Replace with a live leaderboard adapter later. null = not reported.",
+  "metrics": {
+    "Qwen/Qwen2.5-7B-Instruct": {
+      "mmlu": 74.2, "gsm8k": 85.4, "math": 49.8, "humaneval": 84.8, "mbpp": 79.2,
+      "arc_c": 63.7, "hellaswag": 80.0, "winogrande": 75.0, "truthfulqa": 56.0,
+      "gpqa": 34.0, "bbh": 67.0, "ifeval": 74.7
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+      "mmlu": 68.0, "gsm8k": 84.5, "math": 47.2, "humaneval": 72.6, "mbpp": 69.4,
+      "arc_c": 60.0, "hellaswag": 80.0, "winogrande": 74.0, "truthfulqa": 54.0,
+      "gpqa": 30.4, "bbh": 64.2, "ifeval": 80.4
+    },
+    "mistralai/Mistral-7B-Instruct-v0.3": {
+      "mmlu": 62.5, "gsm8k": 50.0, "math": 13.1, "humaneval": 40.2, "mbpp": 50.2,
+      "arc_c": 58.0, "hellaswag": 83.0, "winogrande": 78.0, "truthfulqa": 60.0,
+      "gpqa": 26.0, "bbh": 48.0, "ifeval": 55.0
+    },
+    "mistralai/Mixtral-8x7B-Instruct-v0.1": {
+      "mmlu": 70.6, "gsm8k": 65.0, "math": 28.4, "humaneval": 40.2, "mbpp": 60.7,
+      "arc_c": 70.0, "hellaswag": 86.0, "winogrande": 81.0, "truthfulqa": 64.0,
+      "gpqa": 30.0, "bbh": 57.3, "ifeval": 60.0
+    },
+    "deepseek-ai/DeepSeek-V2-Lite": {
+      "mmlu": 58.3, "gsm8k": 41.1, "math": 17.1, "humaneval": 29.9, "mbpp": 43.2,
+      "arc_c": 54.0, "hellaswag": 79.0, "winogrande": 74.0, "truthfulqa": null,
+      "gpqa": null, "bbh": 48.1, "ifeval": null
+    },
+    "microsoft/Phi-3-mini-4k-instruct": {
+      "mmlu": 68.8, "gsm8k": 82.5, "math": null, "humaneval": 58.5, "mbpp": 70.0,
+      "arc_c": 84.9, "hellaswag": 76.7, "winogrande": 70.8, "truthfulqa": 65.0,
+      "gpqa": null, "bbh": 71.7, "ifeval": null
+    },
+    "tiiuae/falcon-7b": {
+      "mmlu": 27.8, "gsm8k": null, "math": null, "humaneval": null, "mbpp": null,
+      "arc_c": 47.5, "hellaswag": 78.1, "winogrande": 73.0, "truthfulqa": 34.3,
+      "gpqa": null, "bbh": null, "ifeval": null
+    }
+  }
+}

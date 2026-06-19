@@ -1,0 +1,59 @@
+{
+  "id": "tiiuae/falcon-7b-instruct",
+  "slug": "tiiuae__falcon-7b-instruct",
+  "name": "falcon-7b-instruct",
+  "family": "falcon",
+  "architecture": "FalconForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 7.22,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 155750,
+    "likes": 1032,
+    "lastModified": "2024-10-12T13:20:03.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4544,
+    "numLayers": 32,
+    "numHeads": 71,
+    "numKVHeads": 1,
+    "headDim": 64,
+    "intermediateSize": 18176,
+    "vocabSize": 65024,
+    "contextLen": 0,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "mqa"
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/tiiuae/falcon-7b-instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:52.592Z"
+}

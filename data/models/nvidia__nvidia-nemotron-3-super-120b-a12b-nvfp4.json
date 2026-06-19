@@ -1,0 +1,68 @@
+{
+  "id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+  "slug": "nvidia__nvidia-nemotron-3-super-120b-a12b-nvfp4",
+  "name": "NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+  "family": "nemotron_h",
+  "architecture": "NemotronHForCausalLM",
+  "license": "other",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 67.23,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1397984,
+    "likes": 356,
+    "lastModified": "2026-05-01T16:54:19.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 88,
+    "numHeads": 32,
+    "numKVHeads": 2,
+    "headDim": 128,
+    "intermediateSize": 2688,
+    "vocabSize": 131072,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000,
+      "partialRotaryFactor": 1
+    },
+    "moe": {
+      "numExperts": 512,
+      "topK": 22,
+      "numSharedExperts": 1
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:03.314Z"
+}

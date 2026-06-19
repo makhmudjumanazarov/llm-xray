@@ -1,0 +1,63 @@
+{
+  "id": "microsoft/phi-2",
+  "slug": "microsoft__phi-2",
+  "name": "phi-2",
+  "family": "phi",
+  "architecture": "PhiForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 2.78,
+  "dtype": "float16",
+  "stats": {
+    "downloads": 388300,
+    "likes": 3470,
+    "lastModified": "2025-12-08T11:35:44.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 32,
+    "headDim": 80,
+    "intermediateSize": 10240,
+    "vocabSize": 51200,
+    "contextLen": 2048,
+    "activation": "gelu_new",
+    "normType": "layernorm",
+    "attentionType": "mha",
+    "rope": {
+      "theta": 10000,
+      "partialRotaryFactor": 0.4
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/microsoft/phi-2/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:52.210Z"
+}

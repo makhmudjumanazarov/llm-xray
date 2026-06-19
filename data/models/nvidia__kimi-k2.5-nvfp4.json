@@ -1,0 +1,86 @@
+{
+  "id": "nvidia/Kimi-K2.5-NVFP4",
+  "slug": "nvidia__kimi-k2.5-nvfp4",
+  "name": "Kimi-K2.5-NVFP4",
+  "family": "kimi_k25",
+  "architecture": "KimiK25ForConditionalGeneration",
+  "license": "other",
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "paramsB": 0,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1167194,
+    "likes": 86,
+    "lastModified": "2026-05-13T22:27:55.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 7168,
+    "numLayers": 61,
+    "numHeads": 64,
+    "numKVHeads": 64,
+    "headDim": 112,
+    "intermediateSize": 18432,
+    "vocabSize": 163840,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mla",
+    "rope": {
+      "type": "yarn",
+      "theta": 50000,
+      "scaling": {
+        "beta_fast": 32,
+        "beta_slow": 1,
+        "factor": 64,
+        "mscale": 1,
+        "mscale_all_dim": 1,
+        "original_max_position_embeddings": 4096,
+        "type": "yarn"
+      }
+    },
+    "moe": {
+      "numExperts": 384,
+      "topK": 8,
+      "numSharedExperts": 1
+    }
+  },
+  "encoders": [
+    {
+      "kind": "vision",
+      "hiddenSize": 0,
+      "numLayers": 0,
+      "patchSize": 14
+    }
+  ],
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/Kimi-K2.5-NVFP4/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:04.220Z"
+}

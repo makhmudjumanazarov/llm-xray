@@ -1,0 +1,68 @@
+{
+  "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "slug": "nvidia__nvidia-nemotron-3-nano-30b-a3b-bf16",
+  "name": "NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "family": "nemotron_h",
+  "architecture": "NemotronHForCausalLM",
+  "license": "other",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 31.58,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1311601,
+    "likes": 768,
+    "lastModified": "2026-03-15T04:25:53.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2688,
+    "numLayers": 52,
+    "numHeads": 32,
+    "numKVHeads": 2,
+    "headDim": 128,
+    "intermediateSize": 1856,
+    "vocabSize": 131072,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000,
+      "partialRotaryFactor": 1
+    },
+    "moe": {
+      "numExperts": 128,
+      "topK": 6,
+      "numSharedExperts": 1
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:03.878Z"
+}

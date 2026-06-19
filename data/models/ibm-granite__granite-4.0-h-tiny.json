@@ -1,0 +1,108 @@
+{
+  "id": "ibm-granite/granite-4.0-h-tiny",
+  "slug": "ibm-granite__granite-4.0-h-tiny",
+  "name": "granite-4.0-h-tiny",
+  "family": "granitemoehybrid",
+  "architecture": "GraniteMoeHybridForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 6.94,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 132316,
+    "likes": 204,
+    "lastModified": "2025-11-03T19:42:57.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 1536,
+    "numLayers": 40,
+    "numHeads": 12,
+    "numKVHeads": 4,
+    "headDim": 128,
+    "intermediateSize": 512,
+    "vocabSize": 100352,
+    "contextLen": 131072,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000
+    },
+    "moe": {
+      "numExperts": 64,
+      "topK": 6
+    },
+    "layerTypes": [
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "attention",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "attention",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "attention",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba",
+      "attention",
+      "mamba",
+      "mamba",
+      "mamba",
+      "mamba"
+    ]
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.0-h-tiny/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:05.648Z"
+}

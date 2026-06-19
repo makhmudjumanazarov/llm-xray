@@ -1,0 +1,108 @@
+{
+  "id": "nvidia/Gemma-4-26B-A4B-NVFP4",
+  "slug": "nvidia__gemma-4-26b-a4b-nvfp4",
+  "name": "Gemma-4-26B-A4B-NVFP4",
+  "family": "gemma4",
+  "architecture": "Gemma4ForConditionalGeneration",
+  "license": "apache-2.0",
+  "modalities": [
+    "text",
+    "image",
+    "video"
+  ],
+  "paramsB": 14.39,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 1414836,
+    "likes": 79,
+    "lastModified": "2026-05-11T15:58:52.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2816,
+    "numLayers": 30,
+    "numHeads": 16,
+    "numKVHeads": 8,
+    "headDim": 256,
+    "intermediateSize": 2112,
+    "vocabSize": 262144,
+    "contextLen": 262144,
+    "activation": "gelu_pytorch_tanh",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {},
+    "slidingWindow": 1024,
+    "moe": {
+      "numExperts": 128,
+      "topK": 2
+    },
+    "layerTypes": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+    ]
+  },
+  "encoders": [
+    {
+      "kind": "vision",
+      "hiddenSize": 1152,
+      "numLayers": 27,
+      "numHeads": 16,
+      "patchSize": 16
+    }
+  ],
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/Gemma-4-26B-A4B-NVFP4/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:13:02.839Z"
+}

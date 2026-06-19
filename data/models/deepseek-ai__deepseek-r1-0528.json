@@ -1,0 +1,77 @@
+{
+  "id": "deepseek-ai/DeepSeek-R1-0528",
+  "slug": "deepseek-ai__deepseek-r1-0528",
+  "name": "DeepSeek-R1-0528",
+  "family": "deepseek_v3",
+  "architecture": "DeepseekV3ForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 684.53,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 6463039,
+    "likes": 2452,
+    "lastModified": "2025-05-29T11:37:44.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 7168,
+    "numLayers": 61,
+    "numHeads": 128,
+    "numKVHeads": 128,
+    "headDim": 56,
+    "intermediateSize": 18432,
+    "vocabSize": 129280,
+    "contextLen": 163840,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mla",
+    "rope": {
+      "type": "yarn",
+      "theta": 10000,
+      "scaling": {
+        "beta_fast": 32,
+        "beta_slow": 1,
+        "factor": 40,
+        "mscale": 1,
+        "mscale_all_dim": 1,
+        "original_max_position_embeddings": 4096,
+        "type": "yarn"
+      }
+    },
+    "moe": {
+      "numExperts": 256,
+      "topK": 8,
+      "numSharedExperts": 1
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:48.715Z"
+}

@@ -1,0 +1,123 @@
+{
+  "id": "google/gemma-4-E4B-it",
+  "slug": "google__gemma-4-e4b-it",
+  "name": "gemma-4-E4B-it",
+  "family": "gemma4",
+  "architecture": "Gemma4ForConditionalGeneration",
+  "license": "gemma",
+  "modalities": [
+    "text",
+    "image",
+    "audio",
+    "video"
+  ],
+  "paramsB": 8,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 0,
+    "likes": 0,
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 42,
+    "numHeads": 8,
+    "numKVHeads": 2,
+    "headDim": 256,
+    "intermediateSize": 10240,
+    "vocabSize": 262144,
+    "contextLen": 131072,
+    "activation": "gelu_pytorch_tanh",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {},
+    "slidingWindow": 512,
+    "layerTypes": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+    ]
+  },
+  "encoders": [
+    {
+      "kind": "vision",
+      "hiddenSize": 768,
+      "numLayers": 16,
+      "numHeads": 12,
+      "patchSize": 16
+    },
+    {
+      "kind": "audio",
+      "hiddenSize": 1024,
+      "numLayers": 12,
+      "numHeads": 8
+    }
+  ],
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/google/gemma-4-E4B-it/blob/main/config.json",
+    "gated": false,
+    "note": "multimodal preview; read from local config + safetensors"
+  },
+  "generatedAt": "2026-06-19T07:12:41.655Z"
+}

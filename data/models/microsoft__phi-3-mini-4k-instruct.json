@@ -1,0 +1,73 @@
+{
+  "id": "microsoft/Phi-3-mini-4k-instruct",
+  "slug": "microsoft__phi-3-mini-4k-instruct",
+  "name": "Phi-3-mini-4k-instruct",
+  "family": "phi3",
+  "architecture": "Phi3ForCausalLM",
+  "license": "mit",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.82,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 563478,
+    "likes": 1435,
+    "lastModified": "2025-12-10T20:22:18.000Z",
+    "benchmarks": {
+      "mmlu": 68.8,
+      "gsm8k": 82.5,
+      "humaneval": 58.5,
+      "mbpp": 70,
+      "arc_c": 84.9,
+      "hellaswag": 76.7,
+      "winogrande": 70.8,
+      "truthfulqa": 65,
+      "bbh": 71.7
+    }
+  },
+  "text": {
+    "hiddenSize": 3072,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 32,
+    "headDim": 96,
+    "intermediateSize": 8192,
+    "vocabSize": 32064,
+    "contextLen": 4096,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mha",
+    "rope": {
+      "theta": 10000
+    },
+    "slidingWindow": 2047
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:40.660Z"
+}

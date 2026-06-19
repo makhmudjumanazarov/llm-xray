@@ -1,0 +1,42 @@
+name: Refresh model snapshot
+
+# Auto-freshness ($0): poll HuggingFace official accounts on a schedule, refresh
+# data/models/*.json, commit the diff — which triggers the host's auto-deploy.
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: {} # manual run button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Ingest from HuggingFace
+        env:
+          # Add an HF_TOKEN repo secret to also pull gated models (Llama, Gemma…).
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: npm run ingest
+      - name: Commit refreshed snapshot
+        run: |
+          git config user.name "llm-xray-bot"
+          git config user.email "bot@llm-xray.com"
+          git add data/models
+          if git diff --staged --quiet; then
+            echo "No model changes."
+          else
+            git commit -m "chore(data): refresh model snapshot [skip ci]"
+            git push
+          fi

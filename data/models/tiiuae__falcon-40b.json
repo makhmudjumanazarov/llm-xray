@@ -1,0 +1,59 @@
+{
+  "id": "tiiuae/falcon-40b",
+  "slug": "tiiuae__falcon-40b",
+  "name": "falcon-40b",
+  "family": "falcon",
+  "architecture": "FalconForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 41.84,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 31495,
+    "likes": 2437,
+    "lastModified": "2024-08-09T07:48:37.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 8192,
+    "numLayers": 60,
+    "numHeads": 128,
+    "numKVHeads": 8,
+    "headDim": 64,
+    "intermediateSize": 32768,
+    "vocabSize": 65024,
+    "contextLen": 0,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "gqa"
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/tiiuae/falcon-40b/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:54.287Z"
+}

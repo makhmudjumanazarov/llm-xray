@@ -1,0 +1,75 @@
+{
+  "id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "slug": "mistralai__mistral-7b-instruct-v0.3",
+  "name": "Mistral-7B-Instruct-v0.3",
+  "family": "mistral",
+  "architecture": "MistralForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 7.25,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 2523712,
+    "likes": 2640,
+    "lastModified": "2025-12-03T12:13:48.000Z",
+    "benchmarks": {
+      "mmlu": 62.5,
+      "gsm8k": 50,
+      "math": 13.1,
+      "humaneval": 40.2,
+      "mbpp": 50.2,
+      "arc_c": 58,
+      "hellaswag": 83,
+      "winogrande": 78,
+      "truthfulqa": 60,
+      "gpqa": 26,
+      "bbh": 48,
+      "ifeval": 55
+    }
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 14336,
+    "vocabSize": 32768,
+    "contextLen": 32768,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 1000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:39.857Z"
+}

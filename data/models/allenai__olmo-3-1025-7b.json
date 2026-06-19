@@ -1,0 +1,106 @@
+{
+  "id": "allenai/Olmo-3-1025-7B",
+  "slug": "allenai__olmo-3-1025-7b",
+  "name": "Olmo-3-1025-7B",
+  "family": "olmo3",
+  "architecture": "Olmo3ForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 7.3,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 111135,
+    "likes": 70,
+    "lastModified": "2026-04-21T17:21:02.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 4096,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 32,
+    "headDim": 128,
+    "intermediateSize": 11008,
+    "vocabSize": 100278,
+    "contextLen": 65536,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mha",
+    "rope": {
+      "type": "yarn",
+      "theta": 500000,
+      "scaling": {
+        "attention_factor": 1.2079441541679836,
+        "beta_fast": 32,
+        "beta_slow": 1,
+        "factor": 8,
+        "original_max_position_embeddings": 8192,
+        "rope_type": "yarn"
+      }
+    },
+    "slidingWindow": 4096,
+    "layerTypes": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+    ]
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/allenai/Olmo-3-1025-7B/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:56.863Z"
+}

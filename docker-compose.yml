@@ -1,0 +1,52 @@
+# Self-host LLM X-ray: Postgres + Next.js app (+ one-shot seed).
+#   docker compose up -d db
+#   docker compose --profile seed run --rm seed     # load data/models snapshot → DB
+#   docker compose up -d app                         # http://localhost:3000
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: llmxray
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-llmxray}
+      POSTGRES_DB: llmxray
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U llmxray"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      target: runner
+    environment:
+      NODE_ENV: production
+      CATALOG_SOURCE: db
+      DATABASE_URL: postgres://llmxray:${POSTGRES_PASSWORD:-llmxray}@db:5432/llmxray
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
+  # One-shot: builds the snapshot into the DB. Uses the builder stage (has tsx + source).
+  seed:
+    build:
+      context: .
+      target: builder
+    profiles: ["seed"]
+    environment:
+      CATALOG_SOURCE: db
+      DATABASE_URL: postgres://llmxray:${POSTGRES_PASSWORD:-llmxray}@db:5432/llmxray
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["npm", "run", "db:seed"]
+
+volumes:
+  pgdata:

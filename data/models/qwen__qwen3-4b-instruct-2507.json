@@ -1,0 +1,62 @@
+{
+  "id": "Qwen/Qwen3-4B-Instruct-2507",
+  "slug": "qwen__qwen3-4b-instruct-2507",
+  "name": "Qwen3-4B-Instruct-2507",
+  "family": "qwen3",
+  "architecture": "Qwen3ForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 4.02,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 4338344,
+    "likes": 880,
+    "lastModified": "2025-09-17T06:56:53.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 36,
+    "numHeads": 32,
+    "numKVHeads": 8,
+    "headDim": 128,
+    "intermediateSize": 9728,
+    "vocabSize": 151936,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 5000000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-06-19T07:12:47.259Z"
+}
