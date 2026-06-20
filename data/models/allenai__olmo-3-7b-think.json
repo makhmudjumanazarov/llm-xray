@@ -1,19 +1,19 @@
 {
-  "id": "allenai/Olmo-3-1025-7B",
-  "slug": "allenai__olmo-3-1025-7b",
-  "name": "Olmo-3-1025-7B",
+  "id": "allenai/Olmo-3-7B-Think",
+  "slug": "allenai__olmo-3-7b-think",
+  "name": "Olmo-3-7B-Think",
   "family": "olmo3",
   "architecture": "Olmo3ForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 7.3,
+  "paramsB": 0,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 106234,
-    "likes": 70,
-    "lastModified": "2026-04-21T17:21:02.000Z",
+    "downloads": 60160,
+    "likes": 97,
+    "lastModified": "2026-01-05T16:25:49.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -99,8 +99,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/allenai/Olmo-3-1025-7B/blob/main/config.json",
+    "configUrl": "https://huggingface.co/allenai/Olmo-3-7B-Think/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:56.863Z"
+  "generatedAt": "2026-06-20T12:31:21.245Z"
 }
