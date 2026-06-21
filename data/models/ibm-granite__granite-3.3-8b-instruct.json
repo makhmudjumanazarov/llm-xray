@@ -1,7 +1,7 @@
 {
-  "id": "ibm-granite/granite-3.1-8b-instruct",
-  "slug": "ibm-granite__granite-3.1-8b-instruct",
-  "name": "granite-3.1-8b-instruct",
+  "id": "ibm-granite/granite-3.3-8b-instruct",
+  "slug": "ibm-granite__granite-3.3-8b-instruct",
+  "name": "granite-3.3-8b-instruct",
   "family": "granite",
   "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
@@ -11,9 +11,9 @@
   "paramsB": 8.17,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 108535,
-    "likes": 167,
-    "lastModified": "2025-04-16T14:57:57.000Z",
+    "downloads": 83012,
+    "likes": 158,
+    "lastModified": "2025-05-12T06:39:42.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -23,7 +23,7 @@
     "numKVHeads": 8,
     "headDim": 128,
     "intermediateSize": 12800,
-    "vocabSize": 49155,
+    "vocabSize": 49159,
     "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/ibm-granite/granite-3.1-8b-instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3.3-8b-instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:06.467Z"
+  "generatedAt": "2026-06-21T12:34:50.942Z"
 }
