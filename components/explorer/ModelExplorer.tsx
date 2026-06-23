@@ -7,6 +7,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { decoderBlock, type SubOp } from "@/core/model/blocks";
 import { Diagram2D } from "./Diagram2D";
 import { DetailPanel } from "./DetailPanel";
+import { CanvasErrorBoundary } from "./CanvasErrorBoundary";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { Skeleton } from "@/components/ui/Skeleton";
 
@@ -47,7 +48,15 @@ export function ModelExplorer({ model, dict }: { model: Model; dict: Dictionary 
           {view === "2d" ? (
             <Diagram2D model={model} dict={dict} selected={selected} onSelect={setSelected} />
           ) : (
-            <Scene3D model={model} dict={dict} selected={selected} onSelect={setSelected} />
+            <CanvasErrorBoundary
+              fallback={
+                <div className="flex h-[560px] w-full items-center justify-center rounded-card border border-border bg-bg2 px-6 text-center text-sm text-dim">
+                  {dict.explorer.noWebgl}
+                </div>
+              }
+            >
+              <Scene3D model={model} dict={dict} selected={selected} onSelect={setSelected} />
+            </CanvasErrorBoundary>
           )}
         </div>
         <div className="lg:sticky lg:top-20 lg:self-start">

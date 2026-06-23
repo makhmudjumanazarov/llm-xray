@@ -8,7 +8,9 @@
     "home": "Models",
     "learn": "Learn",
     "compare": "Compare",
-    "github": "GitHub"
+    "evolution": "Evolution",
+    "github": "GitHub",
+    "menu": "Menu"
   },
   "home": {
     "heroTitle": "X-ray any open-source LLM",
@@ -16,7 +18,8 @@
     "searchPlaceholder": "Search models…",
     "resultsCount": "{count} models",
     "empty": "No models match your filters.",
-    "exploreCta": "Explore architecture →"
+    "exploreCta": "Explore architecture →",
+    "loadMore": "Load more ({count})"
   },
   "journey": {
     "title": "From Zero to Hero: How an LLM Is Trained",
@@ -220,6 +223,105 @@
       }
     }
   },
+  "inference": {
+    "title": "How an LLM Answers: The Inference Journey",
+    "subtitle": "Watch a finished model turn your prompt into an answer — one token at a time.",
+    "bridgeFromTraining": "Training is done. Now watch that model actually answer.",
+    "promptLabel": "Try a prompt",
+    "promptPlaceholder": "The capital of France is",
+    "presets": {
+      "p1": "The capital of France is",
+      "p2": "Water is made of",
+      "p3": "2 + 2 ="
+    },
+    "run": "Run",
+    "autoplayPlay": "Auto-play",
+    "autoplayStop": "Stop",
+    "prev": "Previous step",
+    "next": "Next step",
+    "stepsGroupLabel": "Inference steps",
+    "analogyLabel": "In plain words",
+    "shapesLabel": "Shapes",
+    "objectiveLabel": "Formula",
+    "tokensLabel": "prompt",
+    "generatedLabel": "generated",
+    "kvCacheLabel": "KV cache",
+    "kvCacheNote": "Seen tokens are remembered, not recomputed.",
+    "attention": {
+      "caption": "Each word looks back at earlier words and weighs which matter.",
+      "query": "current word",
+      "keys": "earlier words",
+      "masked": "future (masked)"
+    },
+    "sampling": {
+      "temperature": "Temperature",
+      "tempLow": "sharp / greedy",
+      "tempHigh": "flat / random",
+      "method": "Sampling",
+      "greedy": "Greedy",
+      "topk": "Top-k",
+      "topp": "Top-p",
+      "kept": "kept",
+      "picked": "picked"
+    },
+    "loop": {
+      "caption": "Append the new token and do it all again — until a stop token.",
+      "repeat": "repeat",
+      "done": "done"
+    },
+    "captions": {
+      "tokenize": "Splitting text",
+      "embed": "Vectors + positions",
+      "layers": "Attention + MLP ×N",
+      "logits": "Next-token scores",
+      "sampling": "Choosing a token",
+      "loop": "Generating…"
+    },
+    "stages": {
+      "tokenize": {
+        "title": "Tokenize",
+        "tagline": "Text → tokens",
+        "beginner": "Your text is chopped into tokens — whole words or word-pieces — and each gets a number. Models don't read letters; they read these token ids.",
+        "expert": "A BPE/SentencePiece tokenizer maps the string to integer ids x ∈ ℤⁿ. Frequent pieces become a single token; rare words split into subwords, so any text is representable.",
+        "shapes": "x ∈ ℤⁿ"
+      },
+      "embed": {
+        "title": "Embed",
+        "tagline": "Tokens → vectors",
+        "beginner": "Each token id is looked up as a list of numbers (a vector), and its position in the sentence is mixed in so word order matters.",
+        "expert": "Each id indexes the embedding matrix E[tᵢ] ∈ ℝ^d; position is injected by rotating Q/K with RoPE. The result is an [n × d] matrix — the start of the residual stream.",
+        "shapes": "[n × d_model]"
+      },
+      "layers": {
+        "title": "Decoder layers ×N",
+        "tagline": "Attention + MLP, repeated",
+        "beginner": "Stacked layers refine the vectors. In each layer every token looks back at earlier tokens (attention), then 'thinks' through a small network (MLP). A residual stream carries information straight through.",
+        "expert": "Per layer: causal self-attention softmax(QKᵀ/√dₖ + M)·V over the cached keys/values, then an MLP (or MoE), each added back to the residual with pre-norm. The KV cache grows each step so earlier tokens aren't recomputed.",
+        "shapes": "Q,K,V ∈ ℝ^{n×d_k}"
+      },
+      "logits": {
+        "title": "Logits → Softmax",
+        "tagline": "A score for every token",
+        "beginner": "After a final normalize, the model gives every possible next token a score, then softmax turns those scores into percentages — one probability per candidate.",
+        "expert": "The last token's hidden state is unembedded: z = W_U·norm(h_n) ∈ ℝ^{|V|}; then p = softmax(z) is the next-token distribution over the whole vocabulary.",
+        "shapes": "z ∈ ℝ^{|V|}"
+      },
+      "sampling": {
+        "title": "Sampling",
+        "tagline": "Pick the next token",
+        "beginner": "From those percentages, choose one token. Temperature, top-k and top-p control how safe or adventurous the pick is — greedy always takes the top one.",
+        "expert": "Temperature scales the logits (z/T); top-k keeps the k highest, top-p the smallest set summing to p. Renormalize over the kept set and sample tₙ₊₁ ~ p.",
+        "shapes": "tₙ₊₁ ~ p"
+      },
+      "loop": {
+        "title": "Repeat",
+        "tagline": "One token at a time",
+        "beginner": "Add the chosen token to the text and do everything again to get the next one — appending word by word until a stop token or a length limit.",
+        "expert": "Autoregressive decoding: append tₙ₊₁, extend the KV cache by one position, and re-run the new token through the layers. Repeat until EOS or max length.",
+        "shapes": "x ← x ∥ tₙ₊₁"
+      }
+    }
+  },
   "filters": {
     "title": "Filters",
     "family": "Family",
@@ -228,7 +330,12 @@
     "license": "License",
     "moeOnly": "MoE only",
     "all": "All",
-    "clear": "Clear filters"
+    "clear": "Clear filters",
+    "presetsTitle": "Quick filters",
+    "presetAll": "All models",
+    "presetMoe": "Mixture-of-Experts",
+    "presetMultimodal": "Multimodal",
+    "presetGqa": "GQA attention"
   },
   "columns": {
     "rank": "#",
@@ -240,7 +347,8 @@
     "downloads": "Downloads",
     "likes": "Likes",
     "license": "License",
-    "benchmark": "MMLU"
+    "benchmark": "MMLU",
+    "score": "Score"
   },
   "modality": {
     "text": "Text",
@@ -272,7 +380,21 @@
     "headDim": "Head dim",
     "intermediate": "Intermediate size",
     "attention": "Attention",
-    "comingSoon": "Interactive 2D/3D explorer is coming next."
+    "comingSoon": "Interactive 2D/3D explorer is coming next.",
+    "advanced": "Advanced",
+    "dataType": "Data type",
+    "tensors": "Tensors",
+    "gated": "Gated",
+    "gatedNote": "Requires access approval on Hugging Face",
+    "ropeScaling": "RoPE scaling",
+    "sharedExperts": "Shared experts",
+    "projectorDim": "Projector dim",
+    "score": "Score",
+    "headGroupsTitle": "Attention head sharing",
+    "headGroupsHint": "How query heads share key/value heads — fewer KV heads shrink the cache (GQA/MQA/MLA).",
+    "queryHeads": "Query heads",
+    "kvHeadsShort": "KV heads",
+    "group": "group"
   },
   "explorer": {
     "title": "Architecture explorer",
@@ -287,6 +409,10 @@
     "noWebgl": "WebGL is not available in this browser — 3D view can't render.",
     "drillHint": "Click a layer to open its internal block.",
     "back": "← Back to stack",
+    "layerMap": "Layer map",
+    "sliding": "sliding",
+    "full": "global",
+    "residualStream": "residual stream",
     "groups": {
       "inputNorm": "Input norm",
       "attention": "Self-attention",
@@ -343,13 +469,18 @@
       "commonsense": "Commonsense",
       "truthfulness": "Truthfulness",
       "instruction": "Instruction following"
-    }
+    },
+    "tableView": "Table",
+    "radarView": "Radar"
   },
   "scatter": {
     "title": "Capability vs. size",
     "hint": "Bubble = downloads · color = family · dashed line = efficient frontier (best score per parameter)",
     "xAxis": "Parameters (log scale)",
-    "yAxis": "Metric"
+    "yAxis": "Metric",
+    "xBy": "X-axis",
+    "sizeBy": "Bubble size",
+    "family": "Family"
   },
   "forward": {
     "run": "▶ Run forward pass",
@@ -384,6 +515,95 @@
       "beginnerText": "Higher temperature flattens the choices (more random, more creative). Lower temperature sharpens toward the single best token (more confident, more repetitive).",
       "expertText": "Each logit is divided by temperature T before exponentiation. As T→0 the distribution approaches argmax (greedy decoding); as T→∞ it approaches uniform."
     },
+    "attention": {
+      "title": "Attention",
+      "blurb": "Which earlier words does each word focus on? This is real attention from a small GPT model — drag the layer, switch heads, hover a word.",
+      "beginnerText": "Attention lets every word look back at earlier words and decide which ones matter for it. A bright cell means the row word is paying strong attention to the column word. GPT-style models are causal: a word can only look backward, so the top-right triangle is empty.",
+      "expertText": "Each head computes softmax(QKᵀ/√dₖ)·V over the causal-masked scores, giving a per-row probability distribution over keys. Different heads specialize — a previous-token head, an induction (copy) head, a syntactic head — and patterns sharpen across layers. Shown here: real distilgpt2 weights.",
+      "sentence": "Sentence",
+      "layer": "Layer",
+      "head": "Head",
+      "headAvg": "Avg",
+      "rows": "row = current word",
+      "cols": "column = earlier word",
+      "low": "less",
+      "high": "more",
+      "flowHint": "Tap or hover a word on the left to trace where it looks.",
+      "realData": "Real {model} attention · {layers} layers × {heads} heads"
+    },
+    "tokenization": {
+      "title": "Tokenization",
+      "blurb": "Models don't read letters — they read tokens. Type anything and watch it split into subword pieces, each with an id.",
+      "beginnerText": "Before a model sees your text, a tokenizer chops it into tokens: common words are one token, rare words split into pieces. Each token maps to a number (an id) the model actually works with. A leading space is part of the token (shown as ·).",
+      "expertText": "This is an illustrative byte-pair encoding (BPE): start from characters and greedily apply the highest-priority merge rules until none apply. Real tokenizers learn thousands of merges from data, use byte-level fallback for any character, and add special tokens like <bos>/<eos>. Vocabulary size trades sequence length against embedding-table size.",
+      "placeholder": "Type some text…",
+      "sample": "Tokenization isn't magic.",
+      "viewTokens": "Tokens",
+      "viewIds": "IDs",
+      "viewMerges": "Merges",
+      "chars": "chars",
+      "tokens": "tokens"
+    },
+    "sampling": {
+      "title": "Sampling & Decoding",
+      "blurb": "The model gives every token a probability — but which one does it actually pick? Tune temperature, top-k and top-p.",
+      "beginnerText": "Greedy decoding always takes the single most likely token (safe but repetitive). Top-k keeps only the k best; top-p keeps the smallest set covering p of the probability; then the model samples one of them — here we highlight the most likely of the kept set. Temperature reshapes the odds: low = sharp and predictable, high = flat and creative.",
+      "expertText": "Temperature scales logits before softmax (z/T). Top-k truncates to the k highest-probability tokens; top-p (nucleus) truncates to the smallest set whose cumulative probability ≥ p. After truncation the kept probabilities are renormalized and one token is sampled. These knobs trade coherence against diversity."
+    },
+    "moe": {
+      "title": "Mixture of Experts",
+      "blurb": "Instead of one big network, MoE has many small expert networks — a router sends each token to just a few. Huge total capacity, a fraction of the compute per token.",
+      "beginnerText": "Every token is scored by a small 'router', which picks the top few experts to handle it. Only those experts run, so a model can have enormous total capacity while doing only a fraction of the work for each token. Each token's chosen experts are highlighted in amber.",
+      "expertText": "The router is a learned linear layer: g = top-k(softmax(x·W_r)). Only the selected experts' MLPs run and their outputs are combined by the gate weights. With E experts and top-k routing, each token uses k/E of the expert FLOPs — e.g. Mixtral's 8 experts, top-2 = 25%. Some models also add always-on shared experts.",
+      "preset": "Model",
+      "experts": "experts",
+      "topk": "chosen",
+      "active": "active per token",
+      "router": "router",
+      "routedTo": "routed to",
+      "skipped": "skipped"
+    },
+    "rope": {
+      "title": "RoPE positions",
+      "blurb": "How does the model know word order? RoPE spins each token's vector by an angle that grows with its position — distance becomes rotation.",
+      "beginnerText": "Each pair of dimensions is rotated by an angle that depends on the token's position. Nearby positions get similar rotations; far-apart positions diverge. Low-frequency pairs barely move, high-frequency pairs spin fast — together they encode position. Drag the position slider.",
+      "expertText": "RoPE rotates the query/key dimension-pairs by m·θ_i where θ_i = base^(-2i/d). Because the rotation is relative, the dot product q_m·k_n depends only on m−n, so the model feels relative distance. A larger base (θ) turns the low frequencies more slowly, stretching the usable context length — the basis of NTK/YaRN scaling.",
+      "position": "Position m",
+      "base": "Base θ",
+      "fast": "fast (high freq)",
+      "slow": "slow (low freq)",
+      "dimPair": "dim-pair"
+    },
+    "kvcache": {
+      "title": "KV cache",
+      "blurb": "To write each next word fast, the model remembers the keys & values it already computed — instead of recomputing attention over the whole prefix.",
+      "beginnerText": "When generating, the model would otherwise redo attention over every earlier token at each step. The KV cache stores those keys and values, so each new token only computes its own — much faster, but memory grows with length. Sliding-window models forget the oldest tokens to cap it. Press Generate.",
+      "expertText": "Each layer caches K,V for all past positions; a new token attends to the cache and appends its own K,V (O(seq) memory per layer). Total ≈ 2·L·n_kv·d_h·seq·bytes — GQA/MQA shrink it with fewer KV heads. Sliding-window attention bounds seq to the window, trading long-range recall for constant memory.",
+      "generate": "Generate",
+      "reset": "Reset",
+      "sliding": "Sliding window",
+      "cacheSize": "cache",
+      "step": "step",
+      "evicted": "evicted",
+      "layers": "layers",
+      "positions": "positions",
+      "full": "Full cache",
+      "window": "Window",
+      "cached": "cached"
+    },
+    "norm": {
+      "title": "Normalization",
+      "blurb": "Normalization keeps activations in a sane range so training stays stable. Compare RMSNorm and LayerNorm on a vector.",
+      "beginnerText": "Deep networks can blow up or vanish as numbers flow through many layers. A normalization step rescales each vector to a consistent size before the next block. RMSNorm just rescales; LayerNorm also re-centers around zero first. Randomize the input and compare.",
+      "expertText": "LayerNorm subtracts the mean then divides by the standard deviation, then applies γ,β: (x−μ)/√(σ²+ε)·γ+β. RMSNorm drops the mean term and divides by the root-mean-square: x/√(mean(x²)+ε)·γ — cheaper and empirically as effective, which is why most modern LLMs use it (pre-norm, before attention/MLP).",
+      "rmsnorm": "RMSNorm",
+      "layernorm": "LayerNorm",
+      "before": "before",
+      "after": "after",
+      "meanLabel": "mean",
+      "rmsLabel": "RMS",
+      "randomize": "Randomize"
+    },
     "concepts": {
       "attention": "Attention",
       "rope": "RoPE positions",
@@ -393,8 +613,247 @@
       "norm": "Normalization"
     }
   },
+  "evolution": {
+    "title": "The Evolution of AI — From Perceptrons to LLMs",
+    "subtitle": "Walk the arc that led to today's language models: classical machine learning, the first neural nets, the deep-learning and vision breakthroughs, sequence models, the transformer, and the LLM era. Click any era — or press play.",
+    "homeTeaserTitle": "How we got to LLMs",
+    "homeTeaserSubtitle": "Seventy years of AI in eight steps — from hand-tuned algorithms to transformer-based language models.",
+    "homeTeaserCta": "Explore the timeline",
+    "capabilityLabel": "what AI could do",
+    "capabilityNowLabel": "By this era",
+    "autoplayPlay": "Auto-play",
+    "autoplayStop": "Stop",
+    "prev": "Previous era",
+    "next": "Next era",
+    "stepsGroupLabel": "AI eras",
+    "keyIdeaLabel": "Key idea",
+    "breakthroughLabel": "Breakthrough",
+    "modelsLabel": "See it in the catalog",
+    "objectiveLabel": "Defining equation",
+    "milestonesLabel": "Timeline",
+    "architecturesLabel": "Architectures",
+    "layersLabel": "Layers",
+    "milestoneKinds": {
+      "origin": "origin",
+      "paper": "paper",
+      "award": "award",
+      "model": "model",
+      "event": "event"
+    },
+    "eras": {
+      "classical_ml": {
+        "title": "Classical Machine Learning",
+        "yearLabel": "1950s–1990s",
+        "tagline": "Learning from hand-crafted features",
+        "beginner": "Before neural nets took over, AI learned from tables of numbers that people prepared by hand. Algorithms like linear/logistic regression, decision trees, k-NN and SVMs found patterns in those features to classify or predict — powerful, but only as good as the features a human engineered.",
+        "expert": "Statistical learning over fixed, hand-engineered feature vectors: linear and logistic regression, k-nearest neighbours, decision trees, and — pivotally — support vector machines with kernels for non-linear boundaries. Optimisation is largely convex (closed-form or quadratic/gradient programming), so training is stable and well-understood, but representation power is bounded by the features you supply.",
+        "keyIdea": "Fit a function to hand-made features — no representation learning yet.",
+        "breakthrough": "SVMs + kernels (1990s) gave robust non-linear classifiers with strong theory.",
+        "milestones": {
+          "origin": "Statistical learning takes shape — fitting simple models to hand-crafted features.",
+          "id3": "Quinlan's ID3 popularises decision trees that split data by information gain.",
+          "svm": "Cortes & Vapnik's support vector machine maximises the margin between classes.",
+          "rf": "Breiman's random forests average many trees for robust, low-variance predictions."
+        },
+        "architectures": {
+          "linreg": "A weighted sum of features squashed by a sigmoid into a probability.",
+          "dtree": "A cascade of yes/no splits ending in a class vote at the leaves.",
+          "svm": "Lift features with a kernel, then separate classes with the widest margin."
+        }
+      },
+      "perceptron": {
+        "title": "Perceptron & Neural Nets",
+        "yearLabel": "1958 · 1986",
+        "tagline": "Neurons that learn their own weights",
+        "beginner": "The perceptron (1958) was a simple model of a neuron: multiply inputs by weights, add them up, and fire. Stacked into layers and trained with backpropagation (1986), these networks could finally learn the features themselves instead of being handed them.",
+        "expert": "Rosenblatt's perceptron is a linear threshold unit; a single layer can't solve XOR (Minsky & Papert, 1969), which chilled the field. The thaw came with the multilayer perceptron trained by backpropagation — reverse-mode automatic differentiation of the loss via the chain rule — letting hidden layers learn distributed, non-linear representations end-to-end.",
+        "keyIdea": "Composable non-linear units trained by gradient via backprop.",
+        "breakthrough": "Backpropagation (Rumelhart, Hinton & Williams, 1986) made multi-layer nets trainable.",
+        "milestones": {
+          "perceptron": "Rosenblatt builds the perceptron — a trainable model of a single neuron.",
+          "minsky": "Minsky & Papert show a single layer can't learn XOR, cooling the field for a decade.",
+          "backprop": "Backpropagation trains multi-layer networks by sending the error gradient backward."
+        },
+        "architectures": {
+          "perceptron": "One neuron: weigh the inputs, sum them, and fire past a threshold.",
+          "mlp": "A hidden layer of neurons lets the network learn non-linear boundaries.",
+          "backprop_net": "Stacked layers trained end-to-end as gradients flow back through each."
+        }
+      },
+      "deep_learning": {
+        "title": "Deep Learning",
+        "yearLabel": "2006–2011",
+        "tagline": "Many layers, learned representations",
+        "beginner": "Deeper networks — many layers stacked — learn far richer patterns, but they were hard to train until better initialisation, activation functions and, crucially, GPUs arrived. “Deep learning” is just neural nets with enough depth and compute to shine.",
+        "expert": "Depth lets a network compose hierarchical features, but vanishing/exploding gradients made deep stacks brittle. Greedy layerwise pretraining (Hinton, 2006), ReLU activations, better initialisation (Xavier/He) and GPU-accelerated SGD on large datasets unlocked stable training of deep models — setting the stage for representation learning.",
+        "keyIdea": "Add depth + GPUs so features are learned hierarchically, not designed.",
+        "breakthrough": "GPU training + ReLU/better init made very deep networks trainable.",
+        "milestones": {
+          "dbn": "Hinton's deep belief nets show deep models can be pretrained layer by layer.",
+          "imagenet_data": "ImageNet ships 14M labelled images — fuel for data-hungry deep models.",
+          "relu": "ReLU activations keep gradients alive, making deep stacks far easier to train.",
+          "dropout": "Dropout randomly mutes neurons during training, curbing overfitting."
+        },
+        "architectures": {
+          "deep_mlp": "Many fully-connected layers with ReLU, trained by SGD on GPUs.",
+          "autoencoder": "Compress the input to a small code, then reconstruct it — learning features unsupervised.",
+          "dbn": "A stack of restricted Boltzmann machines pretrained greedily, then fine-tuned."
+        }
+      },
+      "vision_cnn": {
+        "title": "Vision & Convolutional Nets",
+        "yearLabel": "2012–2015",
+        "tagline": "Seeing with convolutions",
+        "beginner": "Convolutional neural networks (CNNs) slide small filters over an image to detect edges, textures and shapes, building up to whole objects. In 2012 a CNN (AlexNet) crushed the ImageNet contest, and computer vision was never the same.",
+        "expert": "CNNs exploit translation-equivariance and weight sharing: stacked convolution + pooling layers learn a feature hierarchy from pixels. LeNet (1998) proved the idea; AlexNet (2012) scaled it on GPUs to win ImageNet by a wide margin; ResNet (2015) added residual connections, enabling 100+ layer networks. Depth and residuals later fed straight into transformers.",
+        "keyIdea": "Local filters + weight sharing learn a visual feature hierarchy.",
+        "breakthrough": "AlexNet (2012) and ResNet's skip connections (2015).",
+        "milestones": {
+          "lenet": "LeCun's LeNet-5 reads handwritten digits with convolution and pooling.",
+          "alexnet": "AlexNet wins ImageNet 2012 by a huge margin, igniting the deep-learning boom.",
+          "resnet": "ResNet's skip connections train 100+ layer networks and surpass human ImageNet accuracy.",
+          "turing": "Hinton, LeCun & Bengio win the Turing Award for deep learning."
+        },
+        "architectures": {
+          "lenet": "The original CNN: two conv+pool stages feeding fully-connected digit classes.",
+          "alexnet": "A deeper, GPU-trained CNN with ReLU and dropout that cracked ImageNet.",
+          "vgg": "Depth from long stacks of small 3×3 convolutions — simple and uniform.",
+          "resnet": "Residual blocks add a skip path so very deep networks stay trainable."
+        }
+      },
+      "nlp_seq": {
+        "title": "Sequence Models for Language",
+        "yearLabel": "2013–2016",
+        "tagline": "Word vectors, RNNs, attention",
+        "beginner": "To handle language, models needed memory of what came before. word2vec turned words into vectors that capture meaning; RNNs and LSTMs read text one token at a time, carrying a hidden state; and “attention” let a model look back at the most relevant earlier words.",
+        "expert": "word2vec/GloVe gave dense distributional embeddings. Recurrent nets (RNN → LSTM/GRU) model sequences with a recurrent hidden state but struggle with long-range dependencies and can't parallelise over time. Sequence-to-sequence with attention (Bahdanau, 2014) let the decoder soft-align to encoder states — the direct conceptual ancestor of self-attention.",
+        "keyIdea": "Carry a hidden state over time; attend to the relevant past.",
+        "breakthrough": "Seq2seq + attention (2014) — the seed of the transformer.",
+        "milestones": {
+          "lstm": "Hochreiter & Schmidhuber's LSTM adds gates so RNNs remember long-range context.",
+          "word2vec": "word2vec learns word vectors where meaning becomes geometry.",
+          "seq2seq": "Sutskever's encoder–decoder maps one sequence to another for translation.",
+          "attention": "Bahdanau attention lets the decoder focus on the most relevant input words."
+        },
+        "architectures": {
+          "word2vec": "A shallow net that turns each word into a dense meaning vector.",
+          "lstm": "A recurrent cell with gates that carries context across long sequences.",
+          "seq2seq": "An encoder LSTM reads the input; a decoder writes the output, guided by attention."
+        }
+      },
+      "transformers": {
+        "title": "The Transformer",
+        "yearLabel": "2017",
+        "tagline": "Attention is all you need",
+        "beginner": "The transformer dropped recurrence entirely and used only attention: every token can look at every other token at once. That made models hugely parallel (fast to train on GPUs) and great at long-range context — the architecture every modern LLM is built on.",
+        "expert": "Self-attention computes softmax(QKᵀ/√d)·V so each position mixes information from all others in one step; multi-head attention runs several in parallel subspaces, and positional encodings restore order. Removing recurrence makes training fully parallel across the sequence and scales gracefully — the substrate the whole catalog you can x-ray here is built on.",
+        "keyIdea": "Replace recurrence with parallel self-attention over the whole sequence.",
+        "breakthrough": "“Attention Is All You Need” (Vaswani et al., 2017).",
+        "milestones": {
+          "attention_paper": "“Attention Is All You Need” drops recurrence for pure self-attention.",
+          "bert": "BERT pretrains a bidirectional encoder and tops NLP benchmarks.",
+          "gpt": "GPT pretrains a decoder to generate text, then fine-tunes per task.",
+          "gpt2": "GPT-2 scales up and writes fluent paragraphs zero-shot."
+        },
+        "architectures": {
+          "transformer": "Self-attention + feed-forward blocks, fully parallel over the sequence.",
+          "bert": "An encoder-only transformer that reads text in both directions for understanding.",
+          "gpt": "A decoder-only transformer that predicts the next token to generate text."
+        }
+      },
+      "llms": {
+        "title": "Large Language Models",
+        "yearLabel": "2018–2022",
+        "tagline": "Pretrain, scale, then align",
+        "beginner": "Train a transformer to predict the next word on a huge slice of the internet, make it bigger, and surprising abilities emerge. BERT and GPT kicked it off; GPT-3 showed scale alone unlocks few-shot skills; then RLHF (InstructGPT/ChatGPT) taught models to follow instructions.",
+        "expert": "Self-supervised pretraining (masked LM for BERT, causal LM for GPT) plus empirical scaling laws — loss falls predictably as a power law in parameters, data and compute — drove a race to scale. GPT-3 demonstrated in-context/few-shot learning; instruction tuning and RLHF/DPO aligned raw predictors into helpful assistants. (See the Training journey on the home page.)",
+        "keyIdea": "Next-token pretraining + scale + alignment = a general assistant.",
+        "breakthrough": "GPT-3 scaling (2020) and RLHF instruction-tuning (2022).",
+        "milestones": {
+          "gpt3": "GPT-3 reaches 175B parameters and learns tasks from a few examples in the prompt.",
+          "scaling": "Scaling laws show loss falls predictably with more parameters, data and compute.",
+          "instructgpt": "InstructGPT aligns the model to follow instructions via RLHF.",
+          "chatgpt": "ChatGPT puts a conversational LLM in front of hundreds of millions of people."
+        },
+        "architectures": {
+          "gpt3": "A very deep decoder-only stack — scale alone unlocks few-shot abilities.",
+          "t5": "An encoder–decoder that casts every NLP task as text-to-text.",
+          "llama": "A modern open decoder with RMSNorm, RoPE and SwiGLU — the template for today's LLMs."
+        }
+      },
+      "frontier": {
+        "title": "Frontier & Open Models",
+        "yearLabel": "2023–today",
+        "tagline": "Multimodal, mixture-of-experts, open",
+        "beginner": "Today's models see images and hear audio, route tokens to specialised “expert” sub-networks for efficiency, reason step by step, and increasingly ship as open weights anyone can run. This is the world the rest of llm-xray lets you explore.",
+        "expert": "The frontier blends multimodality (vision/audio encoders projected into the text stream), sparse Mixture-of-Experts for parameter-efficient scaling, long-context attention variants and reasoning-tuned post-training. A vibrant open-weights ecosystem — Llama, Qwen, DeepSeek, Mistral, Gemma — makes these architectures inspectable, which is exactly what this site does.",
+        "keyIdea": "Multimodal + sparse MoE + reasoning, increasingly open-weight.",
+        "breakthrough": "Open-weight multimodal MoE models you can download and x-ray.",
+        "milestones": {
+          "open_weights": "Open-weight models — Llama, Mistral, Qwen — put frontier architectures in everyone's hands.",
+          "moe_mm": "Sparse Mixture-of-Experts and native multimodality scale capability efficiently.",
+          "reasoning": "Reasoning models are post-trained with RL to think step by step before answering."
+        },
+        "architectures": {
+          "mixtral": "Each token is routed to a few expert FFNs — more capacity at fixed compute.",
+          "multimodal": "Vision and audio encoders feed the text decoder, so one model sees, hears and reads.",
+          "reasoning": "A decoder tuned by RL to produce long chains of thought before the final answer."
+        }
+      }
+    }
+  },
   "footer": {
     "dataNote": "Architecture data is read directly from each model's config.json and safetensors index — no weights downloaded.",
     "language": "Language"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "q": "What is llm-xray?",
+        "a": "llm-xray is a free, interactive site that ranks the latest open-source large language models by downloads and benchmarks, then lets you x-ray any model’s architecture — attention, normalization, MLP, and Mixture-of-Experts — layer by layer in 2D and 3D, so you can see how LLMs actually work."
+      },
+      {
+        "q": "Which models does llm-xray cover?",
+        "a": "It tracks open-weight LLMs from official Hugging Face accounts (Llama, Qwen, Mistral, DeepSeek, Gemma, Phi and more), refreshed automatically. Each model page is built from the real config and safetensors index — layer count, hidden size, attention type (MHA/GQA/MQA/MLA), context length, and MoE setup."
+      },
+      {
+        "q": "How are models ranked?",
+        "a": "Models are sorted by Hugging Face downloads and likes, with benchmark columns such as MMLU, and you can filter by family, modality, attention type, and Mixture-of-Experts. The compare page puts models side by side across 12+ metrics."
+      },
+      {
+        "q": "What is the difference between MHA, GQA, MQA, and MLA?",
+        "a": "They are attention variants that trade quality for a smaller key/value cache. MHA gives every head its own keys and values; GQA shares them across groups of heads; MQA shares one set across all heads; MLA compresses them into a latent. Fewer KV heads mean faster, cheaper inference."
+      },
+      {
+        "q": "What is a Mixture-of-Experts (MoE) model?",
+        "a": "A Mixture-of-Experts model replaces the dense feed-forward layer with many expert networks and a router that activates only the top-k experts per token (for example top-2 of 8 in Mixtral). This makes the model much larger in total parameters while keeping the compute per token low."
+      },
+      {
+        "q": "Is llm-xray free, and do I need an account?",
+        "a": "Yes, it is completely free and needs no account. It is an educational product for students, engineers, and anyone learning how transformers and LLMs work, available in English, Russian, and Uzbek."
+      }
+    ]
+  },
+  "cta": {
+    "learnThis": "Learn this",
+    "learnMath": "Learn the math",
+    "learnMore": "Learn more",
+    "seeItIn": "See it in"
+  },
+  "realRun": {
+    "title": "Run a real model",
+    "subtitle": "The demos above are illustrative. This runs a real small model — DistilGPT-2 — entirely in your browser. Click Run to load it once (a few MB) and see the actual next-token probabilities.",
+    "prompt": "Prompt",
+    "placeholder": "The capital of France is",
+    "temperature": "Temperature",
+    "run": "▶ Run real model",
+    "running": "Running…",
+    "loading": "Loading DistilGPT-2…",
+    "real": "REAL",
+    "unsupported": "Your browser can’t run in-browser models (module Web Workers unavailable).",
+    "error": "Couldn’t run the model.",
+    "nextToken": "Actual next-token probabilities",
+    "note": "Real output from DistilGPT-2 via transformers.js, computed on your device — nothing is sent to a server."
   }
 }

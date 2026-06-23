@@ -7,6 +7,7 @@ import {
   prevStage,
   capabilityAt,
   stageById,
+  stageAxisPct,
   isMonotonic,
   type StageId,
 } from "./lifecycle";
@@ -19,6 +20,16 @@ describe("lifecycle stages", () => {
   it("has exactly the four canonical stages in training order", () => {
     expect(STAGE_COUNT).toBe(4);
     expect(LIFECYCLE_STAGES.map((s) => s.id)).toEqual(CANONICAL_ORDER);
+  });
+
+  it("stageAxisPct is evenly spaced + centered (bar ticks align with stepper icons)", () => {
+    const xs = LIFECYCLE_STAGES.map((_, i) => stageAxisPct(i));
+    expect(xs).toEqual([12.5, 37.5, 62.5, 87.5]);
+    // strictly increasing, symmetric, and within (0,100) so nothing clips an edge
+    for (let i = 1; i < xs.length; i++) expect(xs[i] - xs[i - 1]).toBeCloseTo(25);
+    expect(xs[0] + xs[xs.length - 1]).toBeCloseTo(100);
+    expect(stageAxisPct(-5)).toBe(12.5); // clamps
+    expect(stageAxisPct(99)).toBe(87.5);
   });
 
   it("capability rises strictly and tops out at 100 (zero → hero)", () => {

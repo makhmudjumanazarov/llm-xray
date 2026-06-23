@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/config";
 import { LIFECYCLE_STAGES, STAGE_COUNT, type StageId } from "@/core/training/lifecycle";
 import type { AlignmentMethod } from "@/core/training/loop";
 import { ExpertToggle } from "@/components/learn/ExpertToggle";
@@ -12,7 +13,7 @@ import { useInView, usePrefersReducedMotion } from "./hooks";
 
 const AUTOPLAY_MS = 3200;
 
-export function TrainingLifecycle({ dict }: { dict: Dictionary }) {
+export function TrainingLifecycle({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const j = dict.journey;
   const [activeIndex, setActiveIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -79,6 +80,7 @@ export function TrainingLifecycle({ dict }: { dict: Dictionary }) {
         nowLabel={j.capabilityNowLabel}
         captions={j.capabilityCaptions}
         bridgeCta={j.bridgeCta}
+        bridgeHref={`/${locale}/models`}
       />
 
       <div className="mt-7">

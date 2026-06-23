@@ -50,11 +50,14 @@ export function pageMetadata({ locale, path = "", title, description, ogTitle }:
       url: localePath(locale, path),
       locale: localeMeta[locale].og,
       alternateLocale: locales.filter((l) => l !== locale).map((l) => localeMeta[l].og),
+      // Resolved against metadataBase → absolute. Served by app/opengraph-image.tsx.
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE_NAME }],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle ?? title,
       description,
+      images: ["/opengraph-image"],
     },
   };
 }

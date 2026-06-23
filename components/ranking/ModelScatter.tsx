@@ -19,6 +19,9 @@ const PH = H - M.top - M.bottom;
 
 const log10 = (x: number) => Math.log(x) / Math.LN10;
 
+type XKey = "paramsB" | "contextLen" | "numLayers";
+type SizeKey = "downloads" | "likes";
+
 export function ModelScatter({
   models,
   locale,
@@ -30,10 +33,18 @@ export function ModelScatter({
 }) {
   const router = useRouter();
   const [metric, setMetric] = useState("mmlu");
+  const [xKey, setXKey] = useState<XKey>("paramsB");
+  const [sizeKey, setSizeKey] = useState<SizeKey>("downloads");
+  const [familyFilter, setFamilyFilter] = useState<string>("all");
   const [hover, setHover] = useState<string | null>(null);
 
   const families = useMemo(() => Array.from(new Set(models.map((m) => m.family))).sort(), [models]);
   const familyColor = (f: string) => FAMILY_COLORS[families.indexOf(f) % FAMILY_COLORS.length];
+
+  const isLogX = xKey === "paramsB";
+  const xValue = (m: Model): number =>
+    xKey === "paramsB" ? m.paramsB : xKey === "contextLen" ? m.text.contextLen : m.text.numLayers;
+  const sizeValue = (m: Model): number => (sizeKey === "downloads" ? m.stats.downloads : m.stats.likes);
 
   // Metrics that at least 2 models report (so the axis is meaningful).
   const metricOptions = useMemo(
@@ -46,31 +57,40 @@ export function ModelScatter({
 
   const points = useMemo(() => {
     const rows = models
-      .filter((m) => m.paramsB > 0 && m.stats.benchmarks?.[metric] != null)
-      .map((m) => ({ m, x: m.paramsB, y: m.stats.benchmarks![metric] as number, dl: m.stats.downloads }));
+      .filter((m) => xValue(m) > 0 && m.stats.benchmarks?.[metric] != null)
+      .map((m) => ({
+        m,
+        x: xValue(m),
+        y: m.stats.benchmarks![metric] as number,
+        dl: sizeValue(m),
+        match: familyFilter === "all" || m.family === familyFilter,
+      }));
     return rows;
-  }, [models, metric]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [models, metric, xKey, sizeKey, familyFilter]);
 
   const scales = useMemo(() => {
     if (!points.length) return null;
     const xs = points.map((p) => p.x);
     const ys = points.map((p) => p.y);
     const dls = points.map((p) => p.dl);
-    const xMin = Math.min(...xs) * 0.8;
-    const xMax = Math.max(...xs) * 1.25;
+    const xMin = isLogX ? Math.min(...xs) * 0.8 : Math.min(...xs);
+    const xMax = isLogX ? Math.max(...xs) * 1.25 : Math.max(...xs);
     const yMin = Math.max(0, Math.min(...ys) - 8);
     const yMax = Math.min(100, Math.max(...ys) + 6);
     const dlMax = Math.max(...dls, 1);
-    const xScale = (v: number) => M.left + ((log10(v) - log10(xMin)) / (log10(xMax) - log10(xMin))) * PW;
+    const xScale = isLogX
+      ? (v: number) => M.left + ((log10(v) - log10(xMin)) / (log10(xMax) - log10(xMin) || 1)) * PW
+      : (v: number) => M.left + ((v - xMin) / (xMax - xMin || 1)) * PW;
     const yScale = (v: number) => M.top + PH - ((v - yMin) / (yMax - yMin || 1)) * PH;
     const rScale = (v: number) => 5 + Math.sqrt(v / dlMax) * 18;
     return { xScale, yScale, rScale, xMin, xMax, yMin, yMax };
-  }, [points]);
+  }, [points, isLogX]);
 
   // Efficient frontier: maximize benchmark while minimizing params (upper-left staircase).
   const frontier = useMemo(() => {
     if (!scales) return [];
-    const sorted = [...points].sort((a, b) => a.x - b.x);
+    const sorted = points.filter((p) => p.match).sort((a, b) => a.x - b.x);
     let best = -Infinity;
     const f: typeof sorted = [];
     for (const p of sorted) {
@@ -85,7 +105,9 @@ export function ModelScatter({
   if (!scales) return null;
   const { xScale, yScale, rScale, yMin, yMax } = scales;
 
-  const xTicks = [0.1, 0.3, 1, 3, 10, 30, 100].filter((t) => t >= scales.xMin && t <= scales.xMax);
+  const xTicks = isLogX
+    ? [0.1, 0.3, 1, 3, 10, 30, 100].filter((t) => t >= scales.xMin && t <= scales.xMax)
+    : Array.from({ length: 5 }, (_, i) => Math.round(scales.xMin + ((scales.xMax - scales.xMin) / 4) * i));
   const yTicks = Array.from({ length: 5 }, (_, i) => Math.round(yMin + ((yMax - yMin) / 4) * i));
   const hovered = hover ? points.find((p) => p.m.slug === hover) : null;
 
@@ -96,18 +118,56 @@ export function ModelScatter({
           <h2 className="font-display text-lg font-bold text-text">{dict.scatter.title}</h2>
           <p className="mt-0.5 text-xs text-dim">{dict.scatter.hint}</p>
         </div>
-        <label className="flex items-center gap-2 text-xs text-muted">
-          {dict.scatter.yAxis}
-          <select
-            value={metric}
-            onChange={(e) => setMetric(e.target.value)}
-            className="rounded-lg border border-border bg-panel px-2 py-1.5 text-sm text-text outline-none focus:border-border2"
-          >
-            {metricOptions.map((mt) => (
-              <option key={mt.id} value={mt.id}>{mt.label}</option>
-            ))}
-          </select>
-        </label>
+        <div className="flex flex-wrap items-center gap-3">
+          <label className="flex items-center gap-2 text-xs text-muted">
+            {dict.scatter.xBy}
+            <select
+              value={xKey}
+              onChange={(e) => setXKey(e.target.value as XKey)}
+              className="rounded-lg border border-border bg-panel px-2 py-1.5 text-sm text-text outline-none focus:border-border2"
+            >
+              <option value="paramsB">{dict.columns.params}</option>
+              <option value="contextLen">{dict.columns.context}</option>
+              <option value="numLayers">{dict.columns.layers}</option>
+            </select>
+          </label>
+          <label className="flex items-center gap-2 text-xs text-muted">
+            {dict.scatter.yAxis}
+            <select
+              value={metric}
+              onChange={(e) => setMetric(e.target.value)}
+              className="rounded-lg border border-border bg-panel px-2 py-1.5 text-sm text-text outline-none focus:border-border2"
+            >
+              {metricOptions.map((mt) => (
+                <option key={mt.id} value={mt.id}>{mt.label}</option>
+              ))}
+            </select>
+          </label>
+          <label className="flex items-center gap-2 text-xs text-muted">
+            {dict.scatter.sizeBy}
+            <select
+              value={sizeKey}
+              onChange={(e) => setSizeKey(e.target.value as SizeKey)}
+              className="rounded-lg border border-border bg-panel px-2 py-1.5 text-sm text-text outline-none focus:border-border2"
+            >
+              <option value="downloads">{dict.columns.downloads}</option>
+              <option value="likes">{dict.columns.likes}</option>
+            </select>
+          </label>
+          <label className="flex items-center gap-2 text-xs text-muted">
+            {dict.scatter.family}
+            <select
+              value={familyFilter}
+              onChange={(e) => setFamilyFilter(e.target.value)}
+              className="rounded-lg border border-border bg-panel px-2 py-1.5 text-sm text-text outline-none focus:border-border2"
+            >
+              <option value="all">{dict.filters.all}</option>
+              {families.map((f) => (
+                <option key={f} value={f}>{f}</option>
+              ))}
+            </select>
+          </label>
+        </div>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ aspectRatio: `${W} / ${H}` }} role="img">
@@ -121,11 +181,15 @@ export function ModelScatter({
         {/* x ticks (log) */}
         {xTicks.map((t) => (
           <text key={`x${t}`} x={xScale(t)} y={H - M.bottom + 20} textAnchor="middle" className="fill-dim font-mono" fontSize={11}>
-            {t < 1 ? t : `${t}B`}
+            {isLogX ? (t < 1 ? t : `${t}B`) : compactNumber(t)}
           </text>
         ))}
         <text x={M.left + PW / 2} y={H - 6} textAnchor="middle" className="fill-muted font-mono" fontSize={11}>
-          {dict.scatter.xAxis}
+          {xKey === "paramsB"
+            ? dict.scatter.xAxis
+            : xKey === "contextLen"
+              ? dict.columns.context
+              : dict.columns.layers}
         </text>
 
         {/* efficient frontier */}
@@ -150,9 +214,10 @@ export function ModelScatter({
               cy={yScale(p.y)}
               r={rScale(p.dl)}
               fill={familyColor(p.m.family)}
-              fillOpacity={active ? 0.85 : 0.5}
+              fillOpacity={p.match ? (active ? 0.85 : 0.5) : 0.08}
               stroke={familyColor(p.m.family)}
               strokeWidth={active ? 2 : 1}
+              strokeOpacity={p.match ? 1 : 0.2}
               className="cursor-pointer transition-all duration-150"
               onMouseEnter={() => setHover(p.m.slug)}
               onMouseLeave={() => setHover((h) => (h === p.m.slug ? null : h))}
@@ -181,7 +246,7 @@ export function ModelScatter({
               className="fill-muted font-mono"
               fontSize={11}
             >
-              {fmtParams(hovered.m.paramsB)} · {hovered.y.toFixed(1)} · {compactNumber(hovered.dl)} ↓
+              {xKey === "paramsB" ? fmtParams(hovered.m.paramsB) : compactNumber(hovered.x)} · {hovered.y.toFixed(1)} · {compactNumber(hovered.dl)} {sizeKey === "downloads" ? "↓" : "♥"}
             </text>
           </g>
         )}

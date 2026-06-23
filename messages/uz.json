@@ -1,0 +1,859 @@
+{
+  "site": {
+    "name": "llm-xray",
+    "tagline": "Har bir open-source LLM ichini ko'ring",
+    "description": "Eng so'nggi open-source LLM modellarini yuklab olishlar va benchmarklar bo'yicha ranking qiling, so'ng istalgan modelning arxitekturasini qatlamma-qatlam — attention, normalizatsiya, MLP, MoE — interaktiv 2D va 3D'da rentgen qiling."
+  },
+  "nav": {
+    "home": "Modellar",
+    "learn": "O'rganish",
+    "compare": "Taqqoslash",
+    "evolution": "Evolyutsiya",
+    "github": "GitHub",
+    "menu": "Menyu"
+  },
+  "home": {
+    "heroTitle": "Istalgan open-source LLM'ni rentgen qiling",
+    "heroSubtitle": "Eng so'nggi ochiq modellarni ko'ring va ranking qiling, so'ng istalganini ochib arxitekturasini — har bir qatlam, attention sxemasi va formulalarni — 2D va 3D'da o'rganing.",
+    "searchPlaceholder": "Modellarni qidirish…",
+    "resultsCount": "{count} ta model",
+    "empty": "Filtrlarga mos model yo'q.",
+    "exploreCta": "Arxitekturani ko'rish →",
+    "loadMore": "Ko'proq ko'rsatish ({count})"
+  },
+  "journey": {
+    "title": "Noldan Qahramongacha: LLM qanday o'qitiladi",
+    "subtitle": "To'rt bosqich tasodifiy vaznlarni ishlaydigan assistentga aylantiradi. Pretraining, fine-tuning, alignment va baholashni bosib o'ting — va modelning qobiliyati pastdagi leaderboard sari o'sishini kuzating.",
+    "capabilityLabel": "illyustrativ qobiliyat",
+    "capabilityNowLabel": "Hozir nima qila oladi",
+    "autoplayPlay": "Avto-namoyish",
+    "autoplayStop": "To'xtatish",
+    "prev": "Oldingi bosqich",
+    "next": "Keyingi bosqich",
+    "stagesGroupLabel": "O'qitish bosqichlari",
+    "analogyLabel": "Analogiya",
+    "whatChangesLabel": "Vaznlarda nima o'zgaradi",
+    "dataExampleLabel": "Ma'lumot namunasi",
+    "objectiveLabel": "O'qitish maqsadi",
+    "fullFtVsLora": {
+      "label": "Fine-tuning",
+      "full": "To'liq fine-tune",
+      "lora": "LoRA"
+    },
+    "bridgeCta": "Rankingni ko'rish",
+    "capabilityCaptions": {
+      "init": "Tasodifiy shovqin",
+      "pretraining": "Matnni bashorat qiladi",
+      "sft": "Ko'rsatmalarga amal qiladi",
+      "preference": "Moslashgan va foydali",
+      "eval": "Baholangan va ishga tushirilgan"
+    },
+    "lossAxis": {
+      "pretraining": "NLL",
+      "sft": "masked CE",
+      "preference": "DPO loss",
+      "eval": "aniqlik"
+    },
+    "diagram": {
+      "allTrainable": "barcha parametrlar o'qitiladi",
+      "frozenBase": "muzlatilgan baza",
+      "adapter": "LoRA adapter",
+      "policy": "policy",
+      "reference": "muzlatilgan reference",
+      "klTether": "KL bog'lov",
+      "quantized": "int4",
+      "prompt": "so'rov",
+      "response": "javob",
+      "lossOnResponse": "faqat javobda loss",
+      "chosen": "tanlangan",
+      "rejected": "rad etilgan",
+      "margin": "afzallik farqi",
+      "predict": "keyingi tokenni bashorat",
+      "steps": "qadamlar",
+      "sftPromptExample": "Fotosintezni tushuntir…",
+      "sftResponseExample": "O'simliklar quyosh nuridan o'zi uchun oziq tayyorlaydi…",
+      "prefChosenExample": "Aniq xavfsizlik ogohlantirishi…",
+      "prefRejectedExample": "Beparvo, xavfli javob…"
+    },
+    "loop": {
+      "title": "Bitta o'qitish qadami",
+      "intro": "Har bir o'qitish bosqichi bir xil tsikl — faqat ma'lumot, loss va qaysi vaznlar o'zgarishi farq qiladi.",
+      "engineOn": "o'rganish YONIQ",
+      "engineOff": "o'rganish O'CHIQ",
+      "gradientLabel": "∇ gradientlar orqaga oqadi",
+      "repeat": "takror",
+      "beginner": {
+        "data": "Misol ko'rsat",
+        "forward": "Taxmin qil",
+        "predict": "Javobni tekshir",
+        "loss": "Xatoni baholash",
+        "update": "Vaznlarni to'g'rilash"
+      },
+      "expert": {
+        "data": "Ma'lumot to'plami (batch)",
+        "forward": "Forward pass",
+        "predict": "Bashorat vs maqsad",
+        "loss": "Loss",
+        "update": "Backprop → yangilash"
+      },
+      "evalScore": "Ball",
+      "frozenStamp": "vaznlar muzlatilgan — faqat forward pass, faqat baholanadi",
+      "evalNote": "O'sha mashina, o'rganish o'chirilgan: ma'lumot kiradi, ball chiqadi, hech narsa yangilanmaydi.",
+      "allWeights": "barcha vaznlar yangilanadi",
+      "adapterOnly": "adapter yangilanadi · baza muzlatilgan",
+      "responseOnly": "javob tokenlarida loss",
+      "rewardKl": "reward + KL bog'lov",
+      "perStage": {
+        "pretraining": "Ma'lumot = xom matn · Loss = keyingi token · O'zgaradi = har bir vazn",
+        "sft": "Ma'lumot = namuna javoblar · Loss = javobda · O'zgaradi = vaznlar (yoki LoRA adapter)",
+        "preference": "Ma'lumot = afzal javoblar · Loss = afzallik · O'zgaradi = policy",
+        "eval": "Ma'lumot = test savollari · hech narsa o'zgarmaydi"
+      }
+    },
+    "method": {
+      "label": "Metod",
+      "rlhf": "RLHF",
+      "dpo": "DPO"
+    },
+    "rlhf": {
+      "title": "RLHF — uch qadam",
+      "beginner": "Odamlar taqqoslashlaridan alohida 'reward model' o'qitiladi, so'ng assistent yuqoriroq rewardga yo'naltiriladi — uzoqlashib ketmasligi uchun 'arqonda' ushlab turiladi.",
+      "step1": "Odamlar ikki javobdan yaxshirog'ini tanlaydi (tanlangan ≻ rad etilgan)",
+      "step1Tag": "y_w ≻ y_l",
+      "step2": "Istalgan javobni baholaydigan Reward Model o'qitiladi",
+      "step2Expert": "Taqqoslashlarda Bradley–Terry",
+      "step3": "PPO policy'ni reward sari suradi — KL bog'lov uni muzlatilgan SFT referencega yaqin ushlaydi",
+      "reward": "reward",
+      "leash": "KL bog'lov",
+      "policy": "Policy πθ",
+      "reference": "Muzlatilgan SFT reference π_ref",
+      "objective": "Rewardni maksimallashtir, muzlatilgan referencedan uzoqlashishni β marta ayir"
+    },
+    "dpo": {
+      "title": "DPO — qisqa yo'l",
+      "beginner": "Qisqa yo'l: afzallik juftlari assistentni to'g'ridan-to'g'ri yangilaydi — reward model ham, RL tsikli ham yo'q.",
+      "direct": "to'g'ridan-to'g'ri",
+      "noRewardModel": "reward model yo'q · RL tsikli yo'q",
+      "caption": "Afzallik juftlari policy'ni to'g'ridan-to'g'ri yangilaydi, baribir muzlatilgan referencega β-bog'lov bilan",
+      "notClosedForm": "Gradient tushish bilan minimallashtiriladigan reparametrizatsiya — yopiq forma bu reward↔policy aloqasi, bir qadamlik analitik yechim emas"
+    },
+    "lora": {
+      "title": "W = W₀ + (α/r)·B·A",
+      "frozenBase": "Muzlatilgan baza W₀",
+      "adapter": "O'qitiladigan adapter B·A",
+      "scalar": "masshtab α/r",
+      "rankLabel": "rank r",
+      "equals": "yangilangan W",
+      "plainFull": "To'liq fine-tune: har bir vazn pretrained nuqtadan o'zgaradi",
+      "plainLora": "LoRA: bazani muzlatib, kichik past-rankli adapter o'qitiladi (~1% vazn)",
+      "mergeable": "adapterlar inferenceda W ichiga qo'shiladi — qo'shimcha kechikishsiz",
+      "qlora": "QLoRA: W₀ 4-bitli NF4'da"
+    },
+    "legend": {
+      "frozen": "muzlatilgan",
+      "trainable": "o'qitiladigan",
+      "frozenIcon": "❄",
+      "trainIcon": "🔥"
+    },
+    "stages": {
+      "pretraining": {
+        "title": "Pretraining",
+        "tagline": "Xom matndan tilni o'rganish",
+        "analogy": "Ulkan kutubxonadagi har bir kitobni o'qib, har sahifada keyingi so'zni ko'rmasdan oldin taxmin qilishdek.",
+        "beginner": "Model tasodifiy sonlardan boshlanadi va bu 'keyingi so'zni taxmin qilish' o'yinini trillionlab so'zlarda o'ynaydi. Oxirida u grammatika, faktlar va g'oyalar bog'lanishini o'zlashtiradi — lekin unga hali foydali bo'lishni o'rgatishmagan, shuning uchun u ko'rsatmaga amal qilmasdan matnni davom ettiradi.",
+        "expert": "Trillionlab xom veb/matn tokeni ustida o'z-o'zini nazorat qiluvchi keyingi-token bashorati. Barcha vaznlar noldan initsializatsiya qilinadi va har bir oldingi tokenga qarab haqiqiy keyingi tokenning token darajasidagi cross-entropy'sini (negativ log-likelihood) minimallashtirish orqali o'rgatiladi — hech qanday yorliq yo'q, korpus o'zini o'zi nazorat qiladi. Natija — base/foundation model: keng dunyoviy bilimga ega kuchli bashoratchi, biroq u ko'rsatmalarga amal qilish yoki alignment'ga ega emas.",
+        "whatChanges": "Har bir parametr o'qitiladi va tasodifiy boshlanishdan yangilanadi — embeddinglar, barcha transformer bloklari va LM head bir vaqtda yonadi. Eng ko'p hisoblash shu yerda, dunyo bilimi shu yerda kodlanadi.",
+        "dataExample": "Xom matn, yorliqsiz: \"Eyfel minorasi ___ shahrida joylashgan\" → \"Parij\" bashorat qilinadi. Butun ketma-ketlik ham kirish, ham nishon bo'lib, bir pozitsiyaga suriladi.",
+        "lossLabel": "Keyingi token cross-entropy (autoregressiv NLL)",
+        "extraExpertNote": "Masshtablash qonunlari (Chinchilla / compute-optimal) parametrlar va tokenlar o'rtasidagi murosani boshqaradi: belgilangan hisoblash byudjeti uchun yo'qotish proporsional ravishda kichikroq modelni ko'proq token ustida o'rgatish bilan minimallashtiriladi (≈20 token har bir parametrga). Ushbu base checkpoint SFT uchun muzlatilgan boshlang'ich nuqta bo'lib, u o'z navbatida preference tuning'ni oziqlantiradi.",
+        "chips": {
+          "tokens": "≈15T token",
+          "lr": "lr 3e-4 · cosine",
+          "epochs": "~1 epoch"
+        }
+      },
+      "sft": {
+        "title": "Supervised Fine-Tuning",
+        "tagline": "Ko'rsatmalarga amal qilishni o'rgatish",
+        "analogy": "Ishlangan misollar bilan shogirdlik: minglab savol–ideal javob juftlarini ko'rsatib, modelni javoblarni taqlid qilishga yo'naltirish.",
+        "beginner": "Modelga namuna suhbatlar — savol va ajoyib javob juftini — ko'rsatamiz va ularning uslubi va formatini nusxalashga o'qitamiz. Xom matn bashoratchisi siz so'raganga haqiqatan javob beradigan assistentga aylanadi.",
+        "expert": "Tanlab olingan (ko'rsatma, javob) namoyishlari ustida o'sha cross-entropy yo'qotish bilan nazoratli fine-tuning, biroq faqat javob tokenlarigacha niqoblangan — prompt bu nishon emas, kontekst. Yo to'liq fine-tuning (oldindan o'rgatilgan checkpoint'dan barcha vaznlarni yangilash), yo LoRA/QLoRA orqali parametr-tejamkor usul: base W₀'ni muzlatib, past-rangli yangilanish W = W₀ + (α/r)·B·A'ni o'rganish, parametrlarning ~1%'idan kamrog'ini o'rgatib.",
+        "whatChanges": "To'liq fine-tune barcha vaznlarni pretrained nuqtadan yangilaydi. LoRA/QLoRA bazani W₀ muzlatib, faqat kiritilgan past-rankli A va B adapterlarini o'qitadi — muzlatilgan baza ustida ingichka o'qitiladigan chiziq. Full FT ↔ LoRA ni almashtirib qaysi parametrlar o'zgarishini ko'ring.",
+        "dataExample": "Yorliqlangan namoyish — prompt: \"Fotosintezni 10 yoshli bolaga tushuntiring.\" → javob: \"O'simliklar quyosh nuridan foydalanib o'z oziq-ovqatini yaratadi…\". Yo'qotish faqat javob tokenlari ustida hisoblanadi; prompt niqoblanadi.",
+        "lossLabel": "Javob tokenlarida maskalangan cross-entropy",
+        "extraExpertNote": "LoRA/QLoRA: rang r (≈8–64) va masshtablash α adapter sig'imini belgilaydi; faqat A ∈ ℝ^{r×d} va B ∈ ℝ^{d×r} o'rgatiladi, W₀ esa muzlatilgan holda qoladi, shuning uchun adapterlar juda kichik, almashtiriladigan va inference paytida qaytarib W'ga birlashtiriladigan (qo'shimcha kechikishsiz). QLoRA W₀'ni 4-bitli NF4'da saqlaydi va adapterlarni yuqoriroq aniqlikda o'rgatadi — yagona GPU'da to'liq sifatli fine-tuning.",
+        "chips": {
+          "rank": "LoRA r = 16",
+          "alpha": "α = 32",
+          "lr": "lr 1e-4",
+          "epochs": "1–3 epoch"
+        }
+      },
+      "preference": {
+        "title": "Preference Tuning",
+        "tagline": "Inson afzalligiga moslash",
+        "analogy": "'Bu javob yaxshiroq' deydigan murabbiy: odamlar ikki javobni taqqoslaydi va model afzal ko'rilganiga moyil bo'lishni o'rganadi.",
+        "beginner": "Assistent javob bera oladi — lekin qaysi javob eng yaxshi? Odamlarga ikki javobni ko'rsatamiz, ular afzal ko'rganini tanlaydi, va modelni o'sha uslubga o'qitamiz: foydaliroq, halolroq va xavfsizroq. U did va moslikni o'rganadi — shunchaki to'g'ri javob emas, balki odamlar haqiqatan afzal ko'radigan javobni.",
+        "expert": "SFT modelini inson afzalligi juftliklariga (tanlangan y_w ≻ rad etilgan y_l) moslashtirish. RLHF taqqoslashlar ustida alohida reward modelni o'rgatadi, so'ng siyosatni SFT referensiga KL jarimasi ostida PPO bilan optimallashtiradi. DPO reward modelni va RL siklini chetlab o'tib, ekvivalent afzallik yo'qotishini — yopiq shakldagi siyosat-reward munosabatidan kelib chiqqan holda — juftliklar ustida to'g'ridan-to'g'ri gradient tushishi orqali minimallashtiradi, tanlangan va rad etilgan o'rtasidagi nazarda tutilgan reward chegarasini kengaytirib, β orqali referensiga tomon regulyarlashtiradi.",
+        "whatChanges": "Vaznlar SFT nuqtasidan afzal xatti-harakat sari suriladi, KL/reference hadi esa policy'ni muzlatilgan SFT modelga bog'lab, uni juda uzoqlashishdan saqlaydi (reward hacking va mode collapse'ning oldini oladi). DPO policy'ni to'g'ridan-to'g'ri yangilaydi; RLHF uni reward model + PPO orqali yangilaydi.",
+        "dataExample": "\"Oqartiruvchini ammiak bilan aralashtirish xavfsizmi?\" uchun afzallik juftligi — tanlangan: zaharli gaz haqida aniq xavfsizlik ogohlantirishi; rad etilgan: beparvo, xavfli javob. Inson tanlangan ≻ rad etilgan deb belgilaydi, shunda model bitta oltin javobni emas, balki tartiblashni o'rganadi.",
+        "lossLabel": "DPO preference loss (yoki RLHF reward model + PPO-KL)",
+        "extraExpertNote": "RLHF 𝔼[r_φ(x,y)] − β·KL(π_θ ‖ π_ref)'ni PPO orqali maksimallashtiradi, bu o'rgatilgan reward model va onlayn RL siklini talab qiladi. DPO yopiq shakldagi optimal-siyosat munosabatidan foydalanib, reward'ni juftliklar ustidagi oddiy klassifikatsiya yo'qotishiga buklaydi — reward modelsiz, sampling'siz. β KL bog'lovchisi SFT referensidan og'ishga qanchalik qattiq qarshilik ko'rsatishini boshqaradi; juda past bo'lsa, siyosat haddan tashqari optimallashishi va sifati pasayishi mumkin.",
+        "chips": {
+          "method": "DPO / PPO",
+          "beta": "β = 0.1",
+          "lr": "lr 5e-7"
+        }
+      },
+      "eval": {
+        "title": "Baholash va Ishga tushirish",
+        "tagline": "Benchmark, kvantlash, xizmat",
+        "analogy": "Yakuniy imtihon, so'ng bitiruv: tayyor modelni standart imtihonlarda sinab, keyin uni real foydalanuvchilar uchun tez ishlashga kichraytirib paketlash.",
+        "beginner": "Tayyor modelni standart imtihonlarda — matematika, bilim, kod va xavfsizlik — sinab, qanchalik yaxshiligini ko'ramiz, so'ng uni tez va arzon ishlashi uchun siqamiz. U to'plagan ballar aynan pastdagi leaderboardda taqqoslaydiganlaringiz.",
+        "expert": "Bu yerda hech qanday vazn o'rgatilmaydi — ular muzlatilgan va o'lchanadi. Moslashtirilgan modelni ajratib qo'yilgan benchmark'lar (MMLU, GSM8K, HumanEval, IFEval, GPQA, TruthfulQA) hamda xavfsizlik/red-team to'plamlari ustida baholang; jami ko'rsatkich qobiliyatni umumlashtiradi. So'ng post-training optimallashtirish — kvantlash (INT8/INT4) va inference runtime — xizmat ko'rsatishdan oldin kichik aniqlik farqini katta o'tkazuvchanlik va xotira yutuqlariga almashtiradi.",
+        "whatChanges": "Hech narsa o'qitilmaydi — barcha vaznlar muzlatilgan. Baholash faqat o'lchaydi; kvantlash mavjud vaznlarni pastroq aniqlikka (masalan fp16 → int4) qayta kodlab, modelni xizmat uchun kichraytiradi va tezlashtiradi, qo'shimcha gradient yangilanishsiz.",
+        "dataExample": "Ajratib qo'yilgan test elementi (GSM8K): \"Natalia aprel oyida 48 do'stiga klips sotdi, mayda esa yarmicha. U jami qanchasini sotdi?\" → oltin javob 72'ga qarshi baholanadi. Aniqlik aniq-moslik bo'yicha, minglab elementlar ustida o'rtachalanadi.",
+        "lossLabel": "O'qitish loss yo'q — benchmark aniqligi / pass@k",
+        "extraExpertNote": "Joylashtirish uchun kvantlash: PTQ sxemalari (GPTQ, AWQ) va formatlar (INT8, INT4, GGUF, NF4) o'rgatilgan vaznlarni keyinchalik pastroq aniqlikka yaxlitlaydi — gradientsiz — odatda aniqlikning kichik ulushini ≈2–4× xotira va kechikish yutuqlariga almashtirib. pass@k (HumanEval) k ta yakunlanishni sample qiladi va agar bittasi testlardan o'tsa, masala yechilgan deb hisoblaydi. Bular quyidagi rankingda chizilgan aynan o'sha metrikalardir.",
+        "chips": {
+          "benchmarks": "MMLU · GSM8K · HumanEval",
+          "quant": "int4 / int8",
+          "metric": "aniqlik · pass@k"
+        }
+      }
+    }
+  },
+  "inference": {
+    "title": "LLM qanday javob beradi: Inference sayohati",
+    "subtitle": "Tayyor model so'rovingizni javobga aylantirishini kuzating — bir vaqtda bitta token.",
+    "bridgeFromTraining": "O'qitish tugadi. Endi o'sha model haqiqatan javob berishini kuzating.",
+    "promptLabel": "So'rov sinab ko'ring",
+    "promptPlaceholder": "Fransiyaning poytaxti",
+    "presets": {
+      "p1": "Fransiyaning poytaxti",
+      "p2": "Suv nimadan iborat",
+      "p3": "2 + 2 ="
+    },
+    "run": "Ishga tushir",
+    "autoplayPlay": "Avto-namoyish",
+    "autoplayStop": "To'xtatish",
+    "prev": "Oldingi qadam",
+    "next": "Keyingi qadam",
+    "stepsGroupLabel": "Inference qadamlari",
+    "analogyLabel": "Oddiy so'z bilan",
+    "shapesLabel": "Shakllar",
+    "objectiveLabel": "Formula",
+    "tokensLabel": "so'rov",
+    "generatedLabel": "yaratilgan",
+    "kvCacheLabel": "KV cache",
+    "kvCacheNote": "Ko'rilgan tokenlar eslab qolinadi, qayta hisoblanmaydi.",
+    "attention": {
+      "caption": "Har bir so'z oldingi so'zlarga qaraydi va qaysilari muhimligini o'lchaydi.",
+      "query": "joriy so'z",
+      "keys": "oldingi so'zlar",
+      "masked": "kelajak (maskalangan)"
+    },
+    "sampling": {
+      "temperature": "Temperatura",
+      "tempLow": "aniq / greedy",
+      "tempHigh": "tekis / tasodifiy",
+      "method": "Sampling",
+      "greedy": "Greedy",
+      "topk": "Top-k",
+      "topp": "Top-p",
+      "kept": "saqlangan",
+      "picked": "tanlangan"
+    },
+    "loop": {
+      "caption": "Yangi tokenni qo'shib, hammasini yana takrorlang — stop tokengacha.",
+      "repeat": "takror",
+      "done": "tugadi"
+    },
+    "captions": {
+      "tokenize": "Matnni bo'lish",
+      "embed": "Vektorlar + pozitsiyalar",
+      "layers": "Attention + MLP ×N",
+      "logits": "Keyingi-token ballari",
+      "sampling": "Token tanlash",
+      "loop": "Yaratilmoqda…"
+    },
+    "stages": {
+      "tokenize": {
+        "title": "Tokenize",
+        "tagline": "Matn → tokenlar",
+        "beginner": "Matningiz tokenlarga — butun so'zlar yoki so'z-bo'laklariga — bo'linadi va har biriga raqam beriladi. Modellar harflarni o'qimaydi; ular shu token id'larni o'qiydi.",
+        "expert": "BPE/SentencePiece tokenizer satrni butun id'larga (x ∈ ℤⁿ) aylantiradi. Tez-tez uchraydigan bo'laklar yagona token bo'ladi; kam uchraydigan so'zlar subword'larga bo'linadi, shu sababli istalgan matnni ifodalash mumkin.",
+        "shapes": "x ∈ ℤⁿ"
+      },
+      "embed": {
+        "title": "Embed",
+        "tagline": "Tokenlar → vektorlar",
+        "beginner": "Har bir token id raqamlar ro'yxati (vektor) sifatida qidiriladi, va uning gapdagi pozitsiyasi aralashtiriladi — shunda so'z tartibi ahamiyatli bo'ladi.",
+        "expert": "Har bir id embedding matritsasidan E[tᵢ] ∈ ℝ^d ni indekslaydi; pozitsiya Q/K ni RoPE bilan aylantirish orqali kiritiladi. Natija [n × d] matritsa — residual oqimning boshlanishi.",
+        "shapes": "[n × d_model]"
+      },
+      "layers": {
+        "title": "Dekoder qatlamlari ×N",
+        "tagline": "Attention + MLP, takrorlanadi",
+        "beginner": "Stacklangan qatlamlar vektorlarni sayqallaydi. Har qatlamda har bir token oldingilarga qaraydi (attention), so'ng kichik tarmoq orqali 'o'ylaydi' (MLP). Residual stream ma'lumotni to'g'ridan-to'g'ri olib o'tadi.",
+        "expert": "Har bir qatlamda: keshlangan kalit/qiymatlar ustidan kauzal o'z-attention softmax(QKᵀ/√dₖ + M)·V, so'ng MLP (yoki MoE), har biri pre-norm bilan residualga qaytarib qo'shiladi. KV cache har qadamda o'sadi, shu sababli oldingi tokenlar qayta hisoblanmaydi.",
+        "shapes": "Q,K,V ∈ ℝ^{n×d_k}"
+      },
+      "logits": {
+        "title": "Logits → Softmax",
+        "tagline": "Har bir tokenga ball",
+        "beginner": "Yakuniy normalizatsiyadan so'ng model har bir mumkin bo'lgan keyingi tokenga ball beradi, so'ng softmax bu ballarni foizga aylantiradi — har nomzodga bitta ehtimollik.",
+        "expert": "Oxirgi tokenning yashirin holati unembed qilinadi: z = W_U·norm(h_n) ∈ ℝ^{|V|}; so'ng p = softmax(z) butun lug'at bo'yicha keyingi-token taqsimotidir.",
+        "shapes": "z ∈ ℝ^{|V|}"
+      },
+      "sampling": {
+        "title": "Sampling",
+        "tagline": "Keyingi tokenni tanlash",
+        "beginner": "O'sha foizlardan bitta token tanlanadi. Temperatura, top-k va top-p tanlov qanchalik xavfsiz yoki tavakkal ekanini boshqaradi — greedy doim eng yuqorisini oladi.",
+        "expert": "Temperatura logitlarni masshtablaydi (z/T); top-k eng yuqori k tasini saqlaydi, top-p esa yig'indisi p ga yetadigan eng kichik to'plamni. Saqlangan to'plam bo'yicha qayta normallashtiriladi va tₙ₊₁ ~ p sampling qilinadi.",
+        "shapes": "tₙ₊₁ ~ p"
+      },
+      "loop": {
+        "title": "Takror",
+        "tagline": "Bir vaqtda bitta token",
+        "beginner": "Tanlangan tokenni matnga qo'shib, keyingisini olish uchun hammasini yana qiling — stop token yoki uzunlik chegarasigacha so'zma-so'z qo'shib.",
+        "expert": "Avtoregressiv dekodlash: tₙ₊₁ ni qo'shing, KV cache ni bitta pozitsiyaga kengaytiring va yangi tokenni qatlamlar orqali qayta o'tkazing. EOS yoki maksimal uzunlikgacha takrorlang.",
+        "shapes": "x ← x ∥ tₙ₊₁"
+      }
+    }
+  },
+  "filters": {
+    "title": "Filtrlar",
+    "family": "Oila",
+    "modality": "Modallik",
+    "attention": "Attention",
+    "license": "Litsenziya",
+    "moeOnly": "Faqat MoE",
+    "all": "Hammasi",
+    "clear": "Filtrlarni tozalash",
+    "presetsTitle": "Tezkor filtrlar",
+    "presetAll": "Barcha modellar",
+    "presetMoe": "Mixture-of-Experts",
+    "presetMultimodal": "Multimodal",
+    "presetGqa": "GQA attention"
+  },
+  "columns": {
+    "rank": "#",
+    "model": "Model",
+    "params": "Parametr",
+    "context": "Kontekst",
+    "attention": "Attention",
+    "layers": "Qatlam",
+    "downloads": "Yuklab olish",
+    "likes": "Layk",
+    "license": "Litsenziya",
+    "benchmark": "MMLU",
+    "score": "Ball"
+  },
+  "modality": {
+    "text": "Matn",
+    "image": "Rasm",
+    "audio": "Audio",
+    "video": "Video"
+  },
+  "attentionType": {
+    "mha": "MHA",
+    "gqa": "GQA",
+    "mqa": "MQA",
+    "mla": "MLA"
+  },
+  "model": {
+    "architecture": "Arxitektura",
+    "overview": "Umumiy",
+    "view3d": "3D ko'rinish",
+    "view2d": "2D diagramma",
+    "params": "Parametrlar",
+    "layers": "Qatlamlar",
+    "hidden": "Hidden o'lcham",
+    "heads": "Attention head'lar",
+    "kvHeads": "KV head'lar",
+    "vocab": "Lug'at",
+    "context": "Kontekst uzunligi",
+    "activation": "Aktivatsiya",
+    "norm": "Normalizatsiya",
+    "experts": "Ekspertlar",
+    "headDim": "Head o'lchami",
+    "intermediate": "Intermediate o'lcham",
+    "attention": "Attention",
+    "comingSoon": "Interaktiv 2D/3D ko'ruvchi tez orada.",
+    "advanced": "Qoʻshimcha",
+    "dataType": "Maʼlumot turi",
+    "tensors": "Tensorlar",
+    "gated": "Yopiq",
+    "gatedNote": "Hugging Face’da kirish uchun ruxsat talab qiladi",
+    "ropeScaling": "RoPE masshtablash",
+    "sharedExperts": "Umumiy ekspertlar",
+    "projectorDim": "Proyektor oʻlchami",
+    "score": "Ball",
+    "headGroupsTitle": "Attention boshlarini boʻlishish",
+    "headGroupsHint": "Query boshlari key/value boshlarini qanday boʻlishadi — kamroq KV boshlar keshni kichraytiradi (GQA/MQA/MLA).",
+    "queryHeads": "Query boshlari",
+    "kvHeadsShort": "KV boshlari",
+    "group": "guruh"
+  },
+  "explorer": {
+    "title": "Arxitektura ko'ruvchi",
+    "view2d": "2D diagramma",
+    "view3d": "3D ko'rinish",
+    "blockTitle": "Dekoder bloki",
+    "repeated": "×{n} qatlam",
+    "selectHint": "Shaklini va vazifasini ko'rish uchun istalgan elementni bosing.",
+    "residual": "+ residual",
+    "pipelineTitle": "Forward pass",
+    "loading3d": "3D ko'rinish yuklanmoqda…",
+    "noWebgl": "Bu brauzerda WebGL mavjud emas — 3D ko'rinish chizilmaydi.",
+    "drillHint": "Ichki blokini ochish uchun qatlamni bosing.",
+    "back": "← Stekka qaytish",
+    "layerMap": "Qatlamlar xaritasi",
+    "sliding": "siljuvchi",
+    "full": "global",
+    "residualStream": "residual oqim",
+    "groups": {
+      "inputNorm": "Kirish norm",
+      "attention": "Self-attention",
+      "postAttnNorm": "Attention-dan keyin norm",
+      "mlp": "MLP (feed-forward)",
+      "moe": "Mixture of Experts",
+      "finalNorm": "Yakuniy norm"
+    },
+    "stages": {
+      "embedding": "Token embedding",
+      "decoderBlock": "Dekoder bloki",
+      "finalNorm": "Yakuniy norm",
+      "logits": "Logits",
+      "sampling": "Sampling",
+      "visionEncoder": "Vision encoder",
+      "audioEncoder": "Audio encoder",
+      "projector": "Projector"
+    }
+  },
+  "ops": {
+    "shape": "Shakl",
+    "params": "Parametr",
+    "input_norm": "Attention oldidan residual stream'ni normalizatsiya qiladi — qiymatlar muvozanatda qoladi.",
+    "post_attn_norm": "Attention'dan so'ng, feed-forward tarmoqdan oldin yana normalizatsiya qiladi.",
+    "q_proj": "Hidden holatni Query vektorlariga proyeksiya qiladi — har attention head uchun bittadan.",
+    "k_proj": "Key vektorlariga proyeksiya. GQA/MQA'da KV head'lar query head'lardan kam.",
+    "v_proj": "Value vektorlariga proyeksiya — attention aralashtiradigan mazmun.",
+    "kv_a_proj": "Key/value'larni kichik latent vektorga siqadi (MLA), KV cache'ni kichraytiradi.",
+    "kv_b_proj": "Siqilgan latentni kerak bo'lganda to'liq key/value fazosiga qaytaradi.",
+    "sdpa": "Scaled dot-product attention: har token softmax(QKᵀ/√d) orqali boshqalarga qaraydi, so'ng Value'larni aralashtiradi.",
+    "o_proj": "Attention chiqishini model hidden o'lchamiga qaytarib, residualga qo'shadi.",
+    "gate_proj": "Gated MLP (SwiGLU/GeGLU) gate proyeksiyasi: har birlikdan qancha o'tishini boshqaradi.",
+    "up_proj": "Hidden holatni kattaroq intermediate o'lchamga kengaytiradi.",
+    "down_proj": "Intermediate aktivatsiyani hidden o'lchamga qaytaradi.",
+    "router": "Har token uchun ekspertlarni baholaydi va tokenni top-k ekspertga yo'naltiradi.",
+    "expert_gate": "Bitta ekspert MLP ichidagi gate proyeksiyasi (faqat tanlangan ekspertlar ishlaydi).",
+    "expert_up": "Bitta ekspert MLP ichidagi up proyeksiya.",
+    "expert_down": "Bitta ekspert MLP ichidagi down proyeksiya."
+  },
+  "compare": {
+    "title": "Modellarni taqqoslash",
+    "subtitle": "Benchmark va arxitektura bo'yicha taqqoslash uchun modellarni tanlang.",
+    "pick": "Modellar",
+    "benchmarks": "Benchmarklar",
+    "architecture": "Arxitektura",
+    "metric": "Metrika",
+    "need2": "Taqqoslash uchun kamida 2 ta model tanlang.",
+    "disclaimer": "Benchmark ballari taxminiy/ochiq manbalardan (model-card va leaderboardlar); kattaroq — yaxshiroq. Arxitektura qiymatlari aniq, har modelning config'idan o'qilgan.",
+    "categories": {
+      "knowledge": "Bilim",
+      "math": "Matematika",
+      "code": "Kod",
+      "reasoning": "Mulohaza",
+      "commonsense": "Sog'lom fikr",
+      "truthfulness": "Haqqoniylik",
+      "instruction": "Ko'rsatmaga amal"
+    },
+    "tableView": "Jadval",
+    "radarView": "Radar"
+  },
+  "scatter": {
+    "title": "Qobiliyat vs. hajm",
+    "hint": "Pufak = yuklab olishlar · rang = oila · punktir = samarali chegara (parametrga eng yaxshi ball)",
+    "xAxis": "Parametrlar (log shkala)",
+    "yAxis": "Metrika",
+    "xBy": "X oʻqi",
+    "sizeBy": "Pufak oʻlchami",
+    "family": "Oila"
+  },
+  "forward": {
+    "run": "▶ Forward pass'ni ishga tushir",
+    "stop": "■ To'xtatish",
+    "sample": "Yerdan Quyoshgacha masofa qancha?",
+    "queryPlaceholder": "Savol yozing…",
+    "illustrative": "Illyustrativ — hisoblash tartibini ko'rsatadi, real model javobini emas.",
+    "tokensLabel": "tokenlar",
+    "ofLayers": "/ {n}",
+    "attnFull": "global attention",
+    "attnSliding": "siljuvchi oyna attention",
+    "genToken": "{n}-token yaratilmoqda",
+    "stages": {
+      "tokenize": "Tokenize",
+      "embed": "Token embedding",
+      "layer": "Dekoder qatlami",
+      "logits": "Yakuniy norm → logits → softmax",
+      "sample": "Keyingi tokenni tanlash",
+      "done": "Tugadi"
+    }
+  },
+  "learn": {
+    "title": "O'rganish",
+    "subtitle": "LLM'lar qanday ishlashini tushuning — interaktiv, matn devorlaridan emas.",
+    "beginner": "Boshlovchi",
+    "expert": "Ekspert",
+    "comingSoon": "Yana darslar tez orada",
+    "softmax": {
+      "title": "Softmax va Temperatura",
+      "blurb": "Model xom ballarni (logits) keyingi-token ehtimolligiga qanday aylantiradi — va temperatura tasodifiylikni qanday boshqaradi. Slayderni suring.",
+      "temperature": "Temperatura",
+      "beginnerText": "Yuqori temperatura tanlovlarni tekislaydi (tasodifiyroq, ijodiyroq). Past temperatura yagona eng yaxshi tokenga qaratadi (ishonchliroq, takroriyroq).",
+      "expertText": "Har bir logit eksponentadan oldin T temperaturaga bo'linadi. T→0 da taqsimot argmax'ga (greedy) yaqinlashadi; T→∞ da bir tekisga."
+    },
+    "attention": {
+      "title": "Attention",
+      "blurb": "Har bir so'z qaysi oldingi so'zlarga e'tibor qaratadi? Bu kichik GPT modelidan olingan haqiqiy attention — qatlamni suring, head'larni almashtiring, so'z ustiga olib boring.",
+      "beginnerText": "Attention har bir so'zga oldingi so'zlarga qarab, ulardan qaysilari o'zi uchun muhimligini aniqlash imkonini beradi. Yorqin katak qator so'zi ustun so'ziga kuchli e'tibor qaratayotganini bildiradi. GPT uslubidagi modellar kauzal: so'z faqat orqaga qaray oladi, shuning uchun yuqori-o'ng uchburchak bo'sh qoladi.",
+      "expertText": "Har bir head kauzal-maskalangan ballar ustidan softmax(QKᵀ/√dₖ)·V ni hisoblaydi va kalitlar bo'yicha har bir qator uchun ehtimollik taqsimotini beradi. Turli head'lar ixtisoslashadi — oldingi-token head'i, induksiya (nusxalash) head'i, sintaktik head — va naqshlar qatlamlar bo'ylab keskinlashadi. Bu yerda ko'rsatilgan: haqiqiy distilgpt2 vaznlari.",
+      "sentence": "Gap",
+      "layer": "Qatlam",
+      "head": "Head",
+      "headAvg": "O'rtacha",
+      "rows": "qator = joriy so'z",
+      "cols": "ustun = oldingi so'z",
+      "low": "kamroq",
+      "high": "ko'proq",
+      "flowHint": "Chapdagi so'zni bosing yoki ustiga olib boring va u qayerga qarashini kuzating.",
+      "realData": "Haqiqiy {model} attention · {layers} qatlam × {heads} head"
+    },
+    "tokenization": {
+      "title": "Tokenizatsiya",
+      "blurb": "Modellar harflarni o'qimaydi — ular tokenlarni o'qiydi. Istalgan narsani yozing va u qanday qilib subso'z bo'laklariga bo'linishini kuzating, har biri o'z id'siga ega.",
+      "beginnerText": "Model sizning matningizni ko'rishidan oldin tokenizer uni tokenlarga bo'laklaydi: keng tarqalgan so'zlar bitta token bo'ladi, kam uchraydigan so'zlar bo'laklarga bo'linadi. Har bir token model aslida ishlaydigan raqamga (id'ga) moslanadi. Boshidagi bo'sh joy tokenning bir qismi hisoblanadi (· tarzida ko'rsatiladi).",
+      "expertText": "Bu illyustrativ byte-pair encoding (BPE): belgilardan boshlanadi va hech biri qo'llanmay qolguncha eng yuqori ustuvorlikdagi birlashtirish qoidalari ochko'zlik bilan qo'llaniladi. Haqiqiy tokenizerlar ma'lumotlardan minglab birlashishlarni o'rganadi, istalgan belgi uchun byte darajasidagi zaxira variantdan foydalanadi va <bos>/<eos> kabi maxsus tokenlarni qo'shadi. Lug'at hajmi ketma-ketlik uzunligini embedding jadvali o'lchamiga qarama-qarshi qo'yadi.",
+      "placeholder": "Biror matn yozing…",
+      "sample": "Tokenizatsiya sehr emas.",
+      "viewTokens": "Tokenlar",
+      "viewIds": "ID'lar",
+      "viewMerges": "Birlashishlar",
+      "chars": "belgilar",
+      "tokens": "tokenlar"
+    },
+    "sampling": {
+      "title": "Sampling va dekodlash",
+      "blurb": "Model har bir tokenga ehtimollik beradi — lekin aslida qaysi birini tanlaydi? Temperatura, top-k va top-p'ni sozlang.",
+      "beginnerText": "Greedy dekodlash har doim eng ehtimoliy yagona tokenni oladi (ishonchli, lekin takroriy). Top-k faqat k ta eng yaxshisini saqlaydi; top-p ehtimollikning p qismini qoplaydigan eng kichik to'plamni saqlaydi; so'ng model ulardan birini sample qiladi — bu yerda biz saqlangan to'plamdagi eng ehtimoliysini ajratib ko'rsatamiz. Temperatura imkoniyatlarni qayta shakllantiradi: past = aniq va bashorat qilinadigan, yuqori = tekis va ijodiy.",
+      "expertText": "Temperatura logitlarni softmax'dan oldin masshtablaydi (z/T). Top-k eng yuqori ehtimollikka ega k ta tokengacha qisqartiradi; top-p (nucleus) jami ehtimolligi ≥ p bo'lgan eng kichik to'plamgacha qisqartiradi. Qisqartirishdan so'ng saqlangan ehtimolliklar qayta normallashtiriladi va bitta token sample qilinadi. Bu sozlamalar izchillik va xilma-xillik o'rtasida muvozanat o'rnatadi."
+    },
+    "moe": {
+      "title": "Mixture of Experts",
+      "blurb": "Bitta katta tarmoq o'rniga MoE'da ko'plab kichik expert tarmoqlari bo'ladi — router har bir tokenni faqat bir nechtasiga yuboradi. Umumiy sig'imi juda katta, har bir tokenga ketadigan hisoblash esa uning bir ulushi.",
+      "beginnerText": "Har bir token kichik 'router' tomonidan baholanadi, u tokenni qayta ishlash uchun eng yaxshi bir nechta expert'ni tanlaydi. Faqat o'sha expert'lar ishlaydi, shuning uchun model juda katta umumiy sig'imga ega bo'lishi mumkin, ammo har bir token uchun ishning faqat bir ulushini bajaradi. Har bir token uchun tanlangan expert'lar amber rangda ajratiladi.",
+      "expertText": "Router — bu o'rgatilgan chiziqli qatlam: g = top-k(softmax(x·W_r)). Faqat tanlangan expert'larning MLP'lari ishlaydi va ularning chiqishlari gate vaznlari bilan birlashtiriladi. E ta expert va top-k routing bilan har bir token expert FLOP'larining k/E qismidan foydalanadi — masalan, Mixtral'ning 8 ta expert'i, top-2 = 25%. Ba'zi modellar shuningdek doimiy ishlaydigan umumiy (shared) expert'larni ham qo'shadi.",
+      "preset": "Model",
+      "experts": "expert'lar",
+      "topk": "tanlandi",
+      "active": "har tokenga faol",
+      "router": "router",
+      "routedTo": "yo'naltirildi",
+      "skipped": "o'tkazib yuborildi"
+    },
+    "rope": {
+      "title": "RoPE pozitsiyalari",
+      "blurb": "Model so'zlar tartibini qanday biladi? RoPE har bir tokenning vektorini uning pozitsiyasi bilan o'sib boruvchi burchakka aylantiradi — masofa aylanishga aylanadi.",
+      "beginnerText": "O'lchamlarning har bir jufti tokenning pozitsiyasiga bog'liq bo'lgan burchakka aylantiriladi. Yaqin pozitsiyalar o'xshash aylanishlarni oladi; uzoqdagi pozitsiyalar ajralib ketadi. Past chastotali juftlar deyarli qimirlamaydi, yuqori chastotali juftlar tez aylanadi — birgalikda ular pozitsiyani kodlaydi. Pozitsiya slayderini suring.",
+      "expertText": "RoPE query/key o'lcham-juftlarini m·θ_i bo'yicha aylantiradi, bu yerda θ_i = base^(-2i/d). Aylanish nisbiy bo'lgani uchun q_m·k_n skalyar ko'paytmasi faqat m−n ga bog'liq, shuning uchun model nisbiy masofani his qiladi. Kattaroq base (θ) past chastotalarni sekinroq aylantiradi va foydalanish mumkin bo'lgan kontekst uzunligini cho'zadi — bu NTK/YaRN masshtablashning asosidir.",
+      "position": "Pozitsiya m",
+      "base": "Base θ",
+      "fast": "tez (yuqori chastota)",
+      "slow": "sekin (past chastota)",
+      "dimPair": "o'lcham-jufti"
+    },
+    "kvcache": {
+      "title": "KV cache",
+      "blurb": "Har bir keyingi so'zni tez yozish uchun model allaqachon hisoblagan key'lar va value'larni eslab qoladi — butun prefiks bo'yicha attention'ni qaytadan hisoblash o'rniga.",
+      "beginnerText": "Generatsiya paytida model aks holda har bir qadamda oldingi har bir token bo'yicha attention'ni qaytadan hisoblashi kerak bo'lardi. KV cache o'sha key'lar va value'larni saqlaydi, shuning uchun har bir yangi token faqat o'zinikini hisoblaydi — ancha tezroq, lekin xotira uzunlik bilan birga o'sib boradi. Sliding-window modellari uni cheklash uchun eng eski tokenlarni unutadi. Yaratish tugmasini bosing.",
+      "expertText": "Har bir qatlam barcha o'tgan pozitsiyalar uchun K,V'ni keshlaydi; yangi token keshga e'tibor qaratadi va o'zining K,V'sini qo'shadi (har bir qatlamga O(seq) xotira). Jami ≈ 2·L·n_kv·d_h·seq·bytes — GQA/MQA uni kamroq KV head bilan kichraytiradi. Sliding-window attention seq'ni oynaga cheklaydi, doimiy xotira evaziga uzoq masofali eslab qolishni almashtiradi.",
+      "generate": "Yaratish",
+      "reset": "Tozalash",
+      "sliding": "Sliding window",
+      "cacheSize": "kesh",
+      "step": "qadam",
+      "evicted": "chiqarilgan",
+      "layers": "qatlamlar",
+      "positions": "pozitsiyalar",
+      "full": "To'liq kesh",
+      "window": "Oyna",
+      "cached": "keshlangan"
+    },
+    "norm": {
+      "title": "Normalizatsiya",
+      "blurb": "Normalizatsiya aktivatsiyalarni mos diapazonda saqlaydi, shunda o'qitish barqaror qoladi. RMSNorm va LayerNorm'ni bir vektorda solishtiring.",
+      "beginnerText": "Chuqur tarmoqlarda sonlar ko'plab qatlamlar orqali oqib o'tar ekan, ular portlab ketishi yoki yo'qolib qolishi mumkin. Normalizatsiya qadami har bir vektorni keyingi blokdan oldin izchil o'lchamga qayta masshtablaydi. RMSNorm faqat qayta masshtablaydi; LayerNorm esa avval nolga qarab qayta markazlashtiradi ham. Kirishni tasodifiy qiling va solishtiring.",
+      "expertText": "LayerNorm o'rtachani ayiradi, so'ng standart og'ishga bo'ladi, keyin γ,β'ni qo'llaydi: (x−μ)/√(σ²+ε)·γ+β. RMSNorm o'rtacha hadini tashlab yuboradi va o'rtacha kvadratning ildiziga bo'ladi: x/√(mean(x²)+ε)·γ — arzonroq va amalda xuddi shunday samarali, shuning uchun ko'pchilik zamonaviy LLM'lar undan foydalanadi (pre-norm, attention/MLP'dan oldin).",
+      "rmsnorm": "RMSNorm",
+      "layernorm": "LayerNorm",
+      "before": "oldin",
+      "after": "keyin",
+      "meanLabel": "o'rtacha",
+      "rmsLabel": "RMS",
+      "randomize": "Tasodifiy"
+    },
+    "concepts": {
+      "attention": "Attention",
+      "rope": "RoPE pozitsiyalar",
+      "moe": "Mixture of Experts",
+      "kvcache": "KV cache",
+      "tokenization": "Tokenizatsiya",
+      "norm": "Normalizatsiya"
+    }
+  },
+  "evolution": {
+    "title": "AI evolyutsiyasi — perseptrondan LLMgacha",
+    "subtitle": "Bugungi til modellariga olib kelgan yo'lni bosib o'ting: klassik mashinaviy o'qitish, birinchi neyron tarmoqlar, deep learning va kompyuter ko'rishidagi yutuqlar, ketma-ketlik modellari, transformer va LLM davri. Istalgan davrni bosing — yoki avto-namoyishni yoqing.",
+    "homeTeaserTitle": "LLMlarga qanday yetib keldik",
+    "homeTeaserSubtitle": "AI'ning yetmish yili sakkiz qadamda — qo'lda sozlanadigan algoritmlardan transformerga asoslangan til modellarigacha.",
+    "homeTeaserCta": "Xronologiyani ochish",
+    "capabilityLabel": "AI nimaga qodir edi",
+    "capabilityNowLabel": "Shu davrga kelib",
+    "autoplayPlay": "Avto-namoyish",
+    "autoplayStop": "To'xtatish",
+    "prev": "Oldingi davr",
+    "next": "Keyingi davr",
+    "stepsGroupLabel": "AI davrlari",
+    "keyIdeaLabel": "Asosiy g'oya",
+    "breakthroughLabel": "Yutuq",
+    "modelsLabel": "Katalogda ko'rish",
+    "objectiveLabel": "Belgilovchi tenglama",
+    "milestonesLabel": "Xronologiya",
+    "architecturesLabel": "Arxitekturalar",
+    "layersLabel": "Qatlamlar",
+    "milestoneKinds": {
+      "origin": "boshlanish",
+      "paper": "maqola",
+      "award": "mukofot",
+      "model": "model",
+      "event": "voqea"
+    },
+    "eras": {
+      "classical_ml": {
+        "title": "Klassik mashinaviy o'qitish",
+        "yearLabel": "1950–1990-yillar",
+        "tagline": "Qo'lda yasalgan belgilardan o'rganish",
+        "beginner": "Neyron tarmoqlar hukmron bo'lishidan oldin AI odamlar qo'lda tayyorlagan sonlar jadvalidan o'rgangan. Chiziqli/logistik regressiya, qaror daraxtlari, k-NN va SVM kabi algoritmlar bu belgilardagi naqshlarni topib tasniflagan yoki bashorat qilgan — kuchli, ammo aynan inson yasagan belgilar darajasida.",
+        "expert": "Qat'iy, qo'lda muhandislashtirilgan belgi vektorlari ustida statistik o'qitish: chiziqli va logistik regressiya, k ta eng yaqin qo'shni, qaror daraxtlari va — ayniqsa muhimi — nochiziqli chegaralar uchun yadroli support vector machine. Optimizatsiya asosan qavariq (yopiq forma yoki kvadratik/gradiyent dasturlash), shuning uchun o'qitish barqaror va yaxshi o'rganilgan, lekin ifoda kuchi siz bergan belgilar bilan chegaralangan.",
+        "keyIdea": "Qo'lda yasalgan belgilarga funksiya moslash — hali representation learning yo'q.",
+        "breakthrough": "SVM + yadrolar (1990-yillar) mustahkam nazariyali ishonchli nochiziqli klassifikatorlar berdi.",
+        "milestones": {
+          "origin": "Statistik o'qitish shakllanadi — qo'lda yasalgan belgilarga oddiy modellar moslanadi.",
+          "id3": "Quinlan'ning ID3'i ma'lumotni axborot o'sishi bo'yicha bo'luvchi qaror daraxtlarini ommalashtiradi.",
+          "svm": "Cortes va Vapnik'ning support vector machine'i klasslar orasidagi chegarani maksimallashtiradi.",
+          "rf": "Breiman'ning random forest'i ishonchli bashorat uchun ko'plab daraxtlarni o'rtalashtiradi."
+        },
+        "architectures": {
+          "linreg": "Belgilar vaznli yig'indisi sigmoid bilan ehtimollikka siqiladi.",
+          "dtree": "Ha/yo'q bo'linishlari kaskadi, barglarda klass uchun ovoz berish bilan tugaydi.",
+          "svm": "Belgilarni yadro bilan ko'tarib, klasslarni eng keng chegara bilan ajrat."
+        }
+      },
+      "perceptron": {
+        "title": "Perseptron va neyron tarmoqlar",
+        "yearLabel": "1958 · 1986",
+        "tagline": "O'z vaznlarini o'rganadigan neyronlar",
+        "beginner": "Perseptron (1958) — neyronning oddiy modeli: kirishlarni vaznlarga ko'paytir, qo'sh va “yon”. Qatlamlarga yig'ilib, backpropagation (1986) bilan o'qitilganda, bu tarmoqlar nihoyat belgilarni o'zlari o'rgana oldi — tayyor holda olish o'rniga.",
+        "expert": "Rozenblatt perseptroni — chiziqli ostona elementi; bitta qatlam XOR'ni yecha olmaydi (Minskiy va Papert, 1969), bu sohani muzlatdi. Erish ko'p qatlamli perseptron bilan keldi — backpropagation, ya'ni zanjir qoidasi orqali yo'qotishni teskari rejimda avtomatik differensiatsiyalash — yashirin qatlamlarga taqsimlangan nochiziqli ifodalarni uchma-uch o'rganish imkonini berdi.",
+        "keyIdea": "Backprop orqali gradiyent bilan o'qitiladigan kompozitsion nochiziqli bloklar.",
+        "breakthrough": "Backpropagation (Rumelhart, Hinton va Williams, 1986) ko'p qatlamli tarmoqlarni o'qitiladigan qildi.",
+        "milestones": {
+          "perceptron": "Rosenblatt perseptronni quradi — bitta neyronning o'qitiladigan modeli.",
+          "minsky": "Minskiy va Papert bitta qatlam XOR'ni o'rgana olmasligini ko'rsatib, sohani o'n yilga muzlatadi.",
+          "backprop": "Backpropagation xato gradiyentini orqaga yuborib ko'p qatlamli tarmoqlarni o'qitadi."
+        },
+        "architectures": {
+          "perceptron": "Bitta neyron: kirishlarni vazn, qo'sh va ostonadan oshib “yon”.",
+          "mlp": "Yashirin neyronlar qatlami tarmoqqa nochiziqli chegaralarni o'rganishga imkon beradi.",
+          "backprop_net": "Gradiyentlar har qatlamdan orqaga oqar ekan, uchma-uch o'qitiladigan qatlamlar."
+        }
+      },
+      "deep_learning": {
+        "title": "Deep learning (chuqur o'qitish)",
+        "yearLabel": "2006–2011",
+        "tagline": "Ko'p qatlam, o'rganilgan ifodalar",
+        "beginner": "Chuqurroq tarmoqlar — bir-biriga yig'ilgan ko'p qatlamlar — ancha boyroq naqshlarni o'rganadi, lekin yaxshi initsializatsiya, aktivatsiya funksiyalari va eng muhimi GPU paydo bo'lguncha ularni o'qitish qiyin edi. “Deep learning” — bu shunchaki yetarlicha chuqurlik va hisoblash quvvatiga ega neyron tarmoqlar.",
+        "expert": "Chuqurlik tarmoqqa iyerarxik belgilarni kompozitsiyalash imkonini beradi, ammo so'nuvchi/portlovchi gradiyentlar chuqur steklarni mo'rt qilgan. Ochko'z qatlamma-qatlam predtrening (Hinton, 2006), ReLU aktivatsiyalari, yaxshiroq initsializatsiya (Xavier/He) va katta datasetlarda GPU-tezlashtirilgan SGD chuqur modellarni barqaror o'qitishni ochdi — representation learning uchun zamin yaratdi.",
+        "keyIdea": "Chuqurlik + GPU qo'sh, shunda belgilar yasalmaydi, balki iyerarxik o'rganiladi.",
+        "breakthrough": "GPU'da o'qitish + ReLU/yaxshiroq initsializatsiya juda chuqur tarmoqlarni o'qitiladigan qildi.",
+        "milestones": {
+          "dbn": "Hinton'ning deep belief net'lari chuqur modellarni qatlamma-qatlam predtrening qilish mumkinligini ko'rsatadi.",
+          "imagenet_data": "ImageNet 14M belgilangan rasm chiqaradi — ma'lumotga och modellar uchun yoqilg'i.",
+          "relu": "ReLU aktivatsiyalari gradiyentlarni tirik saqlab, chuqur steklarni o'qitishni osonlashtiradi.",
+          "dropout": "Dropout o'qitish vaqtida neyronlarni tasodifiy o'chirib, ortiqcha moslashishni tiyadi."
+        },
+        "architectures": {
+          "deep_mlp": "GPU'da SGD bilan o'qitiladigan ReLU'li ko'plab to'liq bog'langan qatlamlar.",
+          "autoencoder": "Kirishni kichik kodga siqib, qayta tiklash — belgilarni nazoratsiz o'rganish.",
+          "dbn": "Ochko'z predtrening qilinib, so'ng dootirilgan cheklangan Boltzmann mashinalari steki."
+        }
+      },
+      "vision_cnn": {
+        "title": "Ko'rish va konvolyutsion tarmoqlar",
+        "yearLabel": "2012–2015",
+        "tagline": "Konvolyutsiya bilan ko'rish",
+        "beginner": "Konvolyutsion neyron tarmoqlar (CNN) rasm ustidan kichik filtrlarni sirpantirib qirralar, teksturalar va shakllarni aniqlaydi, ularni butun obyektlargacha yig'adi. 2012-yilda CNN (AlexNet) ImageNet musobaqasini tor-mor qildi — va kompyuter ko'rishi butunlay o'zgardi.",
+        "expert": "CNN translyatsion ekvivariantlik va vazn ulashishdan foydalanadi: konvolyutsiya + pooling qatlamlari steki pikseldan belgilar iyerarxiyasini o'rganadi. LeNet (1998) g'oyani isbotladi; AlexNet (2012) uni GPU'da masshtablab ImageNet'da katta farq bilan g'olib chiqdi; ResNet (2015) residual ulanishlar qo'shib, 100+ qatlamli tarmoqlarni mumkin qildi. Chuqurlik va residual keyinchalik to'g'ridan-to'g'ri transformerlarga o'tdi.",
+        "keyIdea": "Lokal filtrlar + vazn ulashish vizual belgilar iyerarxiyasini o'rganadi.",
+        "breakthrough": "AlexNet (2012) va ResNet'ning skip ulanishlari (2015).",
+        "milestones": {
+          "lenet": "LeCun'ning LeNet-5'i qo'lyozma raqamlarni konvolyutsiya va pooling bilan o'qiydi.",
+          "alexnet": "AlexNet ImageNet 2012'ni katta farq bilan yutib, deep learning bumini yoqadi.",
+          "resnet": "ResNet'ning skip ulanishlari 100+ qatlamli tarmoqlarni o'qitadi va ImageNet'da insondan o'zib ketadi.",
+          "turing": "Hinton, LeCun va Bengio deep learning uchun Turing mukofotini oladi."
+        },
+        "architectures": {
+          "lenet": "Birinchi CNN: ikki konvolyutsiya+pooling bosqichi to'liq bog'langan raqam klasslariga.",
+          "alexnet": "ReLU va dropout'li, GPU'da o'qitilgan chuqurroq CNN — ImageNet'ni yorgan.",
+          "vgg": "Kichik 3×3 konvolyutsiyalar uzun steklaridan chuqurlik — sodda va bir xil.",
+          "resnet": "Residual bloklar obxod yo'lini qo'shadi, shunda juda chuqur tarmoqlar o'qitiladigan qoladi."
+        }
+      },
+      "nlp_seq": {
+        "title": "Til uchun ketma-ketlik modellari",
+        "yearLabel": "2013–2016",
+        "tagline": "So'z vektorlari, RNN, attention",
+        "beginner": "Til bilan ishlash uchun modellarga avval nima bo'lganini eslab qolish kerak edi. word2vec so'zlarni ma'noni aks ettiruvchi vektorlarga aylantirdi; RNN va LSTM matnni token-token o'qib, yashirin holatni olib yuradi; “attention” esa modelга eng tegishli oldingi so'zlarга qarab olish imkonini berdi.",
+        "expert": "word2vec/GloVe zich distributiv embeddinglar berdi. Rekurrent tarmoqlar (RNN → LSTM/GRU) ketma-ketlikni rekurrent yashirin holat bilan modellaydi, ammo uzoq masofali bog'liqliklar bilan qiynaladi va vaqt bo'yicha parallellashmaydi. Attention bilan seq2seq (Bahdanau, 2014) dekoderга enkoder holatlariга yumshoq moslashish imkonini berdi — self-attention'ning bevosita kontseptual ajdodi.",
+        "keyIdea": "Vaqt bo'ylab yashirin holatni olib yur; tegishli o'tmishга e'tibor ber.",
+        "breakthrough": "Seq2seq + attention (2014) — transformer urug'i.",
+        "milestones": {
+          "lstm": "Hochreiter va Schmidhuber'ning LSTM'i gate'lar qo'shib, RNN uzoq kontekstni eslab qoladi.",
+          "word2vec": "word2vec so'z vektorlarini o'rganadi — bunda ma'no geometriyaga aylanadi.",
+          "seq2seq": "Sutskever'ning enkoder–dekoderi tarjima uchun bir ketma-ketlikni boshqasiga moslaydi.",
+          "attention": "Bahdanau attention dekoderga kirishning eng tegishli so'zlariga fokuslanish imkonini beradi."
+        },
+        "architectures": {
+          "word2vec": "Har so'zni zich ma'no vektoriga aylantiradigan sayoz tarmoq.",
+          "lstm": "Gate'li rekurrent katak — uzoq ketma-ketliklar bo'ylab kontekstni olib yuradi.",
+          "seq2seq": "Enkoder-LSTM kirishni o'qiydi; dekoder attention yo'naltiruvida chiqishni yozadi."
+        }
+      },
+      "transformers": {
+        "title": "Transformer",
+        "yearLabel": "2017",
+        "tagline": "Attention is all you need",
+        "beginner": "Transformer rekurrentlikdan butunlay voz kechib, faqat attention'dan foydalandi: har bir token bir vaqtning o'zida barcha boshqa tokenlarга qaray oladi. Bu modellarni juda parallel (GPU'da tez o'qitiladigan) va uzoq kontekstda kuchli qildi — har bir zamonaviy LLM aynan shu arxitekturaga quriladi.",
+        "expert": "Self-attention softmax(QKᵀ/√d)·V ni hisoblaydi, shunda har bir pozitsiya bir qadamda boshqalardan axborotni aralashtiradi; multi-head attention bir nechta parallel kichik fazoda ishlaydi, positional encoding esa tartibni tiklaydi. Rekurrentlikni olib tashlash o'qitishni ketma-ketlik bo'yicha to'liq parallel qiladi va yaxshi masshtablanadi — bu yerda rentgen qilsa bo'ladigan butun katalog aynan shu substrat ustida qurilgan.",
+        "keyIdea": "Rekurrentlikni butun ketma-ketlik bo'yicha parallel self-attention bilan almashtir.",
+        "breakthrough": "“Attention Is All You Need” (Vaswani va boshq., 2017).",
+        "milestones": {
+          "attention_paper": "“Attention Is All You Need” rekurrentlikdan voz kechib, sof self-attention'ga o'tadi.",
+          "bert": "BERT ikki tomonlama enkoderni predtrening qilib, NLP benchmarklarida yetakchilik qiladi.",
+          "gpt": "GPT dekoderni matn generatsiyasiga predtrening qiladi, so'ng vazifa bo'yicha dootiriladi.",
+          "gpt2": "GPT-2 masshtablanib, zero-shot ravon paragraflar yozadi."
+        },
+        "architectures": {
+          "transformer": "Self-attention + feed-forward bloklari, ketma-ketlik bo'yicha to'liq parallel.",
+          "bert": "Tushunish uchun matnni ikki yo'nalishda o'qiydigan enkoder-transformer.",
+          "gpt": "Matn yaratish uchun keyingi tokenni bashorat qiladigan dekoder-transformer."
+        }
+      },
+      "llms": {
+        "title": "Katta til modellari (LLM)",
+        "yearLabel": "2018–2022",
+        "tagline": "Predtrening, masshtab, so'ng alignment",
+        "beginner": "Transformer'ni internetning katta qismida keyingi so'zni bashorat qilishга o'rgat, kattalashtir — va kutilmagan qobiliyatlar paydo bo'ladi. BERT va GPT boshlab berdi; GPT-3 faqat masshtab few-shot ko'nikmalarni ochishini ko'rsatdi; so'ng RLHF (InstructGPT/ChatGPT) modellarni ko'rsatmalarга amal qilishга o'rgatdi.",
+        "expert": "O'z-o'zini nazorat qiluvchi predtrening (BERT uchun masked LM, GPT uchun causal LM) va empirik masshtablash qonunlari — yo'qotish parametrlar, ma'lumot va hisoblash bo'yicha darajali qonun shaklida bashoratli pasayadi — masshtab uchun poygani harakatga keltirdi. GPT-3 kontekst ichida/few-shot o'qitishni namoyish etdi; instruction tuning va RLHF/DPO xom bashoratchilarni foydali assistentlarга aylantirdi. (Bosh sahifadagi o'qitish yo'lini ko'ring.)",
+        "keyIdea": "Keyingi-token predtrening + masshtab + alignment = umumiy assistent.",
+        "breakthrough": "GPT-3 masshtablash (2020) va RLHF instruction-tuning (2022).",
+        "milestones": {
+          "gpt3": "GPT-3 175B parametrga yetadi va vazifalarni promptdagi bir necha misoldan o'rganadi.",
+          "scaling": "Masshtablash qonunlari yo'qotish parametr, ma'lumot va hisoblash bilan bashoratli pasayishini ko'rsatadi.",
+          "instructgpt": "InstructGPT modelni RLHF orqali ko'rsatmalarga amal qilishga moslaydi.",
+          "chatgpt": "ChatGPT suhbatlashuvchi LLM'ni yuz millionlab odamlar oldiga qo'yadi."
+        },
+        "architectures": {
+          "gpt3": "Juda chuqur decoder-only stek — faqat masshtab few-shot qobiliyatlarini ochadi.",
+          "t5": "Har NLP vazifasini text-to-text sifatida ifodalaydigan enkoder–dekoder.",
+          "llama": "RMSNorm, RoPE va SwiGLU'li zamonaviy ochiq dekoder — bugungi LLM'lar shabloni."
+        }
+      },
+      "frontier": {
+        "title": "Frontier va ochiq modellar",
+        "yearLabel": "2023–bugun",
+        "tagline": "Multimodal, mixture-of-experts, ochiq",
+        "beginner": "Bugungi modellar rasmlarni ko'radi va audioni eshitadi, samaradorlik uchun tokenlarni maxsus “ekspert” pastki tarmoqlarга yo'naltiradi, qadamma-qadam fikr yuritadi va tobora ko'proq har kim ishlata oladigan ochiq vaznlar sifatida chiqadi. Bu — llm-xray'ning qolgan qismi o'rganishга imkon beradigan dunyo.",
+        "expert": "Frontier multimodallikni (matn oqimiга proyeksiyalanadigan ko'rish/audio enkoderlar), parametro-samarali masshtablash uchun siyrak Mixture-of-Experts, uzoq-kontekstli attention variantlari va fikrlashга sozlangan post-treningni birlashtiradi. Jonli ochiq-vaznli ekotizim — Llama, Qwen, DeepSeek, Mistral, Gemma — bu arxitekturalarni tekshiriladigan qiladi, bu sayt aynan shu bilan shug'ullanadi.",
+        "keyIdea": "Multimodal + siyrak MoE + fikrlash, tobora ochiq-vaznli.",
+        "breakthrough": "Yuklab olib rentgen qilsa bo'ladigan ochiq-vaznli multimodal MoE modellar.",
+        "milestones": {
+          "open_weights": "Ochiq-vaznli modellar — Llama, Mistral, Qwen — frontier arxitekturalarni har kimning qo'liga beradi.",
+          "moe_mm": "Siyrak Mixture-of-Experts va tug'ma multimodallik imkoniyatni samarali masshtablaydi.",
+          "reasoning": "Reasoning modellar javobdan oldin qadamma-qadam o'ylash uchun RL bilan dootiriladi."
+        },
+        "architectures": {
+          "mixtral": "Har token bir necha ekspert FFN'ga yo'naltiriladi — qat'iy compute'da ko'proq sig'im.",
+          "multimodal": "Ko'rish va audio enkoderlari matn dekoderini oziqlantiradi — bitta model ko'radi, eshitadi va o'qiydi.",
+          "reasoning": "Yakuniy javobdan oldin uzun fikrlash zanjirlarini chiqarish uchun RL bilan sozlangan dekoder."
+        }
+      }
+    }
+  },
+  "footer": {
+    "dataNote": "Arxitektura ma'lumotlari har modelning config.json va safetensors indeksidan to'g'ridan-to'g'ri o'qiladi — vaznlar yuklanmaydi.",
+    "language": "Til"
+  },
+  "faq": {
+    "title": "Koʻp soʻraladigan savollar",
+    "items": [
+      {
+        "q": "llm-xray nima?",
+        "a": "llm-xray — bepul, interaktiv sayt: eng soʻnggi ochiq kodli katta til modellarini (LLM) yuklab olishlar va benchmarklar boʻyicha tartiblaydi, soʻng istalgan modelning arxitekturasini — attention, normalizatsiya, MLP va Mixture-of-Experts — qatlamma-qatlam 2D va 3D’da “rentgen” qilib koʻrsatadi, shunda LLMlar qanday ishlashini koʻrasiz."
+      },
+      {
+        "q": "llm-xray qaysi modellarni qamraydi?",
+        "a": "U Hugging Face’dagi rasmiy akkauntlardan ochiq vaznli LLMlarni (Llama, Qwen, Mistral, DeepSeek, Gemma, Phi va boshqalar) kuzatadi va avtomatik yangilab turadi. Har bir model sahifasi uning haqiqiy config va safetensors indeksidan quriladi — qatlamlar soni, yashirin oʻlcham, attention turi (MHA/GQA/MQA/MLA), kontekst uzunligi va MoE konfiguratsiyasi."
+      },
+      {
+        "q": "Modellar qanday tartiblanadi?",
+        "a": "Modellar Hugging Face yuklab olishlari va layklari boʻyicha saralanadi, MMLU kabi benchmark ustunlari bilan; oila, modallik, attention turi va Mixture-of-Experts boʻyicha filtrlash mumkin. Taqqoslash sahifasi modellarni 12+ koʻrsatkich boʻyicha yonma-yon qoʻyadi."
+      },
+      {
+        "q": "MHA, GQA, MQA va MLA oʻrtasidagi farq nima?",
+        "a": "Bular attention variantlari boʻlib, sifatni kichikroq key/value keshiga almashtiradi. MHA’da har bir bosh oʻz key va value’siga ega; GQA ularni boshlar guruhi boʻylab boʻlishadi; MQA barcha boshlar uchun bittasini ishlatadi; MLA ularni yashirin (latent) koʻrinishga siqadi. KV boshlari kamaygani sari inference tezroq va arzonroq boʻladi."
+      },
+      {
+        "q": "Mixture-of-Experts (MoE) modeli nima?",
+        "a": "MoE modeli zich (dense) feed-forward qatlamini koʻplab “ekspert” tarmoqlari va har token uchun faqat top-k ekspertni faollashtiradigan router bilan almashtiradi (masalan, Mixtral’da 8 tadan top-2). Bu modelni umumiy parametrlar boʻyicha ancha kattalashtiradi, lekin har token uchun hisoblashni past saqlaydi."
+      },
+      {
+        "q": "llm-xray bepulmi va akkaunt kerakmi?",
+        "a": "Ha, u butunlay bepul va akkaunt talab qilmaydi. Bu talabalar, muhandislar va transformer hamda LLMlar qanday ishlashini oʻrganayotgan har bir kishi uchun ta’limiy mahsulot — ingliz, rus va oʻzbek tillarida."
+      }
+    ]
+  },
+  "cta": {
+    "learnThis": "Oʻrganish",
+    "learnMath": "Formulani tushunish",
+    "learnMore": "Batafsil",
+    "seeItIn": "Qayerda koʻrish"
+  },
+  "realRun": {
+    "title": "Haqiqiy modelni ishga tushiring",
+    "subtitle": "Yuqoridagi demolar illyustrativ. Bu yerda haqiqiy kichik model — DistilGPT-2 — toʻliq brauzeringizda ishlaydi. Ishga tushirish uchun bosing (bir marta bir necha MB yuklanadi) va keyingi token ehtimolliklarini koʻring.",
+    "prompt": "Soʻrov",
+    "placeholder": "Fransiya poytaxti —",
+    "temperature": "Temperatura",
+    "run": "▶ Haqiqiy modelni ishga tushirish",
+    "running": "Hisoblanmoqda…",
+    "loading": "DistilGPT-2 yuklanmoqda…",
+    "real": "HAQIQIY",
+    "unsupported": "Brauzeringiz brauzer ichida modellarni ishga tushira olmaydi (module Web Worker mavjud emas).",
+    "error": "Modelni ishga tushirib boʻlmadi.",
+    "nextToken": "Keyingi tokenning haqiqiy ehtimolliklari",
+    "note": "DistilGPT-2 ning transformers.js orqali haqiqiy chiqishi, qurilmangizda hisoblangan — hech narsa serverga yuborilmaydi."
+  }
+}

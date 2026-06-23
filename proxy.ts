@@ -36,6 +36,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything except internal paths, API, and static/SEO files.
-  matcher: ["/((?!_next|api|favicon.ico|robots.txt|sitemap.xml|.*\\.).*)"],
+  // Run on everything except internal paths, API, and static/SEO files. The
+  // dotless `opengraph-image` route must be listed explicitly so the locale
+  // redirect never swallows it (paths containing a dot are already excluded).
+  matcher: ["/((?!_next|api|favicon.ico|robots.txt|sitemap.xml|opengraph-image|.*\\.).*)"],
 };

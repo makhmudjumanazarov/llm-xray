@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Model } from "@/core/model/schema";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { buildModelTree } from "@/core/model/family";
 import { params as fmtParams } from "@/core/shared/format";
-import { ChevronRight, ChevronDown } from "@/components/ui/icons";
+import { ChevronRight, ChevronDown, Search } from "@/components/ui/icons";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 /** A select-all checkbox that shows the indeterminate (partial) state. */
 function TriCheckbox({
@@ -17,7 +19,9 @@ function TriCheckbox({
   onChange: () => void;
 }) {
   const ref = useRef<HTMLInputElement>(null);
-  if (ref.current) ref.current.indeterminate = indeterminate && !checked;
+  useEffect(() => {
+    if (ref.current) ref.current.indeterminate = indeterminate && !checked;
+  }, [indeterminate, checked]);
   return (
     <input
       ref={ref}
@@ -34,12 +38,24 @@ export function ModelPicker({
   models,
   selected,
   onToggle,
+  dict,
 }: {
   models: Model[];
   selected: string[];
   onToggle: (slug: string) => void;
+  dict: Dictionary;
 }) {
-  const tree = useMemo(() => buildModelTree(models), [models]);
+  const [query, setQuery] = useState("");
+  const term = query.trim().toLowerCase();
+  const searching = term.length > 0;
+  const filteredModels = useMemo(
+    () =>
+      searching
+        ? models.filter((m) => `${m.name} ${m.family} ${m.id}`.toLowerCase().includes(term))
+        : models,
+    [models, searching, term],
+  );
+  const tree = useMemo(() => buildModelTree(filteredModels), [filteredModels]);
   const sel = useMemo(() => new Set(selected), [selected]);
 
   // Auto-open families/versions that already hold a selected model.
@@ -67,9 +83,23 @@ export function ModelPicker({
   };
 
   return (
-    <div className="max-h-[440px] overflow-y-auto rounded-card border border-border bg-panel/40 p-1.5">
-      {tree.map((fam) => {
-        const famOpen = openFam.has(fam.family);
+    <div>
+      <div className="relative mb-2">
+        <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-dim" />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={dict.home.searchPlaceholder}
+          aria-label={dict.home.searchPlaceholder}
+          className="w-full rounded-lg border border-border bg-panel py-1.5 pl-9 pr-3 text-sm text-text outline-none placeholder:text-dim focus:border-border2"
+        />
+      </div>
+      <div className="max-h-[440px] overflow-y-auto rounded-card border border-border bg-panel/40 p-1.5">
+        {tree.length === 0 ? (
+          <EmptyState icon={<Search size={20} />} title={dict.home.empty} className="py-8" />
+        ) : (
+          tree.map((fam) => {
+            const famOpen = searching || openFam.has(fam.family);
         const famSel = fam.models.filter((mm) => sel.has(mm.slug)).length;
         return (
           <div key={fam.family}>
@@ -91,7 +121,7 @@ export function ModelPicker({
             {famOpen &&
               fam.versions.map((ver) => {
                 const key = `${fam.family}/${ver.version}`;
-                const verOpen = openVer.has(key);
+                const verOpen = searching || openVer.has(key);
                 const verSelCount = ver.models.filter((mm) => sel.has(mm.slug)).length;
                 const allSel = verSelCount === ver.models.length;
                 return (
@@ -138,9 +168,11 @@ export function ModelPicker({
                   </div>
                 );
               })}
-          </div>
-        );
-      })}
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }

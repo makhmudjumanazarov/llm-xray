@@ -1,14 +1,46 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { localePath } from "@/core/seo";
+import { Search } from "@/components/ui/icons";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
+import { MobileNav } from "./MobileNav";
+
+function SearchBox({ locale, placeholder }: { locale: Locale; placeholder: string }) {
+  const router = useRouter();
+  const [term, setTerm] = useState("");
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        router.push(localePath(locale, "/models") + "?q=" + encodeURIComponent(term));
+      }}
+      className="hidden items-center gap-2 rounded-lg border border-border bg-panel px-3 py-1.5 sm:flex"
+      role="search"
+    >
+      <Search size={15} className="shrink-0 text-dim" />
+      <input
+        type="search"
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
+        placeholder={placeholder}
+        aria-label={placeholder}
+        className="w-32 bg-transparent text-sm text-text placeholder:text-dim focus:outline-none md:w-44"
+      />
+    </form>
+  );
+}
 
 export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const nav = [
-    { href: localePath(locale, ""), label: dict.nav.home },
+    { href: localePath(locale, "/models"), label: dict.nav.home },
     { href: localePath(locale, "/learn"), label: dict.nav.learn },
+    { href: localePath(locale, "/evolution"), label: dict.nav.evolution },
     { href: localePath(locale, "/compare"), label: dict.nav.compare },
   ];
   return (
@@ -32,7 +64,9 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-3">
+          <SearchBox locale={locale} placeholder={dict.home.searchPlaceholder} />
           <LanguageSwitcher locale={locale} />
+          <MobileNav items={nav} menuLabel={dict.nav.menu} />
         </div>
       </div>
     </header>
