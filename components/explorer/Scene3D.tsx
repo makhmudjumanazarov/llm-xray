@@ -294,6 +294,10 @@ export function Scene3D({
   const playing = frames !== null;
   const frame = playing ? frames[frameIdx] : null;
 
+  // Reset the global cursor if we unmount while a box is hovered (onPointerOut
+  // may not fire on unmount), so the pointer cursor never sticks page-wide.
+  useEffect(() => () => { document.body.style.cursor = "default"; }, []);
+
   useEffect(() => {
     if (!frames) return;
     let idx = 0;
@@ -338,7 +342,13 @@ export function Scene3D({
   const fstages = dict.forward.stages as Record<string, string>;
 
   return (
-    <div className="relative h-[560px] w-full overflow-hidden rounded-card border border-border bg-[#0a0e1a]">
+    // Counter the global body `zoom` (UI-scale feature): CSS zoom desyncs
+    // react-three-fiber's canvas measurement (ResizeObserver vs getBoundingClientRect),
+    // which blanks the WebGL view. Rendering the canvas at net zoom 1 fixes it.
+    <div
+      className="relative h-[560px] w-full overflow-hidden rounded-card border border-border bg-[#0a0e1a]"
+      style={{ zoom: "calc(1 / var(--ui-scale, 1))" } as React.CSSProperties}
+    >
       <Canvas
         key={drill == null ? "overview" : `detail-${drill}`}
         camera={{ position: camPos, fov: 50, near: 0.1, far: 2000 }}

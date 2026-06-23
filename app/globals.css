@@ -59,6 +59,10 @@
   --dur-1: 120ms;
   --dur-2: 220ms;
   --dur-3: 360ms;
+
+  /* Global UI zoom — default 125% (fills the wide-screen gutters). Overridable
+     per-user via the footer scale control (sets this var on <html>). */
+  --ui-scale: 1.25;
 }
 
 /* Map tokens → Tailwind v4 utilities (bg-panel, text-muted, text-acc-400,
@@ -104,8 +108,19 @@ body {
   margin: 0;
   padding: 0;
 }
+/* Smooth in-page anchor jumps (e.g. /learn lesson index). */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 
 body {
+  /* zoom is applied as an inline style on <body> in layout.tsx — Lightning CSS
+     strips non-standard `zoom` from stylesheets, so it must live inline. */
   background:
     radial-gradient(900px 520px at 78% -8%, color-mix(in oklab, var(--acc2) 22%, transparent) 0%, transparent 60%),
     radial-gradient(820px 480px at 2% 4%, color-mix(in oklab, var(--cyan) 12%, transparent) 0%, transparent 55%),
@@ -229,6 +244,63 @@ a:hover {
 .animate-loop-flow-rev { animation: loop-flow-rev 2.8s linear infinite; }
 .animate-loop-glow { animation: loop-glow 2.8s var(--ease-out) infinite; }
 .animate-leash { animation: loop-leash 2s var(--ease-out) infinite; }
+
+/* ---- 2D architecture explorer: a packet of activation falling down the
+   residual stream, and the dashed skip-connection paths it bypasses. Pure CSS,
+   so the reduced-motion rule below neutralizes them. ---- */
+@keyframes flow-down {
+  0% { top: -8%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes flow-dash {
+  to { stroke-dashoffset: -16; }
+}
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--acc-ring); }
+  50% { box-shadow: 0 0 0 5px transparent; }
+}
+.animate-flow-down { animation: flow-down 3.4s var(--ease-out) infinite; }
+.animate-flow-dash { animation: flow-dash 1.1s linear infinite; }
+.animate-node-pulse { animation: node-pulse 3.4s var(--ease-out) infinite; }
+
+/* ---- /evolution era schematics: one shared motion vocabulary the eight
+   EraDiagram visuals compose, so they read as one family. Pure CSS (the
+   reduced-motion rule below neutralizes every one); each diagram also DROPS
+   these classes when offscreen / reduced-motion via useLoopFlow(), rendering
+   a static final frame instead. Per-element timing via inline animation-delay;
+   per-element travel via the --evo-dx / --evo-dy / --evo-len custom props. ---- */
+@keyframes evo-draw { to { stroke-dashoffset: 0; } }
+@keyframes evo-dash { to { stroke-dashoffset: -24; } }
+@keyframes evo-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+@keyframes evo-blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.95; } }
+@keyframes evo-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+@keyframes evo-grow { from { transform: scaleY(0.04); } to { transform: scaleY(1); } }
+@keyframes evo-packet {
+  0% { transform: translate(0, 0); opacity: 0; }
+  12% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { transform: translate(var(--evo-dx, 0px), var(--evo-dy, 0px)); opacity: 0; }
+}
+@keyframes evo-reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* draw a stroke in once (set --evo-len to the path length) */
+.evo-draw { stroke-dasharray: var(--evo-len, 320); stroke-dashoffset: var(--evo-len, 320); animation: evo-draw 1s var(--ease-out) forwards; }
+/* flow along any stroke (curved or straight) via marching dashes */
+.evo-dash { stroke-dasharray: 6 6; animation: evo-dash 1.1s linear infinite; }
+/* an element fading between dim and lit — an active node / connection */
+.evo-pulse { animation: evo-pulse 2.6s var(--ease-out) infinite; }
+/* a faster blink — a firing / emitting element */
+.evo-blink { animation: evo-blink 1.6s var(--ease-out) infinite; }
+/* a gently breathing element — a core unit (σ, model body, query token) */
+.evo-breathe { transform-box: fill-box; transform-origin: center; animation: evo-breathe 2.8s var(--ease-out) infinite; }
+/* a bar growing from its baseline — scaling / feature maps */
+.evo-grow { transform-box: fill-box; transform-origin: bottom; animation: evo-grow 0.8s var(--ease-out) forwards; }
+/* a discrete packet traveling a straight segment (set --evo-dx/--evo-dy) */
+.evo-packet { transform-box: fill-box; animation: evo-packet 2.4s linear infinite; }
+/* staggered reveal of a node / point / layer */
+.evo-reveal { animation: evo-reveal 0.5s var(--ease-out) both; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

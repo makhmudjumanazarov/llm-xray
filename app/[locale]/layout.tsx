@@ -7,6 +7,8 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { pageMetadata, SITE_NAME } from "@/core/seo";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { graph, organizationNode, websiteNode } from "@/core/jsonld";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -52,7 +54,13 @@ export default async function LocaleLayout({
       lang={localeMeta[locale].bcp47}
       className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col bg-bg text-text">
+      <body
+        className="min-h-screen flex flex-col bg-bg text-text"
+        style={{ zoom: "var(--ui-scale)" } as React.CSSProperties}
+      >
+        {/* Site-wide structured data (Organization + WebSite) on every page —
+            the entity backbone classic crawlers and answer engines resolve against. */}
+        <JsonLd data={graph(organizationNode(), websiteNode(locale))} />
         <SiteHeader locale={locale} dict={dict} />
         <main className="flex-1 w-full">{children}</main>
         <SiteFooter dict={dict} />

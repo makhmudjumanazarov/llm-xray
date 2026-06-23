@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { LIFECYCLE_STAGES, nextStage, prevStage, type StageIconName } from "@/core/training/lifecycle";
+import { LIFECYCLE_STAGES, nextStage, prevStage, stageAxisPct, type StageIconName } from "@/core/training/lifecycle";
 import { Database, Target, Scale, Trophy, Play, Square, ChevronRight } from "@/components/ui/icons";
 
 const ICONS: Record<StageIconName, typeof Database> = { Database, Target, Scale, Trophy };
@@ -50,53 +50,53 @@ export function StageStepper({
         role="group"
         aria-label={labels.group}
         onKeyDown={onKeyDown}
-        className="flex items-stretch"
+        className="relative h-[4.75rem]"
       >
+        {/* shared axis track — same coordinate space as the capability bar above */}
+        <div className="absolute inset-x-0 top-4 h-0.5 -translate-y-1/2 rounded-full bg-border" />
+        <div
+          className="absolute left-0 top-4 h-0.5 -translate-y-1/2 rounded-full transition-[width] duration-500 ease-out"
+          style={{
+            width: `${stageAxisPct(activeIndex)}%`,
+            background: `var(${LIFECYCLE_STAGES[activeIndex].accentToken})`,
+          }}
+        />
         {LIFECYCLE_STAGES.map((s, i) => {
           const Icon = ICONS[s.iconName];
           const active = i === activeIndex;
           const visited = i <= activeIndex;
           const accentVar = `var(${s.accentToken})`;
           return (
-            <div key={s.id} className="flex flex-1 items-center">
-              <button
-                ref={(el) => {
-                  btnRefs.current[i] = el;
+            <button
+              key={s.id}
+              ref={(el) => {
+                btnRefs.current[i] = el;
+              }}
+              onClick={() => onSelect(i)}
+              tabIndex={active ? 0 : -1}
+              aria-current={active ? "step" : undefined}
+              aria-label={titles[i]}
+              className="absolute top-0 flex -translate-x-1/2 flex-col items-center gap-1.5 focus-visible:outline-none"
+              style={{ left: `${stageAxisPct(i)}%` }}
+            >
+              <span
+                className="flex h-8 w-8 items-center justify-center rounded-full border-2 transition-all duration-300"
+                style={{
+                  borderColor: visited ? accentVar : "var(--border2)",
+                  background: active ? accentVar : "var(--bg)",
+                  color: active ? "var(--bg)" : visited ? accentVar : "var(--dim)",
+                  boxShadow: active ? `0 0 12px color-mix(in oklab, ${accentVar} 55%, transparent)` : undefined,
                 }}
-                onClick={() => onSelect(i)}
-                tabIndex={active ? 0 : -1}
-                aria-current={active ? "step" : undefined}
-                aria-label={titles[i]}
-                className="group flex min-w-0 flex-col items-center gap-1 rounded-lg px-1.5 py-1.5 transition-colors focus-visible:outline-none"
-                style={{ flex: "0 0 auto" }}
               >
-                <span
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 font-mono text-xs font-bold transition-all duration-300"
-                  style={{
-                    borderColor: visited ? accentVar : "var(--border2)",
-                    background: active ? accentVar : "transparent",
-                    color: active ? "var(--bg)" : visited ? accentVar : "var(--dim)",
-                    boxShadow: active ? `0 0 12px color-mix(in oklab, ${accentVar} 55%, transparent)` : undefined,
-                  }}
-                >
-                  <Icon size={15} />
-                </span>
-                <span
-                  className="hidden max-w-[8rem] truncate text-[11px] font-semibold sm:block"
-                  style={{ color: active ? "var(--text)" : "var(--dim)" }}
-                >
-                  {titles[i]}
-                </span>
-              </button>
-              {i < LIFECYCLE_STAGES.length - 1 && (
-                <span className="mx-1 mb-0 h-0.5 flex-1 overflow-hidden rounded-full bg-border sm:mb-5">
-                  <span
-                    className="block h-full rounded-full transition-[width] duration-500 ease-out"
-                    style={{ width: i < activeIndex ? "100%" : "0%", background: accentVar }}
-                  />
-                </span>
-              )}
-            </div>
+                <Icon size={15} />
+              </span>
+              <span
+                className="hidden max-w-[8rem] text-center text-[11px] font-semibold leading-tight sm:block"
+                style={{ color: active ? "var(--text)" : "var(--dim)" }}
+              >
+                {titles[i]}
+              </span>
+            </button>
           );
         })}
       </div>

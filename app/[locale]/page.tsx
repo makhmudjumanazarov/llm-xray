@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { pageMetadata } from "@/core/seo";
-import { getAllModels } from "@/modules/catalog";
-import { ModelTable } from "@/components/ranking/ModelTable";
-import { ModelScatter } from "@/components/ranking/ModelScatter";
+import { pageMetadata, localePath } from "@/core/seo";
+import { graph, webPageNode, faqNode } from "@/core/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { TrainingLifecycle } from "@/components/training/TrainingLifecycle";
-
-// ISR: rebuild the ranking at most hourly (picks up fresh ingests).
-export const revalidate = 3600;
+import { InferenceJourney } from "@/components/inference/InferenceJourney";
+import { EvolutionTeaser } from "@/components/evolution/EvolutionTeaser";
 
 export async function generateMetadata({
   params,
@@ -36,7 +36,6 @@ export default async function HomePage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
-  const models = await getAllModels();
 
   return (
     <div className="mx-auto w-full max-w-[1680px] px-5 py-10 md:px-10">
@@ -45,17 +44,47 @@ export default async function HomePage({
           {dict.home.heroTitle}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">{dict.home.heroSubtitle}</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={`/${locale}/models`}
+            className="inline-flex items-center gap-1.5 rounded-lg bg-acc2 px-4 py-2 text-sm font-semibold text-white no-underline transition-colors hover:bg-acc-500"
+          >
+            {dict.journey.bridgeCta} →
+          </Link>
+          <Link
+            href={`/${locale}/learn`}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-panel px-4 py-2 text-sm font-semibold text-text no-underline transition-colors hover:border-border2"
+          >
+            {dict.nav.learn}
+          </Link>
+        </div>
       </section>
 
       <div className="mb-10">
-        <TrainingLifecycle dict={dict} />
+        <TrainingLifecycle dict={dict} locale={locale} />
       </div>
 
-      <div id="ranking" className="mb-8 scroll-mt-24">
-        <ModelScatter models={models} locale={locale} dict={dict} />
+      <div className="mb-10">
+        <InferenceJourney dict={dict} />
       </div>
 
-      <ModelTable models={models} locale={locale} dict={dict} />
+      <div className="mb-10">
+        <EvolutionTeaser dict={dict} locale={locale} />
+      </div>
+
+      <FaqSection dict={dict} />
+
+      <JsonLd
+        data={graph(
+          webPageNode({
+            locale,
+            path: localePath(locale, ""),
+            name: dict.home.heroTitle,
+            description: dict.site.description,
+          }),
+          faqNode(dict.faq.items),
+        )}
+      />
     </div>
   );
 }

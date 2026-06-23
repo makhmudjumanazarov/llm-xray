@@ -92,6 +92,15 @@ export function capabilityAt(index: number): number {
   return LIFECYCLE_STAGES[clampStageIndex(index)].capabilityPct;
 }
 
+/**
+ * Even horizontal position (%) for a stage on the shared timeline axis — centered
+ * in its equal segment. The capability bar ticks AND the stepper icons both use
+ * this, so they line up vertically. 4 stages → 12.5 / 37.5 / 62.5 / 87.5.
+ */
+export function stageAxisPct(index: number): number {
+  return ((clampStageIndex(index) + 0.5) / STAGE_COUNT) * 100;
+}
+
 /** Look up a stage by id (undefined if unknown). */
 export function stageById(id: StageId): StageMeta | undefined {
   return LIFECYCLE_STAGES.find((s) => s.id === id);

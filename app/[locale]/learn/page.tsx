@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { locales, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { pageMetadata } from "@/core/seo";
-import { SoftmaxPlayground } from "@/components/learn/SoftmaxPlayground";
+import { pageMetadata, localePath } from "@/core/seo";
+import { graph, learningResourceNode, itemListNode, breadcrumbNode } from "@/core/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ExpertToggle } from "@/components/learn/ExpertToggle";
+import { LESSON_REGISTRY } from "@/components/learn/registry";
+import { LessonNav } from "@/components/learn/LessonNav";
+import { LessonExamples } from "@/components/learn/LessonExamples";
+import { RealInference } from "@/components/learn/RealInference";
+import { getAllModels } from "@/modules/catalog";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,7 +35,12 @@ export default async function LearnPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
-  const upcoming = Object.values(dict.learn.concepts);
+  const models = await getAllModels();
+  const live = LESSON_REGISTRY.filter((l) => l.status === "live" && l.Component);
+  const soon = LESSON_REGISTRY.filter((l) => l.status === "soon");
+  const concepts = dict.learn.concepts as Record<string, string>;
+  const lessonTitles = dict.learn as unknown as Record<string, { title: string }>;
+  const navItems = live.map((l) => ({ id: l.id, label: lessonTitles[l.id].title, iconName: l.iconName }));
 
   return (
     <div className="mx-auto w-full max-w-[1680px] px-5 py-10 md:px-10">
@@ -43,21 +54,70 @@ export default async function LearnPage({
         <ExpertToggle dict={dict} />
       </div>
 
-      <SoftmaxPlayground dict={dict} />
-
-      <h2 className="mb-3 mt-10 font-mono text-xs font-semibold uppercase tracking-wider text-muted">
-        {dict.learn.comingSoon}
-      </h2>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {upcoming.map((c) => (
-          <div
-            key={c}
-            className="rounded-card border border-dashed border-border bg-panel/30 p-4 text-sm text-dim"
-          >
-            {c}
-          </div>
-        ))}
+      {/* Flagship: a REAL small model running in-browser (opt-in, lazy-loaded). */}
+      <div className="mb-8">
+        <RealInference dict={dict} />
       </div>
+
+      <div className="lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-8">
+        <LessonNav items={navItems} label={dict.learn.title} />
+
+        <div>
+          <div className="space-y-6">
+            {live.map((l) => {
+              const Lesson = l.Component!;
+              return (
+                <section key={l.id} id={l.id} className="scroll-mt-[112px] lg:scroll-mt-24">
+                  <Lesson dict={dict} />
+                  <LessonExamples lessonId={l.id} models={models} locale={locale} dict={dict} />
+                </section>
+              );
+            })}
+          </div>
+
+          {soon.length > 0 && (
+            <>
+              <h2 className="mb-3 mt-10 font-mono text-xs font-semibold uppercase tracking-wider text-muted">
+                {dict.learn.comingSoon}
+              </h2>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {soon.map((l) => {
+                  const Icon = l.Icon;
+                  return (
+                    <div
+                      key={l.id}
+                      className="flex items-center gap-2 rounded-card border border-dashed border-border bg-panel/30 p-4 text-sm text-dim"
+                    >
+                      <Icon size={15} className="shrink-0" />
+                      {concepts[l.id]}
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      <JsonLd
+        data={graph(
+          learningResourceNode({
+            locale,
+            path: localePath(locale, "/learn"),
+            name: dict.learn.title,
+            description: dict.learn.subtitle,
+            teaches: navItems.map((n) => n.label),
+          }),
+          itemListNode(
+            navItems.map((n) => ({ name: n.label, path: `${localePath(locale, "/learn")}#${n.id}` })),
+            dict.learn.title,
+          ),
+          breadcrumbNode([
+            { name: dict.site.name, path: localePath(locale, "") },
+            { name: dict.nav.learn, path: localePath(locale, "/learn") },
+          ]),
+        )}
+      />
     </div>
   );
 }

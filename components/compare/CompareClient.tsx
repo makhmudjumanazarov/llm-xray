@@ -7,7 +7,11 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { BENCHMARK_METRICS, ARCH_ROWS, type BenchmarkCategory } from "@/core/benchmark/catalog";
 import { params as fmtParams, contextLen, compactNumber } from "@/core/shared/format";
+import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { ModelPicker } from "./ModelPicker";
+import { BenchmarkRadar } from "./BenchmarkRadar";
+
+type BenchView = "table" | "radar";
 
 const CAT_ORDER: BenchmarkCategory[] = [
   "knowledge", "math", "code", "reasoning", "commonsense", "truthfulness", "instruction",
@@ -49,6 +53,7 @@ export function CompareClient({
   }, [models]);
 
   const [selected, setSelected] = useState<string[]>(defaults);
+  const [benchView, setBenchView] = useState<BenchView>("table");
 
   const chosen = useMemo(
     () => selected.map((s) => models.find((m) => m.slug === s)).filter(Boolean) as Model[],
@@ -69,7 +74,7 @@ export function CompareClient({
       {/* Model picker — foldered family → version → model (HF org/model format) */}
       <div className="mb-6">
         <div className="mb-2 font-mono text-[11px] uppercase tracking-wide text-dim">{dict.compare.pick}</div>
-        <ModelPicker models={models} selected={selected} onToggle={toggle} />
+        <ModelPicker models={models} selected={selected} onToggle={toggle} dict={dict} />
       </div>
 
       {chosen.length < 2 ? (
@@ -77,9 +82,23 @@ export function CompareClient({
       ) : (
         <>
           {/* Benchmarks */}
-          <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-wider text-muted">
-            {dict.compare.benchmarks}
-          </h2>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
+              {dict.compare.benchmarks}
+            </h2>
+            <SegmentedControl<BenchView>
+              value={benchView}
+              onChange={setBenchView}
+              ariaLabel={dict.compare.benchmarks}
+              options={[
+                { value: "table", label: dict.compare.tableView },
+                { value: "radar", label: dict.compare.radarView },
+              ]}
+            />
+          </div>
+          {benchView === "radar" ? (
+            <BenchmarkRadar models={chosen} dict={dict} />
+          ) : (
           <div className="overflow-x-auto rounded-card border border-border">
             <table className="w-full min-w-[640px] border-collapse text-sm">
               <thead>
@@ -136,6 +155,7 @@ export function CompareClient({
               </tbody>
             </table>
           </div>
+          )}
 
           {/* Architecture */}
           <h2 className="mb-3 mt-8 font-mono text-xs font-semibold uppercase tracking-wider text-muted">

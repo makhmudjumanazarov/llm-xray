@@ -19,7 +19,7 @@ function entry(path: string, lastModified?: string | Date): MetadataRoute.Sitema
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPaths = ["", "/learn", "/compare"];
+  const staticPaths = ["", "/models", "/learn", "/evolution", "/compare"];
   const models = await getAllModels();
   const modelPaths = models.map((m) => entry(`/models/${m.slug}`, m.stats.lastModified));
   return [...staticPaths.map((p) => entry(p)), ...modelPaths];

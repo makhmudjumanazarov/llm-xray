@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { useExpertMode } from "@/components/ui/useExpertMode";
+import { softmaxTemp } from "@/core/inference/run";
+import { LogitsBars } from "@/components/inference/LogitsBars";
 import { BlockMath } from "./Katex";
 
 // Illustrative next-token candidates with raw scores (logits).
@@ -15,48 +17,24 @@ const TOKENS = [
   { t: "Cairo", z: -0.4 },
 ];
 
-function softmax(zs: number[], T: number): number[] {
-  const scaled = zs.map((z) => z / T);
-  const max = Math.max(...scaled);
-  const exps = scaled.map((s) => Math.exp(s - max));
-  const sum = exps.reduce((a, b) => a + b, 0);
-  return exps.map((e) => e / sum);
-}
-
 export function SoftmaxPlayground({ dict }: { dict: Dictionary }) {
   const [temp, setTemp] = useState(1);
   const expert = useExpertMode((s) => s.expert);
   const L = dict.learn.softmax;
 
-  const probs = useMemo(() => softmax(TOKENS.map((t) => t.z), temp), [temp]);
-  const maxP = Math.max(...probs);
+  const probs = useMemo(() => softmaxTemp(TOKENS.map((t) => t.z), temp), [temp]);
 
   return (
     <div className="rounded-card border border-border bg-panel/50 p-5 elev">
       <h3 className="font-display text-lg font-bold text-text">{L.title}</h3>
       <p className="mt-1 max-w-2xl text-sm text-muted">{L.blurb}</p>
 
-      {/* bars */}
-      <div className="mt-5 space-y-2">
-        {TOKENS.map((tok, i) => {
-          const p = probs[i];
-          const isMax = p === maxP;
-          return (
-            <div key={tok.t} className="flex items-center gap-3">
-              <span className="w-16 shrink-0 text-right font-mono text-xs text-muted">{tok.t}</span>
-              <div className="relative h-6 flex-1 overflow-hidden rounded bg-bg2">
-                <div
-                  className="h-full rounded transition-[width] duration-300 ease-out"
-                  style={{ width: `${p * 100}%`, background: isMax ? "var(--acc2)" : "var(--acc-soft)" }}
-                />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 font-mono text-[11px] text-text">
-                  {(p * 100).toFixed(1)}%
-                </span>
-              </div>
-              {expert && <span className="w-12 shrink-0 font-mono text-[11px] text-dim">z={tok.z}</span>}
-            </div>
-          );
-        })}
+      {/* bars (shared with the inference logits/sampling stages) */}
+      <div className="mt-5">
+        <LogitsBars
+          bars={TOKENS.map((tok, i) => ({ label: tok.t, prob: probs[i], logit: tok.z }))}
+          showLogit={expert}
+        />
       </div>
 
       {/* temperature slider */}
