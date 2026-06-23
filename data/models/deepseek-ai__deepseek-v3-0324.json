@@ -1,30 +1,30 @@
 {
-  "id": "deepseek-ai/DeepSeek-V4-Flash",
-  "slug": "deepseek-ai__deepseek-v4-flash",
-  "name": "DeepSeek-V4-Flash",
-  "family": "deepseek_v4",
-  "architecture": "DeepseekV4ForCausalLM",
+  "id": "deepseek-ai/DeepSeek-V3-0324",
+  "slug": "deepseek-ai__deepseek-v3-0324",
+  "name": "DeepSeek-V3-0324",
+  "family": "deepseek_v3",
+  "architecture": "DeepseekV3ForCausalLM",
   "license": "mit",
   "modalities": [
     "text"
   ],
-  "paramsB": 158.07,
+  "paramsB": 684.53,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 2353239,
-    "likes": 1565,
-    "lastModified": "2026-06-22T12:12:13.000Z",
+    "downloads": 1082516,
+    "likes": 3132,
+    "lastModified": "2025-03-27T04:01:53.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 4096,
-    "numLayers": 43,
-    "numHeads": 64,
-    "numKVHeads": 1,
-    "headDim": 512,
-    "intermediateSize": 16384,
+    "hiddenSize": 7168,
+    "numLayers": 61,
+    "numHeads": 128,
+    "numKVHeads": 128,
+    "headDim": 56,
+    "intermediateSize": 18432,
     "vocabSize": 129280,
-    "contextLen": 1048576,
+    "contextLen": 163840,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "mla",
@@ -34,15 +34,16 @@
       "scaling": {
         "beta_fast": 32,
         "beta_slow": 1,
-        "factor": 16,
-        "original_max_position_embeddings": 65536,
+        "factor": 40,
+        "mscale": 1,
+        "mscale_all_dim": 1,
+        "original_max_position_embeddings": 4096,
         "type": "yarn"
       }
     },
-    "slidingWindow": 128,
     "moe": {
       "numExperts": 256,
-      "topK": 6,
+      "topK": 8,
       "numSharedExperts": 1
     }
   },
@@ -69,8 +70,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/main/config.json",
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V3-0324/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-22T13:48:57.915Z"
+  "generatedAt": "2026-06-21T12:34:50.765Z"
 }

@@ -11,9 +11,9 @@
   "paramsB": 861.61,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 2948726,
-    "likes": 4957,
-    "lastModified": "2026-06-08T06:02:44.000Z",
+    "downloads": 2421858,
+    "likes": 5017,
+    "lastModified": "2026-06-22T12:12:50.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -72,5 +72,5 @@
     "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:49.515Z"
+  "generatedAt": "2026-06-22T13:48:57.837Z"
 }

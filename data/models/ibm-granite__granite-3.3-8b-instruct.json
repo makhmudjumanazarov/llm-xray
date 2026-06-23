@@ -1,35 +1,35 @@
 {
-  "id": "allenai/OLMo-2-1124-7B-Instruct",
-  "slug": "allenai__olmo-2-1124-7b-instruct",
-  "name": "OLMo-2-1124-7B-Instruct",
-  "family": "olmo2",
-  "architecture": "Olmo2ForCausalLM",
+  "id": "ibm-granite/granite-3.3-8b-instruct",
+  "slug": "ibm-granite__granite-3.3-8b-instruct",
+  "name": "granite-3.3-8b-instruct",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 7.3,
+  "paramsB": 8.17,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 59290,
-    "likes": 50,
-    "lastModified": "2025-01-06T01:02:35.000Z",
+    "downloads": 83178,
+    "likes": 158,
+    "lastModified": "2025-05-12T06:39:42.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 4096,
-    "numLayers": 32,
+    "numLayers": 40,
     "numHeads": 32,
-    "numKVHeads": 32,
+    "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 11008,
-    "vocabSize": 100352,
-    "contextLen": 4096,
+    "intermediateSize": 12800,
+    "vocabSize": 49159,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
-    "attentionType": "mha",
+    "attentionType": "gqa",
     "rope": {
-      "theta": 500000
+      "theta": 10000000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/allenai/OLMo-2-1124-7B-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3.3-8b-instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:58.016Z"
+  "generatedAt": "2026-06-21T12:34:50.942Z"
 }
