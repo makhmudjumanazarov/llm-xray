@@ -8,12 +8,12 @@
   "modalities": [
     "text"
   ],
-  "paramsB": 0,
+  "paramsB": 7.3,
   "dtype": "bfloat16",
   "stats": {
     "downloads": 122429,
     "likes": 134,
-    "lastModified": "2026-01-05T16:23:38.000Z",
+    "lastModified": "2026-06-25T21:41:37.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -102,5 +102,5 @@
     "configUrl": "https://huggingface.co/allenai/Olmo-3-7B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:56.475Z"
+  "generatedAt": "2026-06-26T00:29:10.453Z"
 }
