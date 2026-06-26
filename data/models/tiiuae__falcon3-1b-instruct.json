@@ -1,35 +1,35 @@
 {
-  "id": "tiiuae/Falcon-H1-0.5B-Base",
-  "slug": "tiiuae__falcon-h1-0.5b-base",
-  "name": "Falcon-H1-0.5B-Base",
-  "family": "falcon_h1",
-  "architecture": "FalconH1ForCausalLM",
+  "id": "tiiuae/Falcon3-1B-Instruct",
+  "slug": "tiiuae__falcon3-1b-instruct",
+  "name": "Falcon3-1B-Instruct",
+  "family": "llama",
+  "architecture": "LlamaForCausalLM",
   "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 0.52,
+  "paramsB": 1.67,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 126737,
-    "likes": 17,
-    "lastModified": "2025-07-31T03:51:29.000Z",
+    "downloads": 23567,
+    "likes": 46,
+    "lastModified": "2025-01-10T06:58:42.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 1024,
-    "numLayers": 36,
+    "hiddenSize": 2048,
+    "numLayers": 18,
     "numHeads": 8,
-    "numKVHeads": 2,
-    "headDim": 64,
-    "intermediateSize": 2048,
-    "vocabSize": 32784,
-    "contextLen": 16384,
+    "numKVHeads": 4,
+    "headDim": 256,
+    "intermediateSize": 8192,
+    "vocabSize": 131072,
+    "contextLen": 8192,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 100000000000
+      "theta": 1000042
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/tiiuae/Falcon-H1-0.5B-Base/blob/main/config.json",
+    "configUrl": "https://huggingface.co/tiiuae/Falcon3-1B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:53.377Z"
+  "generatedAt": "2026-06-26T12:37:41.362Z"
 }
