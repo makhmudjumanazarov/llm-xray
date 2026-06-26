@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { TrainingLifecycle } from "@/components/training/TrainingLifecycle";
 import { InferenceJourney } from "@/components/inference/InferenceJourney";
+import { ProcessJourney } from "@/components/processes/ProcessJourney";
 import { EvolutionTeaser } from "@/components/evolution/EvolutionTeaser";
 
 export async function generateMetadata({
@@ -66,6 +67,10 @@ export default async function HomePage({
 
       <div className="mb-10">
         <InferenceJourney dict={dict} />
+      </div>
+
+      <div className="mb-10">
+        <ProcessJourney dict={dict} />
       </div>
 
       <div className="mb-10">

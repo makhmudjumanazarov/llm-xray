@@ -5,7 +5,6 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { pageMetadata, localePath } from "@/core/seo";
 import { graph, learningResourceNode, itemListNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { ExpertToggle } from "@/components/learn/ExpertToggle";
 import { LESSON_REGISTRY } from "@/components/learn/registry";
 import { LessonNav } from "@/components/learn/LessonNav";
 import { LessonExamples } from "@/components/learn/LessonExamples";
@@ -51,7 +50,6 @@ export default async function LearnPage({
           </h1>
           <p className="mt-2 max-w-2xl text-base text-muted">{dict.learn.subtitle}</p>
         </div>
-        <ExpertToggle dict={dict} />
       </div>
 
       {/* Flagship: a REAL small model running in-browser (opt-in, lazy-loaded). */}

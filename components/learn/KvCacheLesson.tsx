@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { useCountUp } from "@/components/ui/useCountUp";
 import { cacheBytes, windowKept } from "@/core/learn/kvcache";
@@ -24,7 +23,7 @@ function fmtBytes(b: number): string {
 }
 
 export function KvCacheLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.kvcache;
   const [step, setStep] = useState(0);
   const [sliding, setSliding] = useState(false);

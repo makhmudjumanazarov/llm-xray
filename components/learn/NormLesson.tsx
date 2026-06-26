@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { rmsnorm, layernorm, mean, rms } from "@/core/learn/norm";
 import { LessonCard } from "./LessonCard";
@@ -63,7 +62,7 @@ function SignedBars({
 }
 
 export function NormLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.norm;
   const [seed, setSeed] = useState(0);
   const [method, setMethod] = useState<"rms" | "layer">("rms");

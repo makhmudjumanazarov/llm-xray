@@ -802,6 +802,85 @@
       }
     }
   },
+  "processes": {
+    "title": "LLM bilan ishlash: training'dan keyin",
+    "subtitle": "Sizda tayyor, ochiq model bor — endi nima? Bular jamoalar mavjud LLM ustida bajaradigan processlar: siqish, moslashtirish, bilim bilan asoslash, fikrlatish, serve qilish va xavfsiz saqlash.",
+    "intro": "Training va inference yuqorida. Bu yerda xom ochiq modelni foydali, joylashtirilgan mahsulotga aylantiradigan amaliy hayot tsikli.",
+    "prev": "Oldingi process",
+    "next": "Keyingi process",
+    "autoplayPlay": "Avto-namoyish",
+    "autoplayStop": "To'xtatish",
+    "stepsGroupLabel": "LLM processlari",
+    "useCaseLabel": "Qachon ishlatiladi",
+    "tradeoffLabel": "Murosa",
+    "objectiveLabel": "Belgilovchi tenglama",
+    "steps": {
+      "quantization": {
+        "title": "Quantization",
+        "tagline": "Vaznlarni siqish",
+        "beginner": "Model sonlarini kamroq bitda saqlash — 16/32 o'rniga 8-bit yoki 4-bit — shunda u ancha kam xotira oladi va tezroq ishlaydi. Yaxshi bajarilsa, sifat deyarli tushmaydi.",
+        "expert": "Yuqori aniqlikdagi vaznlarni kanal yoki guruh bo'yicha masshtab bilan kichik butun-son to'riga moslash (GPTQ, AWQ, GGUF). Post-training quantization qayta o'qitish talab qilmaydi; 4-bit xotirani taxminan to'rt baravar kichraytiradi — ozgina aniqlik yo'qotish evaziga katta tezlik va VRAM yutug'i, ya'ni bitta GPU'ga sig'adi yoki yo'q.",
+        "useCase": "Katta modelni cheklangan VRAM yoki oddiy qurilmada ishga tushirish.",
+        "tradeoff": "Aniqlik pastroq → kichikroq va tezroq, lekin sal sifat tushadi."
+      },
+      "distillation": {
+        "title": "Distillation",
+        "tagline": "Kichikroq modelni o'rgatish",
+        "beginner": "Katta, qobiliyatli 'o'qituvchi' modeldan foydalanib, unga taqlid qiladigan kichik 'o'quvchi'ni o'qitish. O'quvchi arzonroq ishlaydi, lekin o'qituvchining ko'p mahoratini saqlaydi.",
+        "expert": "O'quvchini o'qituvchining yumshoq ehtimollik taqsimotida (va/yoki yashirin holatlarida) o'qitish — vazifa loss'i bilan birga temperatura bilan yumshatilgan o'qituvchi logitlariga KL'ni minimallashtirish. O'quvchi o'qituvchining 'qorong'i bilimini' — klasslarning nisbiy ehtimolliklarini — o'rganadi, faqat yorliqlardan o'qitilgan o'sha o'lchamli model yeta olmaydigan sifatga erishadi.",
+        "useCase": "O'qituvchiga yaqin sifatli tez, arzon model chiqarish.",
+        "tradeoff": "Kichikroq va arzonroq, lekin o'qituvchi bilan cheklangan va uning chiqishi kerak."
+      },
+      "adaptation": {
+        "title": "Adaptation",
+        "tagline": "O'z datangizga moslashtirish",
+        "beginner": "Mavjud ochiq modelni o'z domeningiz yoki vazifangizda fine-tune qilish — ko'pincha LoRA bilan, u butun model o'rniga kichik qo'shimchani o'qitadi, shuning uchun arzon va tez.",
+        "expert": "Domen ma'lumotida continued pretraining yoki instruction/LoRA fine-tuning. LoRA baza W₀'ni muzlatib, past-rankli B·A yangilanishini (~1% parametr) o'rganadi, inferenceda qo'shimcha kechikishsiz qo'shiladi; QLoRA buni 4-bitli baza ustida qiladi. (To'liq manzara uchun yuqoridagi training bo'limiga qarang.)",
+        "useCase": "Umumiy modelni domeningiz yoki uslubingizda ekspert qilish.",
+        "tradeoff": "LoRA bilan arzon, lekin catastrophic forgetting yoki overfitting xavfi bor."
+      },
+      "rag": {
+        "title": "Retrieval-Augmented Generation",
+        "tagline": "Bilimingiz bilan asoslash",
+        "beginner": "Faqat model yodlaganiga tayanish o'rniga — o'z datangizdan tegishli hujjatlarni olib, promptga qo'yish, shunda javoblar dolzarb qoladi va haqiqiy manbalarga havola qiladi.",
+        "expert": "Korpusni vektor ombor (vector store)ga embed qilish; so'rovda o'xshashlik bo'yicha top-k olib, generatsiyani topilgan kontekstga shartlash. Gallyutsinatsiyani kamaytiradi va qayta o'qitmasdan bilimni yangilash imkonini beradi — sifat retriever va chunking'ga bog'liq, faqat LLM'ga emas.",
+        "useCase": "Maxfiy yoki yangi data ustida havolalar bilan javob berish, qayta o'qitishsiz.",
+        "tradeoff": "Qayta o'qitish shart emas, lekin sifat topilganidan oshmaydi."
+      },
+      "agents": {
+        "title": "Agents va tool use",
+        "tagline": "Faqat gapirmasin, harakat qilsin",
+        "beginner": "Modelga vositalar bering — veb-qidiruv, kod ishga tushirgich, kalkulyator, API'lar — va ularni qachon chaqirishni loopda o'zi hal qilsin, shunda u faqat suhbatlashmasdan haqiqiy vazifalarni bajaradi.",
+        "expert": "Vositalarni function-calling sxemalari orqali e'lon qilish; model strukturali chaqiruv chiqaradi, runtime uni bajaradi, natija observe→think→act loopga qaytadi. Ko'p qadamli vazifalar va rejalashtirishga imkon beradi, lekin kechikish, narx va nosozliklar (looplar, yomon chaqiruvlar) qo'shadi — guardrail kerak.",
+        "useCase": "Ko'p qadamli vazifalar: brauzing, kod ishga tushirish, API chaqirish, avtomatlashtirish.",
+        "tradeoff": "Kuchli va avtonom, lekin sekinroq, qimmatroq va boshqarish qiyinroq."
+      },
+      "reasoning": {
+        "title": "Reasoning",
+        "tagline": "Javobdan oldin o'ylash",
+        "beginner": "Model yakuniy javobdan oldin qadamma-qadam 'ovoz chiqarib o'ylasin', yoki bir necha yondashuvni sinab ko'proq hisoblash sarflasin. Sekinroq, lekin qiyin masalalarda ancha aniqroq.",
+        "expert": "Chain-of-thought'ni chaqirib, test-time compute'ni masshtablash (sampling, self-consistency, qidiruv yoki o1/R1 uslubidagi RL bilan o'qitilgan uzun reasoning). Matematika va mantiqda aniqlik fikrlash tokenlari bilan o'sadi — kechikish va narxni to'g'rilikka almashtirasiz, yashirin reasoning yo'llari z bo'yicha marginallashtirasiz.",
+        "useCase": "Qiyin matematika, mantiq, dasturlash va ko'p qadamli masalalar.",
+        "tradeoff": "Aniqroq, lekin ancha ko'p token → sekinroq va qimmatroq."
+      },
+      "serving": {
+        "title": "Serving va optimizatsiya",
+        "tagline": "Tez va katta miqyosda ishga tushirish",
+        "beginner": "Modelni shunday joylashtiring-ki, ko'p foydalanuvchi bir vaqtda unga murojaat qilsin — arzon va tez, so'rovlarni birga batch qiladigan va hisobni qayta ishlatadigan dvigatellar bilan.",
+        "expert": "Production inference dvigatellari (vLLM, TGI) paged KV-cache, continuous batching va speculative decoding (kichik draft model tokenlarni taklif qiladi, katta model tekshiradi) bilan throughput'ni oshiradi va kechikishni kamaytiradi. San'at — kechikish byudjetida tokens/sek/GPU'ni maksimallashtirish.",
+        "useCase": "Yuqori throughput, past kechikishli production deployment.",
+        "tradeoff": "Throughput katta o'sadi, lekin haqiqiy injenerlik va infra murakkabligi bor."
+      },
+      "safety": {
+        "title": "Safety va guardrails",
+        "tagline": "Foydali va zararsiz saqlash",
+        "beginner": "Zararli kirish va chiqishlarni bloklash uchun model atrofiga filtrlar qo'shish va uni stress-test ('red-teaming') qilib, foydalanuvchilardan oldin zaif joylarni topish.",
+        "expert": "Model atrofiga kirish/chiqish moderatsiya klassifikatorlari, system-prompt siyosatlari va rad etish (refusal) o'qitishni qatlash; jailbreak va adversarial promptlarga red-team. Guardrail javobni faqat xavfsizlik-ehtimoli ostonadan past bo'lganda qaytaradi — chuqur himoya, chunki bitta qatlam mukammal emas.",
+        "useCase": "Production ilovalar, tartibga solinadigan sohalar, ommaviy assistentlar.",
+        "tradeoff": "Xavfsizroq, lekin kechikish qo'shishi va ba'zan zararsiz so'rovni ortiqcha rad etishi mumkin."
+      }
+    }
+  },
   "footer": {
     "dataNote": "Arxitektura ma'lumotlari har modelning config.json va safetensors indeksidan to'g'ridan-to'g'ri o'qiladi — vaznlar yuklanmaydi.",
     "language": "Til"

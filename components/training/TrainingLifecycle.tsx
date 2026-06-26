@@ -5,7 +5,6 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 import { LIFECYCLE_STAGES, STAGE_COUNT, type StageId } from "@/core/training/lifecycle";
 import type { AlignmentMethod } from "@/core/training/loop";
-import { ExpertToggle } from "@/components/learn/ExpertToggle";
 import { CapabilityMeter } from "./CapabilityMeter";
 import { StageStepper } from "./StageStepper";
 import { StageDetailPanel } from "./StageDetailPanel";
@@ -71,7 +70,6 @@ export function TrainingLifecycle({ dict, locale }: { dict: Dictionary; locale: 
             {j.loop.intro}
           </p>
         </div>
-        <ExpertToggle dict={dict} />
       </div>
 
       <CapabilityMeter

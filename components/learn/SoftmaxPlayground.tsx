@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { softmaxTemp } from "@/core/inference/run";
 import { LogitsBars } from "@/components/inference/LogitsBars";
 import { BlockMath } from "./Katex";
@@ -19,7 +18,7 @@ const TOKENS = [
 
 export function SoftmaxPlayground({ dict }: { dict: Dictionary }) {
   const [temp, setTemp] = useState(1);
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.softmax;
 
   const probs = useMemo(() => softmaxTemp(TOKENS.map((t) => t.z), temp), [temp]);

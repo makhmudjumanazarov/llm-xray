@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { ROPE_PRESETS, ropeFreqs, rotate } from "@/core/learn/rope";
 import { LessonCard } from "./LessonCard";
@@ -11,7 +10,7 @@ const FORMULA = "\\theta_i = \\mathrm{base}^{-2i/d}, \\qquad q'_i = R(m\\,\\thet
 const HEAD_DIM = 12; // → 6 dimension-pairs
 
 export function RopeLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.rope;
   const [pos, setPos] = useState(8);
   const [presetId, setPresetId] = useState(ROPE_PRESETS[0].id);

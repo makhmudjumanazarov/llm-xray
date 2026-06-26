@@ -171,3 +171,39 @@ export const Globe = make(
     <path d="M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" />
   </>,
 );
+
+// LLM-process glyphs.
+// Quantization — a gauge dialing precision down.
+export const Gauge = make(
+  <>
+    <path d="M12 14 16 9" />
+    <path d="M4 19a8 8 0 1 1 16 0" />
+    <circle cx="12" cy="14" r="1.4" />
+  </>,
+);
+// Agents / tool use — a wrench.
+export const Wrench = make(
+  <path d="M14.5 5.5a3.5 3.5 0 0 0-4.7 4.2L4 15.5 8.5 20l5.8-5.8a3.5 3.5 0 0 0 4.2-4.7l-2.5 2.5-2-2 2.5-2.5z" />,
+);
+// Reasoning — a brain / thought.
+export const Brain = make(
+  <>
+    <path d="M9 4a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 5 11a2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 9 19a2 2 0 0 0 3-1.7V5.7A2 2 0 0 0 9 4Z" />
+    <path d="M15 4a2.5 2.5 0 0 1 2.5 2.5A2.5 2.5 0 0 1 19 11a2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 15 19a2 2 0 0 1-3-1.7" />
+  </>,
+);
+// Serving — a CPU / inference engine.
+export const Cpu = make(
+  <>
+    <rect x="6" y="6" width="12" height="12" rx="1.5" />
+    <rect x="9.5" y="9.5" width="5" height="5" rx="0.5" />
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+  </>,
+);
+// Safety — a shield.
+export const Shield = make(
+  <>
+    <path d="M12 3 5 6v5c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" />
+    <path d="m9 12 2 2 4-4" />
+  </>,
+);

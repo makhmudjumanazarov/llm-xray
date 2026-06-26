@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { useCountUp } from "@/components/ui/useCountUp";
 import { MOE_PRESETS, routerScores, topKIndices, activeFraction } from "@/core/learn/moe";
@@ -14,7 +13,7 @@ const FORMULA =
 const TOKENS = ["The", "cat", "sat", "on", "the", "mat"];
 
 export function MoeLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.moe;
   const [presetId, setPresetId] = useState(MOE_PRESETS[0].id);
   const [hover, setHover] = useState<number | null>(null);

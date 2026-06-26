@@ -5,7 +5,6 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { pageMetadata, localePath } from "@/core/seo";
 import { graph, learningResourceNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { ExpertToggle } from "@/components/learn/ExpertToggle";
 import { EvolutionTimeline } from "@/components/evolution/EvolutionTimeline";
 
 export function generateStaticParams() {
@@ -39,7 +38,6 @@ export default async function EvolutionPage({
           <h1 className="animate-rise font-display text-4xl font-bold tracking-tight text-text">{dict.evolution.title}</h1>
           <p className="mt-2 text-base text-muted">{dict.evolution.subtitle}</p>
         </div>
-        <ExpertToggle dict={dict} />
       </div>
       <EvolutionTimeline dict={dict} locale={locale} />
 

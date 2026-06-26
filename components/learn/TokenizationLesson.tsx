@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { tokenize } from "@/core/learn/tokenize";
 import { LessonCard } from "./LessonCard";
@@ -10,7 +9,7 @@ import { LessonCard } from "./LessonCard";
 type View = "tokens" | "ids" | "merges";
 
 export function TokenizationLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.tokenization;
   const [text, setText] = useState(L.sample);
   const [view, setView] = useState<View>("tokens");
