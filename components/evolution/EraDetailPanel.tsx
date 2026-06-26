@@ -6,7 +6,6 @@ import type { Locale } from "@/i18n/config";
 import { localePath } from "@/core/seo";
 import { lessonForEra } from "@/core/learn/links";
 import type { EraMeta } from "@/core/evolution/timeline";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { BlockMath } from "@/components/learn/Katex";
 import { EraDiagram } from "./EraDiagram";
 import { EraMilestones } from "./EraMilestones";
@@ -37,7 +36,7 @@ function slugLabel(slug: string): string {
 }
 
 export function EraDetailPanel({ dict, locale, era }: { dict: Dictionary; locale: Locale; era: EraMeta }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const ev = dict.evolution;
   const copy = (ev.eras as Record<string, EraCopy>)[era.id];
   const accentVar = `var(${era.accentToken})`;

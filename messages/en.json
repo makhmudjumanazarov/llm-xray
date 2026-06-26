@@ -802,6 +802,85 @@
       }
     }
   },
+  "processes": {
+    "title": "Working with LLMs: Beyond Training",
+    "subtitle": "You have a trained, open model — now what? These are the processes teams run on an existing LLM to shrink it, adapt it, ground it, make it reason, serve it, and keep it safe.",
+    "intro": "Training and inference are above. This walks the practical lifecycle that turns a raw open model into a useful, deployed product.",
+    "prev": "Previous process",
+    "next": "Next process",
+    "autoplayPlay": "Auto-play",
+    "autoplayStop": "Stop",
+    "stepsGroupLabel": "LLM processes",
+    "useCaseLabel": "When to use",
+    "tradeoffLabel": "Trade-off",
+    "objectiveLabel": "Defining equation",
+    "steps": {
+      "quantization": {
+        "title": "Quantization",
+        "tagline": "Shrink the weights",
+        "beginner": "Store the model's numbers in fewer bits — 8-bit or 4-bit instead of 16/32 — so it takes far less memory and runs faster. Done well, quality barely drops.",
+        "expert": "Map high-precision weights to a small integer grid with a per-channel or per-group scale (GPTQ, AWQ, GGUF). Post-training quantization needs no retraining; 4-bit roughly quarters the memory footprint, trading a small accuracy hit for big speed/VRAM wins — the difference between fitting on one GPU or not.",
+        "useCase": "Run a big model on limited VRAM or consumer hardware.",
+        "tradeoff": "Lower precision → smaller and faster, but a slight accuracy drop."
+      },
+      "distillation": {
+        "title": "Distillation",
+        "tagline": "Teach a smaller model",
+        "beginner": "Use a big, capable 'teacher' model to train a small 'student' that mimics it. The student is cheaper to run but keeps much of the teacher's skill.",
+        "expert": "Train the student on the teacher's soft probability distribution (and/or hidden states), minimizing KL to the temperature-softened teacher logits alongside the task loss. The student learns the teacher's 'dark knowledge' — relative class probabilities — reaching quality a same-size model trained from labels alone can't.",
+        "useCase": "Ship a fast, cheap model with near-teacher quality.",
+        "tradeoff": "Smaller and cheaper, but capped by the teacher and needs its outputs."
+      },
+      "adaptation": {
+        "title": "Adaptation",
+        "tagline": "Specialize it to your data",
+        "beginner": "Fine-tune an existing open model on your own domain or task — often with LoRA, which trains a tiny add-on instead of the whole model, so it's cheap and fast.",
+        "expert": "Continued pretraining or instruction/LoRA fine-tuning on domain data. LoRA freezes the base W₀ and learns a low-rank update B·A (~1% of params), merged at inference for zero added latency; QLoRA does it over a 4-bit base. (See the training journey above for the full picture.)",
+        "useCase": "Make a general model expert in your domain or style.",
+        "tradeoff": "Cheap with LoRA, but risks catastrophic forgetting or overfitting."
+      },
+      "rag": {
+        "title": "Retrieval-Augmented Generation",
+        "tagline": "Ground it in your knowledge",
+        "beginner": "Instead of relying only on what the model memorized, fetch relevant documents from your own data and put them in the prompt — so answers stay current and cite real sources.",
+        "expert": "Embed a corpus into a vector store; at query time retrieve top-k by similarity and condition generation on the retrieved context. Cuts hallucination and lets you update knowledge without retraining — quality hinges on the retriever and chunking, not just the LLM.",
+        "useCase": "Answer over private or fresh data with citations, no retraining.",
+        "tradeoff": "No retraining needed, but only as good as what's retrieved."
+      },
+      "agents": {
+        "title": "Agents & Tool Use",
+        "tagline": "Let it act, not just talk",
+        "beginner": "Give the model tools — web search, a code runner, a calculator, APIs — and let it decide when to call them in a loop, so it can do real tasks instead of only chatting.",
+        "expert": "Expose tools via function-calling schemas; the model emits a structured call, the runtime executes it, and the result feeds back in an observe→think→act loop. Enables multi-step tasks and planning, but adds latency, cost, and failure modes (loops, bad calls) that need guardrails.",
+        "useCase": "Multi-step tasks: browse, run code, call APIs, automate.",
+        "tradeoff": "Powerful and autonomous, but slower, costlier, and harder to control."
+      },
+      "reasoning": {
+        "title": "Reasoning",
+        "tagline": "Think before answering",
+        "beginner": "Let the model 'think out loud' step by step before giving its final answer, or spend more compute trying several approaches. It's slower but much more accurate on hard problems.",
+        "expert": "Elicit chain-of-thought and scale test-time compute (sampling, self-consistency, search, or RL-trained long reasoning à la o1/R1). Accuracy on math and logic rises with thinking tokens — you trade latency and cost for correctness, marginalizing over latent reasoning paths z.",
+        "useCase": "Hard math, logic, coding, and multi-step problems.",
+        "tradeoff": "More accurate, but many more tokens → slower and pricier."
+      },
+      "serving": {
+        "title": "Serving & Optimization",
+        "tagline": "Run it fast at scale",
+        "beginner": "Deploy the model so many users can hit it at once, cheaply and quickly — using engines that batch requests together and reuse computation.",
+        "expert": "Production inference engines (vLLM, TGI) use paged KV-cache, continuous batching, and speculative decoding (a small draft model proposes tokens a big model verifies) to raise throughput and cut latency. The art is maximizing tokens/sec/GPU under a latency budget.",
+        "useCase": "High-throughput, low-latency production deployment.",
+        "tradeoff": "Big throughput gains, but real engineering and infra complexity."
+      },
+      "safety": {
+        "title": "Safety & Guardrails",
+        "tagline": "Keep it helpful and harmless",
+        "beginner": "Add filters around the model to block harmful inputs and outputs, and stress-test it ('red-teaming') to find weaknesses before users do.",
+        "expert": "Layer input/output moderation classifiers, system-prompt policies, and refusal training around the model; red-team for jailbreaks and adversarial prompts. A guardrail returns an answer only when the unsafe-probability is below a threshold — defense in depth, since no single layer is perfect.",
+        "useCase": "Production apps, regulated domains, public-facing assistants.",
+        "tradeoff": "Safer, but can add latency and sometimes over-refuse benign requests."
+      }
+    }
+  },
   "footer": {
     "dataNote": "Architecture data is read directly from each model's config.json and safetensors index — no weights downloaded.",
     "language": "Language"

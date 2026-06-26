@@ -5,7 +5,6 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { INFER_STAGES, INFER_STAGE_COUNT, type InferStageId } from "@/core/inference/stages";
 import { tokenizeIllustrative } from "@/core/model/forwardPass";
 import type { SamplingState } from "@/core/inference/run";
-import { ExpertToggle } from "@/components/learn/ExpertToggle";
 import { useInView, usePrefersReducedMotion } from "@/components/training/hooks";
 import { PromptBar } from "./PromptBar";
 import { InferStepper } from "./InferStepper";
@@ -72,7 +71,6 @@ export function InferenceJourney({ dict }: { dict: Dictionary }) {
             {j.bridgeFromTraining}
           </p>
         </div>
-        <ExpertToggle dict={dict} />
       </div>
 
       <div className="mb-5">

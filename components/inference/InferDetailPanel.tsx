@@ -3,7 +3,6 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { InferStageMeta } from "@/core/inference/stages";
 import type { SamplingState } from "@/core/inference/run";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { BlockMath } from "@/components/learn/Katex";
 import { InferDiagram } from "./InferDiagram";
 
@@ -24,7 +23,7 @@ export function InferDetailPanel({
   sampling: SamplingState;
   setSampling: (s: SamplingState) => void;
 }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const j = dict.inference;
   const copy = j.stages[stage.id] as unknown as InferCopy;
   const accentVar = `var(${stage.accentToken})`;

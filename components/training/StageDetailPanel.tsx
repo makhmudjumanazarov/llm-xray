@@ -3,7 +3,6 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 import { type StageMeta, PPO_OBJECTIVE_KATEX } from "@/core/training/lifecycle";
 import type { AlignmentMethod } from "@/core/training/loop";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { BlockMath } from "@/components/learn/Katex";
 import { StageDiagram } from "./StageDiagram";
@@ -46,7 +45,7 @@ export function StageDetailPanel({
   method: AlignmentMethod;
   setMethod: (v: AlignmentMethod) => void;
 }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const j = dict.journey;
   const copy = j.stages[stage.id] as unknown as StageCopy;
   const accentVar = `var(${stage.accentToken})`;

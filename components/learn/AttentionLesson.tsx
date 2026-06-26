@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { useExpertMode } from "@/components/ui/useExpertMode";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { ATTENTION } from "@/core/learn/attention/data";
 import { LessonCard } from "./LessonCard";
@@ -32,7 +31,7 @@ function avgHeads(layer: number[][][]): number[][] {
 }
 
 export function AttentionLesson({ dict }: { dict: Dictionary }) {
-  const expert = useExpertMode((s) => s.expert);
+  const expert = true;
   const L = dict.learn.attention;
   const D = ATTENTION;
   const [exIdx, setExIdx] = useState(0);
