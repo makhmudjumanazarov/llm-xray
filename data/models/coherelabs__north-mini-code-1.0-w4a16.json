@@ -1,47 +1,59 @@
 {
-  "id": "allenai/Olmo-3-7B-Think",
-  "slug": "allenai__olmo-3-7b-think",
-  "name": "Olmo-3-7B-Think",
-  "family": "olmo3",
-  "architecture": "Olmo3ForCausalLM",
+  "id": "CohereLabs/North-Mini-Code-1.0-w4a16",
+  "slug": "coherelabs__north-mini-code-1.0-w4a16",
+  "name": "North-Mini-Code-1.0-w4a16",
+  "family": "cohere2_moe",
+  "architecture": "Cohere2MoeForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 7.3,
+  "paramsB": 30.48,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 60270,
-    "likes": 98,
-    "lastModified": "2026-06-25T21:41:28.000Z",
+    "downloads": 9976,
+    "likes": 38,
+    "lastModified": "2026-06-18T18:46:10.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 4096,
-    "numLayers": 32,
+    "hiddenSize": 2048,
+    "numLayers": 49,
     "numHeads": 32,
-    "numKVHeads": 32,
+    "numKVHeads": 4,
     "headDim": 128,
-    "intermediateSize": 11008,
-    "vocabSize": 100278,
-    "contextLen": 65536,
+    "intermediateSize": 768,
+    "vocabSize": 262144,
+    "contextLen": 500000,
     "activation": "silu",
     "normType": "rmsnorm",
-    "attentionType": "mha",
+    "attentionType": "gqa",
     "rope": {
-      "type": "yarn",
-      "theta": 500000,
-      "scaling": {
-        "attention_factor": 1.2079441541679836,
-        "beta_fast": 32,
-        "beta_slow": 1,
-        "factor": 8,
-        "original_max_position_embeddings": 8192,
-        "rope_type": "yarn"
-      }
+      "theta": 50000
     },
     "slidingWindow": 4096,
+    "moe": {
+      "numExperts": 128,
+      "topK": 8
+    },
     "layerTypes": [
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
@@ -90,8 +102,8 @@
       "id": "post_attn_norm"
     },
     {
-      "kind": "mlp",
-      "id": "mlp"
+      "kind": "moe",
+      "id": "moe"
     },
     {
       "kind": "residual",
@@ -99,8 +111,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/allenai/Olmo-3-7B-Think/blob/main/config.json",
+    "configUrl": "https://huggingface.co/CohereLabs/North-Mini-Code-1.0-w4a16/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-26T00:29:10.509Z"
+  "generatedAt": "2026-06-27T12:22:56.363Z"
 }
