@@ -1,35 +1,35 @@
 {
-  "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
-  "slug": "huggingfacetb__smollm2-1.7b-instruct",
-  "name": "SmolLM2-1.7B-Instruct",
-  "family": "llama",
-  "architecture": "LlamaForCausalLM",
+  "id": "allenai/OLMo-2-0425-1B-Instruct",
+  "slug": "allenai__olmo-2-0425-1b-instruct",
+  "name": "OLMo-2-0425-1B-Instruct",
+  "family": "olmo2",
+  "architecture": "Olmo2ForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 1.71,
+  "paramsB": 1.48,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 132919,
-    "likes": 733,
-    "lastModified": "2025-04-21T20:51:14.000Z",
+    "downloads": 58674,
+    "likes": 57,
+    "lastModified": "2025-04-30T22:32:46.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 2048,
-    "numLayers": 24,
-    "numHeads": 32,
-    "numKVHeads": 32,
-    "headDim": 64,
+    "numLayers": 16,
+    "numHeads": 16,
+    "numKVHeads": 16,
+    "headDim": 128,
     "intermediateSize": 8192,
-    "vocabSize": 49152,
-    "contextLen": 8192,
+    "vocabSize": 100352,
+    "contextLen": 4096,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "mha",
     "rope": {
-      "theta": 130000
+      "theta": 500000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:00.433Z"
+  "generatedAt": "2026-06-28T12:23:15.953Z"
 }
