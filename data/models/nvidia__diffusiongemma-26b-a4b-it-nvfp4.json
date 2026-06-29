@@ -1,63 +1,49 @@
 {
-  "id": "allenai/Olmo-3-7B-Instruct-SFT",
-  "slug": "allenai__olmo-3-7b-instruct-sft",
-  "name": "Olmo-3-7B-Instruct-SFT",
-  "family": "olmo3",
-  "architecture": "Olmo3ForCausalLM",
+  "id": "nvidia/diffusiongemma-26B-A4B-it-NVFP4",
+  "slug": "nvidia__diffusiongemma-26b-a4b-it-nvfp4",
+  "name": "diffusiongemma-26B-A4B-it-NVFP4",
+  "family": "diffusion_gemma",
+  "architecture": "DiffusionGemmaForBlockDiffusion",
   "license": "apache-2.0",
   "modalities": [
-    "text"
+    "text",
+    "image"
   ],
-  "paramsB": 7.3,
+  "paramsB": 14.4,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 213908,
-    "likes": 4,
-    "lastModified": "2026-01-05T16:23:33.000Z",
+    "downloads": 1081430,
+    "likes": 88,
+    "lastModified": "2026-06-11T00:05:07.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 4096,
-    "numLayers": 32,
-    "numHeads": 32,
-    "numKVHeads": 32,
-    "headDim": 128,
-    "intermediateSize": 11008,
-    "vocabSize": 100278,
-    "contextLen": 65536,
-    "activation": "silu",
+    "hiddenSize": 2816,
+    "numLayers": 30,
+    "numHeads": 16,
+    "numKVHeads": 8,
+    "headDim": 256,
+    "intermediateSize": 2112,
+    "vocabSize": 262144,
+    "contextLen": 262144,
+    "activation": "gelu_pytorch_tanh",
     "normType": "rmsnorm",
-    "attentionType": "mha",
-    "rope": {
-      "type": "yarn",
-      "theta": 500000,
-      "scaling": {
-        "attention_factor": 1.2079441541679836,
-        "beta_fast": 32,
-        "beta_slow": 1,
-        "factor": 8,
-        "original_max_position_embeddings": 8192,
-        "rope_type": "yarn"
-      }
+    "attentionType": "gqa",
+    "rope": {},
+    "slidingWindow": 1024,
+    "moe": {
+      "numExperts": 128,
+      "topK": 2
     },
-    "slidingWindow": 4096,
     "layerTypes": [
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
-      "full_attention",
-      "sliding_attention",
-      "sliding_attention",
-      "sliding_attention",
-      "full_attention",
-      "sliding_attention",
       "sliding_attention",
       "sliding_attention",
       "full_attention",
       "sliding_attention",
       "sliding_attention",
-      "sliding_attention",
-      "full_attention",
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
@@ -65,17 +51,32 @@
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
       "full_attention",
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
       "full_attention",
+      "sliding_attention",
+      "sliding_attention",
       "sliding_attention",
       "sliding_attention",
       "sliding_attention",
       "full_attention"
     ]
   },
+  "encoders": [
+    {
+      "kind": "vision",
+      "hiddenSize": 1152,
+      "numLayers": 27,
+      "numHeads": 16,
+      "patchSize": 16
+    }
+  ],
   "blockOps": [
     {
       "kind": "norm",
@@ -90,8 +91,8 @@
       "id": "post_attn_norm"
     },
     {
-      "kind": "mlp",
-      "id": "mlp"
+      "kind": "moe",
+      "id": "moe"
     },
     {
       "kind": "residual",
@@ -99,8 +100,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT/blob/main/config.json",
+    "configUrl": "https://huggingface.co/nvidia/diffusiongemma-26B-A4B-it-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:55.869Z"
+  "generatedAt": "2026-06-29T13:21:35.908Z"
 }
