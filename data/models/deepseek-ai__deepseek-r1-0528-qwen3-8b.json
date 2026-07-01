@@ -1,19 +1,19 @@
 {
-  "id": "Qwen/Qwen3-8B",
-  "slug": "qwen__qwen3-8b",
-  "name": "Qwen3-8B",
+  "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+  "slug": "deepseek-ai__deepseek-r1-0528-qwen3-8b",
+  "name": "DeepSeek-R1-0528-Qwen3-8B",
   "family": "qwen3",
   "architecture": "Qwen3ForCausalLM",
-  "license": "apache-2.0",
+  "license": "mit",
   "modalities": [
     "text"
   ],
   "paramsB": 8.19,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 14359927,
-    "likes": 1171,
-    "lastModified": "2025-07-26T03:49:13.000Z",
+    "downloads": 1165330,
+    "likes": 1079,
+    "lastModified": "2025-05-29T13:13:34.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -24,12 +24,19 @@
     "headDim": 128,
     "intermediateSize": 12288,
     "vocabSize": 151936,
-    "contextLen": 40960,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 1000000
+      "type": "yarn",
+      "theta": 1000000,
+      "scaling": {
+        "rope_type": "yarn",
+        "factor": 4,
+        "original_max_position_embeddings": 32768,
+        "attn_factor": 0.8782488562869419
+      }
     }
   },
   "blockOps": [
@@ -55,8 +62,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json",
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:46.204Z"
+  "generatedAt": "2026-07-01T12:52:28.098Z"
 }
