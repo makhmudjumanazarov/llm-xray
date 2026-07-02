@@ -1,35 +1,35 @@
 {
-  "id": "Qwen/Qwen3-4B",
-  "slug": "qwen__qwen3-4b",
-  "name": "Qwen3-4B",
-  "family": "qwen3",
-  "architecture": "Qwen3ForCausalLM",
+  "id": "ibm-granite/granite-4.1-8b",
+  "slug": "ibm-granite__granite-4.1-8b",
+  "name": "granite-4.1-8b",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 4.02,
+  "paramsB": 8.79,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 12016396,
-    "likes": 644,
-    "lastModified": "2025-07-26T03:46:39.000Z",
+    "downloads": 432773,
+    "likes": 203,
+    "lastModified": "2026-05-04T17:36:29.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 2560,
-    "numLayers": 36,
+    "hiddenSize": 4096,
+    "numLayers": 40,
     "numHeads": 32,
     "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 9728,
-    "vocabSize": 151936,
-    "contextLen": 40960,
+    "intermediateSize": 12800,
+    "vocabSize": 100352,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 1000000
+      "theta": 10000000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/Qwen/Qwen3-4B/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.1-8b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:45.932Z"
+  "generatedAt": "2026-07-02T13:27:01.085Z"
 }
