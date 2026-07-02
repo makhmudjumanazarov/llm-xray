@@ -1,37 +1,36 @@
 {
-  "id": "mistralai/Mistral-7B-Instruct-v0.1",
-  "slug": "mistralai__mistral-7b-instruct-v0.1",
-  "name": "Mistral-7B-Instruct-v0.1",
-  "family": "mistral",
-  "architecture": "MistralForCausalLM",
+  "id": "ibm-granite/granite-4.1-30b",
+  "slug": "ibm-granite__granite-4.1-30b",
+  "name": "granite-4.1-30b",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 7.24,
+  "paramsB": 28.87,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 257786,
-    "likes": 1839,
-    "lastModified": "2025-07-24T16:44:46.000Z",
+    "downloads": 76576,
+    "likes": 134,
+    "lastModified": "2026-05-04T17:31:52.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 4096,
-    "numLayers": 32,
+    "numLayers": 64,
     "numHeads": 32,
     "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 14336,
-    "vocabSize": 32000,
-    "contextLen": 32768,
+    "intermediateSize": 32768,
+    "vocabSize": 100352,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 10000
-    },
-    "slidingWindow": 4096
+      "theta": 50000000
+    }
   },
   "blockOps": [
     {
@@ -56,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.1-30b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:48.076Z"
+  "generatedAt": "2026-07-02T08:40:18.509Z"
 }
