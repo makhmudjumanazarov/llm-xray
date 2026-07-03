@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { locales, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -6,6 +7,7 @@ import { pageMetadata, localePath } from "@/core/seo";
 import { graph, learningResourceNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { EvolutionTimeline } from "@/components/evolution/EvolutionTimeline";
+import { ShareButton } from "@/components/ui/ShareButton";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,7 +21,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return pageMetadata({ locale, path: "/evolution", title: dict.evolution.title, description: dict.evolution.subtitle });
+  return pageMetadata({ locale, path: "/evolution", title: dict.evolution.title, description: dict.evolution.subtitle, ownOgImage: true });
 }
 
 export default async function EvolutionPage({
@@ -38,8 +40,12 @@ export default async function EvolutionPage({
           <h1 className="animate-rise font-display text-4xl font-bold tracking-tight text-text">{dict.evolution.title}</h1>
           <p className="mt-2 text-base text-muted">{dict.evolution.subtitle}</p>
         </div>
+        <ShareButton title={dict.evolution.title} dict={dict} />
       </div>
-      <EvolutionTimeline dict={dict} locale={locale} />
+      {/* Suspense: the timeline reads useSearchParams (?era=) on a prerendered route. */}
+      <Suspense fallback={null}>
+        <EvolutionTimeline dict={dict} locale={locale} />
+      </Suspense>
 
       <JsonLd
         data={graph(

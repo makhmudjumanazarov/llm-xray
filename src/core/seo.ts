@@ -24,7 +24,12 @@ export function buildAlternates(path = ""): NonNullable<Metadata["alternates"]> 
     languages[localeMeta[l].bcp47] = localePath(l, path);
   }
   languages["x-default"] = localePath(defaultLocale, path);
-  return { canonical: localePath(defaultLocale, path), languages };
+  return {
+    canonical: localePath(defaultLocale, path),
+    languages,
+    // Advertise the RSS feed from every page.
+    types: { "application/rss+xml": "/feed.xml" },
+  };
 }
 
 type PageMetaInput = {
@@ -33,10 +38,17 @@ type PageMetaInput = {
   title: string;
   description: string;
   ogTitle?: string;
+  /**
+   * Set when the route ships its own opengraph-image.tsx. Next applies a
+   * file-convention image only if generateMetadata leaves openGraph.images /
+   * twitter.images unset — with the defaults below the colocated file would be
+   * silently ignored (twitter then auto-inherits from openGraph).
+   */
+  ownOgImage?: boolean;
 };
 
 /** Compose a full Metadata object with localized fields + hreflang. */
-export function pageMetadata({ locale, path = "", title, description, ogTitle }: PageMetaInput): Metadata {
+export function pageMetadata({ locale, path = "", title, description, ogTitle, ownOgImage }: PageMetaInput): Metadata {
   return {
     metadataBase: new URL(SITE_URL),
     title,
@@ -51,13 +63,13 @@ export function pageMetadata({ locale, path = "", title, description, ogTitle }:
       locale: localeMeta[locale].og,
       alternateLocale: locales.filter((l) => l !== locale).map((l) => localeMeta[l].og),
       // Resolved against metadataBase → absolute. Served by app/opengraph-image.tsx.
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE_NAME }],
+      ...(ownOgImage ? {} : { images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE_NAME }] }),
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle ?? title,
       description,
-      images: ["/opengraph-image"],
+      ...(ownOgImage ? {} : { images: ["/opengraph-image"] }),
     },
   };
 }

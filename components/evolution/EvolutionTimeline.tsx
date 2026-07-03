@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 import { EVOLUTION_ERAS, ERA_COUNT, type EraId } from "@/core/evolution/timeline";
@@ -27,10 +28,24 @@ export function EvolutionTimeline({ dict, locale }: { dict: Dictionary; locale: 
   const [sectionRef, inView] = useInView("-10% 0px -10% 0px");
   const reduced = usePrefersReducedMotion();
 
+  // Deep links: seed the active era from ?era=<EraId> (requires <Suspense> in
+  // the parent since this route is prerendered).
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const era = searchParams.get("era");
+    const idx = EVOLUTION_ERAS.findIndex((e) => e.id === era);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- URL-driven seed
+    if (idx >= 0) setActiveIndex(idx);
+  }, [searchParams]);
+
   // Manual navigation always pauses autoplay so it never fights the user.
+  // The URL is written ONLY here — never from the autoplay interval, which
+  // would rewrite it every few seconds.
   const select = useCallback((i: number) => {
     setActiveIndex(i);
     setPlaying(false);
+    const id = EVOLUTION_ERAS[i]?.id;
+    if (id) window.history.replaceState(null, "", i === 0 ? window.location.pathname : `?era=${id}`);
   }, []);
 
   const togglePlay = useCallback(() => {

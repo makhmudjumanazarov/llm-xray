@@ -882,6 +882,11 @@
       }
     }
   },
+  "share": {
+    "share": "Ulashish",
+    "copyLink": "Havolani nusxalash",
+    "copied": "Nusxalandi!"
+  },
   "calculator": {
     "title": "LLM VRAM kalkulyatori",
     "subtitle": "Model sizning GPU'ingizda ishlaydimi? Istalgan ochiq model uchun xotirani baholang — og'irliklar kvantizatsiya bo'yicha, KV-kesh kontekst bo'yicha — va qaysi GPU'lar sig'dirishini ko'ring.",
@@ -959,7 +964,8 @@
   },
   "footer": {
     "dataNote": "Arxitektura ma'lumotlari har modelning config.json va safetensors indeksidan to'g'ridan-to'g'ri o'qiladi — vaznlar yuklanmaydi.",
-    "language": "Til"
+    "language": "Til",
+    "rss": "RSS tasma — yangi modellar"
   },
   "faq": {
     "title": "Koʻp soʻraladigan savollar",

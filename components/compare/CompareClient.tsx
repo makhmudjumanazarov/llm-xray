@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import type { Model } from "@/core/model/schema";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { BENCHMARK_METRICS, ARCH_ROWS, type BenchmarkCategory } from "@/core/benchmark/catalog";
 import { params as fmtParams, contextLen, compactNumber } from "@/core/shared/format";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
+import { ShareButton } from "@/components/ui/ShareButton";
 import { ModelPicker } from "./ModelPicker";
 import { BenchmarkRadar } from "./BenchmarkRadar";
 
@@ -55,15 +57,45 @@ export function CompareClient({
   const [selected, setSelected] = useState<string[]>(defaults);
   const [benchView, setBenchView] = useState<BenchView>("table");
 
+  // Seed the selection from a shared permalink (?models=a,b,c&view=radar).
+  // Same reactive pattern as ModelTable; requires <Suspense> in the parent.
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- URL-driven seed */
+    const fromUrl = (searchParams.get("models") ?? "")
+      .split(",")
+      .filter((s) => models.some((m) => m.slug === s));
+    if (fromUrl.length > 0) setSelected(fromUrl);
+    const view = searchParams.get("view");
+    if (view === "radar" || view === "table") setBenchView(view);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [searchParams, models]);
+
+  // Written from handlers (never effects) so seeding and writing can't loop.
+  function writeUrl(nextSelected: string[], nextView: BenchView) {
+    const p = new URLSearchParams();
+    if (nextSelected.join(",") !== defaults.join(",")) p.set("models", nextSelected.join(","));
+    if (nextView !== "table") p.set("view", nextView);
+    const qs = p.toString();
+    window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
+  }
+
   const chosen = useMemo(
     () => selected.map((s) => models.find((m) => m.slug === s)).filter(Boolean) as Model[],
     [selected, models],
   );
 
   function toggle(slug: string) {
-    setSelected((prev) =>
-      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
-    );
+    setSelected((prev) => {
+      const next = prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug];
+      writeUrl(next, benchView);
+      return next;
+    });
+  }
+
+  function changeView(view: BenchView) {
+    setBenchView(view);
+    writeUrl(selected, view);
   }
 
   const cats = dict.compare.categories as Record<string, string>;
@@ -86,15 +118,18 @@ export function CompareClient({
             <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
               {dict.compare.benchmarks}
             </h2>
-            <SegmentedControl<BenchView>
-              value={benchView}
-              onChange={setBenchView}
-              ariaLabel={dict.compare.benchmarks}
-              options={[
-                { value: "table", label: dict.compare.tableView },
-                { value: "radar", label: dict.compare.radarView },
-              ]}
-            />
+            <div className="flex items-center gap-2">
+              <SegmentedControl<BenchView>
+                value={benchView}
+                onChange={changeView}
+                ariaLabel={dict.compare.benchmarks}
+                options={[
+                  { value: "table", label: dict.compare.tableView },
+                  { value: "radar", label: dict.compare.radarView },
+                ]}
+              />
+              <ShareButton title={dict.compare.title} dict={dict} />
+            </div>
           </div>
           {benchView === "radar" ? (
             <BenchmarkRadar models={chosen} dict={dict} />

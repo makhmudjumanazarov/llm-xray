@@ -8,6 +8,7 @@ import { getAllModels } from "@/modules/catalog";
 import { graph, webPageNode, webApplicationNode, faqNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CalculatorClient } from "@/components/calculator/CalculatorClient";
+import { ShareButton } from "@/components/ui/ShareButton";
 import { estimateMemory, kvCacheBytes, type MemoryTextInput } from "@/core/memory/estimate";
 import { weightsBytes } from "@/core/memory/quant";
 import { gib } from "@/core/shared/format";
@@ -29,6 +30,7 @@ export async function generateMetadata({
     path: "/calculator",
     title: dict.calculator.title,
     description: dict.calculator.subtitle,
+    ownOgImage: true,
   });
 }
 
@@ -67,8 +69,14 @@ export default async function CalculatorPage({
 
   return (
     <div className="mx-auto w-full max-w-[1680px] px-5 py-10 md:px-10">
-      <h1 className="font-display text-3xl font-bold tracking-tight text-text">{dict.calculator.title}</h1>
-      <p className="mt-2 mb-8 max-w-2xl text-base text-muted">{dict.calculator.subtitle}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="font-display text-3xl font-bold tracking-tight text-text">{dict.calculator.title}</h1>
+          <p className="mt-2 max-w-2xl text-base text-muted">{dict.calculator.subtitle}</p>
+        </div>
+        <ShareButton title={dict.calculator.title} dict={dict} />
+      </div>
+      <div className="mb-8" />
 
       <Suspense fallback={null}>
         <CalculatorClient models={models} dict={dict} />

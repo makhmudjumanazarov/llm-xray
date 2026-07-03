@@ -9,6 +9,7 @@ import { LESSON_REGISTRY } from "@/components/learn/registry";
 import { LessonNav } from "@/components/learn/LessonNav";
 import { LessonExamples } from "@/components/learn/LessonExamples";
 import { RealInference } from "@/components/learn/RealInference";
+import { ShareButton } from "@/components/ui/ShareButton";
 import { getAllModels } from "@/modules/catalog";
 
 export function generateStaticParams() {
@@ -23,7 +24,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return pageMetadata({ locale, path: "/learn", title: dict.learn.title, description: dict.learn.subtitle });
+  return pageMetadata({ locale, path: "/learn", title: dict.learn.title, description: dict.learn.subtitle, ownOgImage: true });
 }
 
 export default async function LearnPage({
@@ -50,6 +51,7 @@ export default async function LearnPage({
           </h1>
           <p className="mt-2 max-w-2xl text-base text-muted">{dict.learn.subtitle}</p>
         </div>
+        <ShareButton title={dict.learn.title} dict={dict} />
       </div>
 
       {/* Flagship: a REAL small model running in-browser (opt-in, lazy-loaded). */}

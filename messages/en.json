@@ -882,6 +882,11 @@
       }
     }
   },
+  "share": {
+    "share": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied!"
+  },
   "calculator": {
     "title": "LLM VRAM Calculator",
     "subtitle": "Will it run on your GPU? Estimate the memory any tracked open model needs — weights by quantization, KV cache by context — and see which GPUs can hold it.",
@@ -959,7 +964,8 @@
   },
   "footer": {
     "dataNote": "Architecture data is read directly from each model's config.json and safetensors index — no weights downloaded.",
-    "language": "Language"
+    "language": "Language",
+    "rss": "RSS feed — new models"
   },
   "faq": {
     "title": "Frequently asked questions",

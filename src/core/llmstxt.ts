@@ -23,9 +23,9 @@ const CONCEPTS: { name: string; note: string }[] = [
   { name: "Normalization", note: "RMSNorm vs LayerNorm" },
 ];
 
-/** One model bullet: name → architecture facts the engine can quote. */
-function modelLine(m: Model): string {
-  const facts = [
+/** Quotable architecture facts for one model (shared with the RSS feed). */
+export function modelFacts(m: Model): string {
+  return [
     m.family,
     `${m.paramsB}B params`,
     m.text.attentionType.toUpperCase(),
@@ -36,7 +36,11 @@ function modelLine(m: Model): string {
   ]
     .filter(Boolean)
     .join(" · ");
-  return `- [${m.name}](${abs(`/models/${m.slug}`)}): ${facts}`;
+}
+
+/** One model bullet: name → architecture facts the engine can quote. */
+function modelLine(m: Model): string {
+  return `- [${m.name}](${abs(`/models/${m.slug}`)}): ${modelFacts(m)}`;
 }
 
 export function buildLlmsTxt(models: Model[], opts: { full?: boolean } = {}): string {
@@ -76,6 +80,7 @@ export function buildLlmsTxt(models: Model[], opts: { full?: boolean } = {}): st
     lines.push("## Optional");
     lines.push(`- [llms-full.txt](${SITE_URL}/llms-full.txt): the same map with every tracked model listed`);
     lines.push(`- [sitemap.xml](${SITE_URL}/sitemap.xml): all URLs with hreflang alternates`);
+    lines.push(`- [feed.xml](${SITE_URL}/feed.xml): RSS 2.0 feed of new and recently updated models`);
     lines.push("");
   }
 

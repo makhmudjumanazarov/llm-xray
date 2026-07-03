@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { locales, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { pageMetadata, localePath } from "@/core/seo";
+import { pageMetadata, localePath, SITE_URL } from "@/core/seo";
 import { graph, softwareApplicationNode, techArticleNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getAllSlugs, getModelBySlug } from "@/modules/catalog";
@@ -12,6 +12,7 @@ import { lessonForField } from "@/core/learn/links";
 import { ModelExplorer } from "@/components/explorer/ModelExplorer";
 import { HeadGroups } from "@/components/model/HeadGroups";
 import { WillItRun } from "@/components/model/WillItRun";
+import { ShareButton } from "@/components/ui/ShareButton";
 
 // ISR: pre-render known models, render the long tail on-demand, refresh daily.
 export const dynamicParams = true;
@@ -41,6 +42,7 @@ export async function generateMetadata({
     path: `/models/${model.slug}`,
     title: `${model.name} — ${dict.model.architecture}`,
     description: desc,
+    ownOgImage: true,
   });
 }
 
@@ -118,6 +120,7 @@ export default async function ModelPage({
         {t.moe && (
           <span className="rounded bg-aud/15 px-2 py-0.5 font-mono text-xs font-semibold text-aud">MoE</span>
         )}
+        <ShareButton title={model.name} url={`${SITE_URL}${path}`} dict={dict} className="ml-auto" />
       </div>
       <p className="mt-2 font-mono text-sm text-dim">
         {model.id} · {model.architecture} · {model.license}
