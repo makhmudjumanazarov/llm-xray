@@ -9,6 +9,7 @@
     "learn": "Learn",
     "compare": "Compare",
     "evolution": "Evolution",
+    "calculator": "Calculator",
     "github": "GitHub",
     "menu": "Menu"
   },
@@ -879,6 +880,81 @@
         "useCase": "Production apps, regulated domains, public-facing assistants.",
         "tradeoff": "Safer, but can add latency and sometimes over-refuse benign requests."
       }
+    }
+  },
+  "calculator": {
+    "title": "LLM VRAM Calculator",
+    "subtitle": "Will it run on your GPU? Estimate the memory any tracked open model needs — weights by quantization, KV cache by context — and see which GPUs can hold it.",
+    "controls": {
+      "model": "Model",
+      "quantization": "Quantization",
+      "context": "Context length",
+      "batch": "Batch size",
+      "gpu": "GPU",
+      "custom": "Custom",
+      "customVram": "VRAM (GB)"
+    },
+    "verdict": {
+      "fits": "Fits comfortably",
+      "tight": "Barely fits",
+      "no": "Doesn't fit",
+      "usage": "{used} of {total}",
+      "headroom": "{gb} of headroom left",
+      "maxContext": "Fits with up to {ctx} tokens of context",
+      "tryQuant": "Fits at {quant} or smaller",
+      "multiGpu": "Needs ~{n} × {gpu}"
+    },
+    "breakdown": {
+      "title": "Memory breakdown",
+      "weights": "Weights",
+      "kv": "KV cache",
+      "overhead": "Overhead",
+      "total": "Total"
+    },
+    "matrix": {
+      "title": "Across GPUs"
+    },
+    "notes": {
+      "title": "Assumptions",
+      "moe-all-experts": "Mixture-of-Experts: all {n} experts stay resident in memory — top-k routing reduces compute, not VRAM.",
+      "mla-compressed": "MLA caches a compressed latent (~576 values per token per layer) instead of full K/V heads.",
+      "ssm-no-kv": "State-space (Mamba) blocks keep a fixed-size state, so memory does not grow with context length.",
+      "sliding-window": "Sliding-window layers only cache the most recent {w} tokens.",
+      "overhead-model": "Runtime overhead is modeled as 0.75 GB + 5% for CUDA context, buffers and fragmentation.",
+      "disclaimer": "Estimates are ±10%. Real usage varies by runtime (llama.cpp, vLLM, MLX) and settings."
+    },
+    "gpuGroups": {
+      "consumer": "Consumer",
+      "datacenter": "Datacenter",
+      "apple": "Apple Silicon"
+    },
+    "embed": {
+      "title": "Will it run on your GPU?",
+      "quant": "Quantization",
+      "memory": "Est. memory",
+      "atContext": "estimated at {ctx} tokens of context, batch 1",
+      "cta": "Open the full calculator"
+    },
+    "faq": {
+      "title": "VRAM questions, answered",
+      "items": [
+        {
+          "q": "How much VRAM does a 70B model need?",
+          "a": "At Q4_K_M quantization the weights of a 70B model take about {w70q4}, and with KV cache and overhead the practical total at 8K context is around {t70q4} — so it fits a 48 GB card, or two 24 GB GPUs. At FP16 the weights alone are {w70fp16}."
+        },
+        {
+          "q": "What is quantization and how much memory does it save?",
+          "a": "Quantization stores weights with fewer bits. FP16 uses 2 bytes per parameter; Q8_0 about 1.06; Q4_K_M about 0.61 — roughly a 3.3× saving versus FP16 with a small quality loss. An 8B model drops from {w8fp16} of weights to {w8q4}."
+        },
+        {
+          "q": "Why does a long context need more memory?",
+          "a": "The KV cache stores keys and values for every past token, so it grows linearly with context length and batch size. For an 8B-class model (32 layers, 8 KV heads) each 8K tokens of context adds about {kv8at8k} on top of the weights."
+        },
+        {
+          "q": "Can I split a model across multiple GPUs?",
+          "a": "Yes — tensor or pipeline parallelism in runtimes like vLLM spreads the weights and KV cache across cards, and frontier-size open models (400B+) require it. The calculator shows how many GPUs of the selected type the total would need."
+        }
+      ]
     }
   },
   "footer": {

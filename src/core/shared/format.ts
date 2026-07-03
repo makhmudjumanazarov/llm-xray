@@ -23,3 +23,9 @@ export function contextLen(n: number): string {
 export function mmlu(v?: number): string {
   return v == null ? "—" : v.toFixed(1);
 }
+
+/** Bytes → binary gigabytes ("42.4 GB"), matching how GPU VRAM is sized. */
+export function gib(bytes: number, digits = 1): string {
+  if (bytes == null || Number.isNaN(bytes)) return "—";
+  return `${(bytes / 1024 ** 3).toFixed(digits)} GB`;
+}

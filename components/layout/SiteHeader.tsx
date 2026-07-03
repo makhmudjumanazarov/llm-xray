@@ -42,6 +42,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     { href: localePath(locale, "/learn"), label: dict.nav.learn },
     { href: localePath(locale, "/evolution"), label: dict.nav.evolution },
     { href: localePath(locale, "/compare"), label: dict.nav.compare },
+    { href: localePath(locale, "/calculator"), label: dict.nav.calculator },
   ];
   return (
     <header className="glass sticky top-0 z-30 w-full border-x-0 border-t-0">

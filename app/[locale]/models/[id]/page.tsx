@@ -11,6 +11,7 @@ import { params as fmtParams, contextLen, compactNumber } from "@/core/shared/fo
 import { lessonForField } from "@/core/learn/links";
 import { ModelExplorer } from "@/components/explorer/ModelExplorer";
 import { HeadGroups } from "@/components/model/HeadGroups";
+import { WillItRun } from "@/components/model/WillItRun";
 
 // ISR: pre-render known models, render the long tail on-demand, refresh daily.
 export const dynamicParams = true;
@@ -145,6 +146,10 @@ export default async function ModelPage({
         {t.slidingWindow && <Stat k="Sliding window" v={t.slidingWindow} />}
         {t.moe && <Stat k={dict.model.experts} v={`${t.moe.numExperts} (top-${t.moe.topK})`} to={lessonHref("moe")} learnMore={dict.cta.learnMore} />}
         {t.rope?.theta && <Stat k="RoPE θ" v={compactNumber(t.rope.theta)} to={lessonHref("rope")} learnMore={dict.cta.learnMore} />}
+      </div>
+
+      <div className="mt-6">
+        <WillItRun model={model} locale={locale} dict={dict} />
       </div>
 
       {t.numHeads != null && t.numKVHeads != null && (

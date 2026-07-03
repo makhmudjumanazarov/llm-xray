@@ -227,6 +227,28 @@ export function softwareApplicationNode(opts: {
   };
 }
 
+/** A WebApplication node — interactive tools like the VRAM calculator. */
+export function webApplicationNode(opts: {
+  locale: Locale;
+  path: string; // includes the locale prefix
+  name: string;
+  description: string;
+}): JsonLdNode {
+  return {
+    "@type": "WebApplication",
+    "@id": `${abs(opts.path)}#app`,
+    name: opts.name,
+    url: abs(opts.path),
+    description: opts.description,
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Web",
+    inLanguage: localeMeta[opts.locale].bcp47,
+    publisher: { "@id": ORG_ID },
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  };
+}
+
 /** An FAQPage from visible Q&A pairs (the answers must also render on the page). */
 export function faqNode(qas: { q: string; a: string }[]): JsonLdNode {
   return {

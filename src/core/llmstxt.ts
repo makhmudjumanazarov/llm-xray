@@ -59,6 +59,9 @@ export function buildLlmsTxt(models: Model[], opts: { full?: boolean } = {}): st
   lines.push(`- [Compare](${abs("/compare")}): compare models side by side across 12+ architecture and benchmark metrics`);
   lines.push(`- [Learn](${abs("/learn")}): interactive lessons on the mechanics of transformers and LLMs`);
   lines.push(`- [Evolution](${abs("/evolution")}): the path from classical ML to perceptrons, deep learning, CNNs, RNNs, transformers, and modern LLMs`);
+  lines.push(
+    `- [VRAM calculator](${abs("/calculator")}): estimate the GPU memory any tracked model needs — weights by quantization (FP16…Q3_K_M), KV cache by context length — and whether it fits a given GPU`,
+  );
   lines.push("");
 
   lines.push("## Concepts explained (Learn)");

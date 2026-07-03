@@ -9,6 +9,7 @@
     "learn": "O'rganish",
     "compare": "Taqqoslash",
     "evolution": "Evolyutsiya",
+    "calculator": "Kalkulyator",
     "github": "GitHub",
     "menu": "Menyu"
   },
@@ -879,6 +880,81 @@
         "useCase": "Production ilovalar, tartibga solinadigan sohalar, ommaviy assistentlar.",
         "tradeoff": "Xavfsizroq, lekin kechikish qo'shishi va ba'zan zararsiz so'rovni ortiqcha rad etishi mumkin."
       }
+    }
+  },
+  "calculator": {
+    "title": "LLM VRAM kalkulyatori",
+    "subtitle": "Model sizning GPU'ingizda ishlaydimi? Istalgan ochiq model uchun xotirani baholang — og'irliklar kvantizatsiya bo'yicha, KV-kesh kontekst bo'yicha — va qaysi GPU'lar sig'dirishini ko'ring.",
+    "controls": {
+      "model": "Model",
+      "quantization": "Kvantizatsiya",
+      "context": "Kontekst uzunligi",
+      "batch": "Batch hajmi",
+      "gpu": "GPU",
+      "custom": "Boshqa",
+      "customVram": "VRAM (GB)"
+    },
+    "verdict": {
+      "fits": "Bemalol sig'adi",
+      "tight": "Zo'rg'a sig'adi",
+      "no": "Sig'maydi",
+      "usage": "{used} / {total}",
+      "headroom": "Zaxira: {gb}",
+      "maxContext": "{ctx} tokengacha kontekst bilan sig'adi",
+      "tryQuant": "{quant} yoki kichikroqda sig'adi",
+      "multiGpu": "~{n} × {gpu} kerak"
+    },
+    "breakdown": {
+      "title": "Xotira nimadan iborat",
+      "weights": "Og'irliklar",
+      "kv": "KV-kesh",
+      "overhead": "Qo'shimcha xarajat",
+      "total": "Jami"
+    },
+    "matrix": {
+      "title": "Barcha GPU'lar bo'yicha"
+    },
+    "notes": {
+      "title": "Taxminlar",
+      "moe-all-experts": "Mixture-of-Experts: barcha {n} ekspert doimo xotirada turadi — top-k marshrutlash hisob-kitobni tejaydi, VRAM'ni emas.",
+      "mla-compressed": "MLA to'liq K/V head'lar o'rniga siqilgan latentni (~har token, har qatlam uchun 576 qiymat) keshlaydi.",
+      "ssm-no-kv": "State-space (Mamba) bloklari o'zgarmas hajmdagi holatni saqlaydi — xotira kontekst bilan o'smaydi.",
+      "sliding-window": "Sliding-window qatlamlari faqat oxirgi {w} tokenni keshlaydi.",
+      "overhead-model": "Runtime qo'shimcha xarajati 0.75 GB + 5% sifatida modellashtirilgan (CUDA konteksti, buferlar, fragmentatsiya).",
+      "disclaimer": "Baholar ±10%. Haqiqiy sarf runtime (llama.cpp, vLLM, MLX) va sozlamalarga bog'liq."
+    },
+    "gpuGroups": {
+      "consumer": "Uy kompyuterlari uchun",
+      "datacenter": "Data-markaz",
+      "apple": "Apple Silicon"
+    },
+    "embed": {
+      "title": "Sizning GPU'ingizda ishlaydimi?",
+      "quant": "Kvantizatsiya",
+      "memory": "Taxminiy xotira",
+      "atContext": "{ctx} token kontekst, batch 1 uchun baho",
+      "cta": "To'liq kalkulyatorni ochish"
+    },
+    "faq": {
+      "title": "VRAM haqida savollar",
+      "items": [
+        {
+          "q": "70B model uchun qancha VRAM kerak?",
+          "a": "Q4_K_M kvantizatsiyasida 70B model og'irliklari taxminan {w70q4} joy oladi, KV-kesh va qo'shimcha xarajat bilan 8K kontekstda amaliy jami {t70q4} atrofida — ya'ni 48 GB kartaga yoki ikkita 24 GB GPU'ga sig'adi. FP16'da og'irliklarning o'zi {w70fp16}."
+        },
+        {
+          "q": "Kvantizatsiya nima va qancha xotira tejaydi?",
+          "a": "Kvantizatsiya og'irliklarni kamroq bit bilan saqlaydi. FP16 — har parametrga 2 bayt; Q8_0 — taxminan 1.06; Q4_K_M — taxminan 0.61, ya'ni FP16'ga nisbatan ~3.3× tejamkorlik, sifat esa ozgina yo'qoladi. 8B model og'irliklari {w8fp16}'dan {w8q4}'gacha kichrayadi."
+        },
+        {
+          "q": "Nega uzun kontekst ko'proq xotira talab qiladi?",
+          "a": "KV-kesh har bir o'tgan tokenning kalit va qiymatlarini saqlaydi, shuning uchun kontekst uzunligi va batch hajmi bilan chiziqli o'sadi. 8B-sinf model (32 qatlam, 8 KV head) uchun har 8K token kontekst og'irliklar ustiga taxminan {kv8at8k} qo'shadi."
+        },
+        {
+          "q": "Modelni bir nechta GPU'ga bo'lish mumkinmi?",
+          "a": "Ha — vLLM kabi runtime'lardagi tensor yoki pipeline parallelizm og'irliklar va KV-keshni kartalar orasida taqsimlaydi; frontir hajmdagi ochiq modellar (400B+) uchun bu shart. Kalkulyator tanlangan turdagi nechta GPU kerakligini ko'rsatadi."
+        }
+      ]
     }
   },
   "footer": {

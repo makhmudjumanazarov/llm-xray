@@ -9,6 +9,7 @@ import {
   techArticleNode,
   learningResourceNode,
   softwareApplicationNode,
+  webApplicationNode,
   faqNode,
   graph,
 } from "./jsonld";
@@ -63,6 +64,14 @@ describe("jsonld builders", () => {
     const app = softwareApplicationNode({ name: "M", path: "/en/models/m", description: "d", license: "apache-2.0" });
     expect(app["@type"]).toBe("SoftwareApplication");
     expect(app.license).toBe("apache-2.0");
+  });
+
+  it("webApplicationNode is a free utility tied to the org", () => {
+    const app = webApplicationNode({ locale: "en", path: "/en/calculator", name: "n", description: "d" });
+    expect(app["@type"]).toBe("WebApplication");
+    expect(app.applicationCategory).toBe("UtilitiesApplication");
+    expect(app.url).toContain("/en/calculator");
+    expect(app.isAccessibleForFree).toBe(true);
   });
 
   it("webPageNode ties to site + supports CollectionPage", () => {
