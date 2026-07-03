@@ -11,6 +11,7 @@ import { TrainingLifecycle } from "@/components/training/TrainingLifecycle";
 import { InferenceJourney } from "@/components/inference/InferenceJourney";
 import { ProcessJourney } from "@/components/processes/ProcessJourney";
 import { EvolutionTeaser } from "@/components/evolution/EvolutionTeaser";
+import { SectionQuiz } from "@/components/quiz/SectionQuiz";
 
 export async function generateMetadata({
   params,
@@ -61,16 +62,25 @@ export default async function HomePage({
         </div>
       </section>
 
-      <div className="mb-10">
+      <div className="mb-4">
         <TrainingLifecycle dict={dict} locale={locale} />
       </div>
-
       <div className="mb-10">
-        <InferenceJourney dict={dict} />
+        <SectionQuiz sectionId="training" accentToken="--acc2" dict={dict} />
       </div>
 
+      <div className="mb-4">
+        <InferenceJourney dict={dict} />
+      </div>
       <div className="mb-10">
+        <SectionQuiz sectionId="inference" accentToken="--cyan" dict={dict} />
+      </div>
+
+      <div className="mb-4">
         <ProcessJourney dict={dict} />
+      </div>
+      <div className="mb-10">
+        <SectionQuiz sectionId="processes" accentToken="--full" dict={dict} />
       </div>
 
       <div className="mb-10">

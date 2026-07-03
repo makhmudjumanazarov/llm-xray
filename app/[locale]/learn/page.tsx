@@ -10,6 +10,8 @@ import { LessonNav } from "@/components/learn/LessonNav";
 import { LessonExamples } from "@/components/learn/LessonExamples";
 import { RealInference } from "@/components/learn/RealInference";
 import { ShareButton } from "@/components/ui/ShareButton";
+import { SectionQuiz } from "@/components/quiz/SectionQuiz";
+import { ProgressChip } from "@/components/quiz/ProgressChip";
 import { getAllModels } from "@/modules/catalog";
 
 export function generateStaticParams() {
@@ -51,7 +53,10 @@ export default async function LearnPage({
           </h1>
           <p className="mt-2 max-w-2xl text-base text-muted">{dict.learn.subtitle}</p>
         </div>
-        <ShareButton title={dict.learn.title} dict={dict} />
+        <div className="flex items-center gap-2.5">
+          <ProgressChip dict={dict} />
+          <ShareButton title={dict.learn.title} dict={dict} />
+        </div>
       </div>
 
       {/* Flagship: a REAL small model running in-browser (opt-in, lazy-loaded). */}
@@ -73,6 +78,10 @@ export default async function LearnPage({
                 </section>
               );
             })}
+          </div>
+
+          <div className="mt-8">
+            <SectionQuiz sectionId="learn" accentToken="--vis" dict={dict} />
           </div>
 
           {soon.length > 0 && (

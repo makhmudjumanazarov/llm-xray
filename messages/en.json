@@ -882,6 +882,284 @@
       }
     }
   },
+  "quiz": {
+    "testYourself": "Test yourself",
+    "questionsHint": "5 quick questions on this section",
+    "start": "Start the quiz",
+    "questionOf": "Question {i} of {n}",
+    "next": "Next",
+    "seeResults": "See results",
+    "retry": "Try again",
+    "share": "Share score",
+    "copied": "Copied!",
+    "resultTitle": "Your score: {score}/{total}",
+    "resultPerfect": "Perfect score — you really know your LLMs!",
+    "resultGood": "Nice — a solid grasp of the concepts.",
+    "resultTryAgain": "Worth another pass — the section above explains it all.",
+    "bestScore": "Best: {score}/{total}",
+    "progressChip": "{done}/{total} quizzes done",
+    "shareText": "I scored {score}/{total} on the “{section}” quiz at llm-xray {url}",
+    "explainLabel": "Why",
+    "sections": {
+      "training": "How an LLM is trained",
+      "inference": "How an LLM answers",
+      "processes": "Working with LLMs",
+      "evolution": "The evolution of AI",
+      "learn": "Transformer mechanics"
+    },
+    "questions": {
+      "training-pretrain-objective": {
+        "prompt": "What is the training objective during LLM pretraining?",
+        "options": [
+          "Classifying documents by topic",
+          "Predicting the next token in text",
+          "Translating between languages",
+          "Ranking search results"
+        ],
+        "explain": "Pretraining is next-token prediction over huge text corpora — everything else emerges from that simple objective."
+      },
+      "training-data-scale": {
+        "prompt": "Roughly how much text do frontier LLMs pretrain on?",
+        "options": [
+          "A few hundred books",
+          "Millions of tokens",
+          "Trillions of tokens",
+          "Only curated encyclopedias"
+        ],
+        "explain": "Modern frontier models see on the order of 10 trillion+ tokens scraped and filtered from the web, code, and books."
+      },
+      "training-sft-purpose": {
+        "prompt": "What does supervised fine-tuning (SFT) teach a pretrained model?",
+        "options": [
+          "To follow instructions and answer in a helpful format",
+          "To predict the next token",
+          "To compress its weights",
+          "To run faster on GPUs"
+        ],
+        "explain": "SFT shows the model curated prompt→response pairs so it behaves like an assistant rather than a raw text predictor."
+      },
+      "training-rlhf-role": {
+        "prompt": "What role does RLHF / DPO play in training?",
+        "options": [
+          "It adds new knowledge from the web",
+          "It shrinks the model",
+          "It speeds up inference",
+          "It aligns outputs with human preferences"
+        ],
+        "explain": "Preference optimization tunes the model toward answers people rate as helpful and harmless — it adds alignment, not knowledge."
+      },
+      "training-eval-benchmarks": {
+        "prompt": "Why are benchmarks like MMLU run after training?",
+        "options": [
+          "To retrain the tokenizer",
+          "To measure capabilities across many tasks",
+          "To reduce VRAM usage",
+          "To generate more training data"
+        ],
+        "explain": "Benchmarks give a comparable score across knowledge, math, code and reasoning so models can be tracked and compared."
+      },
+      "inference-first-step": {
+        "prompt": "What happens first when you send a prompt to an LLM?",
+        "options": [
+          "The model writes a draft answer",
+          "Logits are sampled",
+          "The text is tokenized into IDs",
+          "The KV cache is cleared to zero"
+        ],
+        "explain": "Everything starts with the tokenizer: text becomes a sequence of integer token IDs the model can embed."
+      },
+      "inference-logits-meaning": {
+        "prompt": "What are logits?",
+        "options": [
+          "Final probabilities",
+          "Raw scores for every vocabulary token, before softmax",
+          "Attention weights",
+          "Compressed embeddings"
+        ],
+        "explain": "The model's last layer outputs one raw score per vocabulary entry; softmax then turns them into probabilities."
+      },
+      "inference-temperature-effect": {
+        "prompt": "What does raising the temperature do?",
+        "options": [
+          "Flattens the distribution — more diverse, riskier picks",
+          "Makes answers more factually accurate",
+          "Shortens the answer",
+          "Increases VRAM usage"
+        ],
+        "explain": "Temperature divides the logits: higher values flatten the distribution, so sampling picks less likely tokens more often."
+      },
+      "inference-kv-cache-why": {
+        "prompt": "Why do runtimes keep a KV cache?",
+        "options": [
+          "To store chat history on disk",
+          "To quantize weights on the fly",
+          "To filter unsafe tokens",
+          "To avoid recomputing attention over past tokens"
+        ],
+        "explain": "Keys and values of every previous position are stored once, so each new token only attends — never recomputes."
+      },
+      "inference-stop-condition": {
+        "prompt": "When does generation stop?",
+        "options": [
+          "After exactly 100 tokens",
+          "When the GPU runs out of memory",
+          "At an end-of-sequence token or a length limit",
+          "When temperature reaches zero"
+        ],
+        "explain": "The loop ends when the model emits its end-of-sequence token or the configured max length is reached."
+      },
+      "processes-quantization-tradeoff": {
+        "prompt": "What is the core trade-off of quantization?",
+        "options": [
+          "Slower inference for better accuracy",
+          "Less memory in exchange for a small quality loss",
+          "More experts but less compute",
+          "Longer context but more VRAM"
+        ],
+        "explain": "Storing weights in 8 or 4 bits shrinks memory ~2–4× versus FP16; aggressive levels start to cost noticeable quality."
+      },
+      "processes-distillation-goal": {
+        "prompt": "What is knowledge distillation?",
+        "options": [
+          "Training a small student model to mimic a large teacher",
+          "Removing unsafe data from a corpus",
+          "Merging two models into one",
+          "Caching frequent answers"
+        ],
+        "explain": "The student learns from the teacher's full output distribution, capturing more signal than raw labels alone."
+      },
+      "processes-rag-benefit": {
+        "prompt": "What does RAG add to a plain LLM?",
+        "options": [
+          "A bigger vocabulary",
+          "Faster token generation",
+          "Fresh external knowledge retrieved at answer time",
+          "Lower GPU temperatures"
+        ],
+        "explain": "Retrieval-augmented generation fetches relevant documents per query, so answers can cite data the model never trained on."
+      },
+      "processes-lora-frozen": {
+        "prompt": "In LoRA fine-tuning, what happens to the base weights W₀?",
+        "options": [
+          "They are retrained from scratch",
+          "They stay frozen; small adapter matrices learn the change",
+          "They are quantized to 1-bit",
+          "They are deleted after training"
+        ],
+        "explain": "LoRA adds a low-rank update B·A on top of frozen weights — training touches ~1% of the parameters."
+      },
+      "processes-guardrails-where": {
+        "prompt": "Where do safety guardrails typically sit?",
+        "options": [
+          "Inside the tokenizer",
+          "Only in the training data",
+          "In the GPU driver",
+          "Around the model — checking inputs and outputs"
+        ],
+        "explain": "Production systems wrap the model with classifiers that screen the incoming prompt and the outgoing answer."
+      },
+      "evolution-perceptron-year": {
+        "prompt": "When was the perceptron introduced?",
+        "options": [
+          "1943",
+          "1958",
+          "1986",
+          "2012"
+        ],
+        "explain": "Frank Rosenblatt's perceptron (1958) was the first trainable artificial neuron — the ancestor of every deep net."
+      },
+      "evolution-alexnet-milestone": {
+        "prompt": "Why was AlexNet (2012) a milestone?",
+        "options": [
+          "It was the first chatbot",
+          "It invented backpropagation",
+          "A GPU-trained CNN that crushed ImageNet",
+          "It was the first open-source LLM"
+        ],
+        "explain": "AlexNet halved the ImageNet error using GPUs and deep convolutions, igniting the deep-learning era."
+      },
+      "evolution-attention-paper": {
+        "prompt": "Which paper introduced the Transformer?",
+        "options": [
+          "“Attention Is All You Need” (2017)",
+          "“ImageNet Classification” (2012)",
+          "“Playing Atari with Deep RL” (2013)",
+          "“BERT” (2018)"
+        ],
+        "explain": "Vaswani et al., 2017 replaced recurrence with self-attention — the architecture every modern LLM builds on."
+      },
+      "evolution-rnn-limitation": {
+        "prompt": "What key limitation of RNNs did transformers solve?",
+        "options": [
+          "They couldn't run on GPUs",
+          "They had too many parameters",
+          "They only worked on images",
+          "Sequential processing — no parallelism, fading long-range memory"
+        ],
+        "explain": "RNNs read one token at a time and forget far-away context; attention sees the whole sequence at once, in parallel."
+      },
+      "evolution-scaling-laws": {
+        "prompt": "What do LLM scaling laws describe?",
+        "options": [
+          "How GPUs heat up under load",
+          "How loss falls predictably as model, data, and compute grow",
+          "How to compress models",
+          "The market price of GPUs"
+        ],
+        "explain": "Kaplan et al. and Chinchilla showed loss follows smooth power laws — making giant training runs a calculated bet."
+      },
+      "learn-softmax-output": {
+        "prompt": "What does softmax turn logits into?",
+        "options": [
+          "Integers",
+          "Attention masks",
+          "A probability distribution that sums to 1",
+          "Gradient updates"
+        ],
+        "explain": "exp() then normalize: every token gets a probability, and they all add up to exactly 1."
+      },
+      "learn-gqa-saves": {
+        "prompt": "What does grouped-query attention (GQA) save?",
+        "options": [
+          "Training data",
+          "KV-cache memory, by sharing K/V heads across query heads",
+          "Vocabulary size",
+          "Disk space for checkpoints"
+        ],
+        "explain": "Many query heads share a few K/V heads, shrinking the KV cache several-fold at long context."
+      },
+      "learn-rope-encodes": {
+        "prompt": "What does RoPE encode?",
+        "options": [
+          "Token positions, as rotations of the Q/K vectors",
+          "Token frequencies",
+          "Grammar rules",
+          "The model's license"
+        ],
+        "explain": "Rotary position embeddings rotate query/key vectors by an angle proportional to position — relative order falls out of the dot product."
+      },
+      "learn-moe-active": {
+        "prompt": "In a Mixture-of-Experts layer, which experts run for each token?",
+        "options": [
+          "All of them",
+          "None — experts are only used in training",
+          "One fixed expert for the whole prompt",
+          "Only the top-k experts a router picks per token"
+        ],
+        "explain": "A router scores all experts per token and activates just the top-k, so compute stays small while capacity is huge."
+      },
+      "learn-tokenizer-units": {
+        "prompt": "What units does a BPE tokenizer split text into?",
+        "options": [
+          "Whole sentences",
+          "Subword pieces from a learned vocabulary",
+          "Individual bits",
+          "Fixed 4-character chunks"
+        ],
+        "explain": "Byte-pair encoding merges frequent character pairs into subwords — common words are one token, rare ones split."
+      }
+    }
+  },
   "share": {
     "share": "Share",
     "copyLink": "Copy link",

@@ -8,6 +8,7 @@ import { graph, learningResourceNode, breadcrumbNode } from "@/core/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { EvolutionTimeline } from "@/components/evolution/EvolutionTimeline";
 import { ShareButton } from "@/components/ui/ShareButton";
+import { SectionQuiz } from "@/components/quiz/SectionQuiz";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -46,6 +47,10 @@ export default async function EvolutionPage({
       <Suspense fallback={null}>
         <EvolutionTimeline dict={dict} locale={locale} />
       </Suspense>
+
+      <div className="mt-6">
+        <SectionQuiz sectionId="evolution" accentToken="--aud" dict={dict} />
+      </div>
 
       <JsonLd
         data={graph(

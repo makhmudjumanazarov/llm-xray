@@ -882,6 +882,284 @@
       }
     }
   },
+  "quiz": {
+    "testYourself": "O'zingizni sinang",
+    "questionsHint": "Ushbu bo'lim bo'yicha 5 ta tezkor savol",
+    "start": "Quizni boshlash",
+    "questionOf": "Savol {i} / {n}",
+    "next": "Keyingi",
+    "seeResults": "Natijalarni ko'rish",
+    "retry": "Yana urinish",
+    "share": "Natijani ulashish",
+    "copied": "Nusxalandi!",
+    "resultTitle": "Natijangiz: {score}/{total}",
+    "resultPerfect": "Mukammal natija — LLM'larni zo'r bilasiz!",
+    "resultGood": "Yaxshi — mavzuni ishonchli tushunasiz.",
+    "resultTryAgain": "Yana bir ko'rib chiqishga arziydi — yuqoridagi bo'lim hammasini tushuntiradi.",
+    "bestScore": "Eng yaxshi: {score}/{total}",
+    "progressChip": "{done}/{total} quiz bajarildi",
+    "shareText": "llm-xray'dagi “{section}” quizida {score}/{total} to'pladim {url}",
+    "explainLabel": "Nega",
+    "sections": {
+      "training": "LLM qanday o'qitiladi",
+      "inference": "LLM qanday javob beradi",
+      "processes": "LLM'lar bilan ishlash",
+      "evolution": "AI evolyutsiyasi",
+      "learn": "Transformer mexanikasi"
+    },
+    "questions": {
+      "training-pretrain-objective": {
+        "prompt": "LLM oldindan o'qitish (pretraining) paytida maqsad nima?",
+        "options": [
+          "Hujjatlarni mavzu bo'yicha tasniflash",
+          "Matndagi keyingi tokenni bashorat qilish",
+          "Tillar orasida tarjima qilish",
+          "Qidiruv natijalarini saralash"
+        ],
+        "explain": "Pretraining — ulkan matn korpuslarida keyingi tokenni bashorat qilish; qolgan hamma qobiliyat shu oddiy maqsaddan o'sib chiqadi."
+      },
+      "training-data-scale": {
+        "prompt": "Ilg'or LLM'lar taxminan qancha matnda oldindan o'qitiladi?",
+        "options": [
+          "Bir necha yuz kitob",
+          "Millionlab token",
+          "Trillionlab token",
+          "Faqat saralangan ensiklopediyalar"
+        ],
+        "explain": "Zamonaviy modellar web, kod va kitoblardan 10+ trillion token ko'radi."
+      },
+      "training-sft-purpose": {
+        "prompt": "Supervised fine-tuning (SFT) modelga nimani o'rgatadi?",
+        "options": [
+          "Ko'rsatmalarga amal qilib, foydali formatda javob berishni",
+          "Keyingi tokenni bashorat qilishni",
+          "O'z og'irliklarini siqishni",
+          "GPU'da tezroq ishlashni"
+        ],
+        "explain": "SFT modelga tanlangan «so'rov → javob» juftliklarini ko'rsatadi — u oddiy matn bashoratchisi emas, assistent kabi ishlaydi."
+      },
+      "training-rlhf-role": {
+        "prompt": "RLHF / DPO o'qitishda qanday rol o'ynaydi?",
+        "options": [
+          "Webdan yangi bilim qo'shadi",
+          "Modelni kichraytiradi",
+          "Inference'ni tezlashtiradi",
+          "Javoblarni inson afzalliklariga moslaydi"
+        ],
+        "explain": "Afzallik optimizatsiyasi modelni odamlar foydali va xavfsiz deb baholagan javoblarga yo'naltiradi — bu bilim emas, moslashuv."
+      },
+      "training-eval-benchmarks": {
+        "prompt": "O'qitishdan keyin MMLU kabi benchmarklar nega ishga tushiriladi?",
+        "options": [
+          "Tokenizer'ni qayta o'qitish uchun",
+          "Ko'plab vazifalar bo'yicha qobiliyatlarni o'lchash uchun",
+          "VRAM sarfini kamaytirish uchun",
+          "Ko'proq o'quv ma'lumoti yaratish uchun"
+        ],
+        "explain": "Benchmarklar bilim, matematika, kod va mulohazani solishtirma baholaydi — modellarni taqqoslash mumkin bo'ladi."
+      },
+      "inference-first-step": {
+        "prompt": "LLM'ga so'rov yuborganingizda birinchi nima sodir bo'ladi?",
+        "options": [
+          "Model javob qoralamasini yozadi",
+          "Logitlar tanlanadi",
+          "Matn token ID'lariga bo'linadi",
+          "KV-kesh nolga tushiriladi"
+        ],
+        "explain": "Hammasi tokenizer'dan boshlanadi: matn model o'qiy oladigan butun sonli token ID'lari ketma-ketligiga aylanadi."
+      },
+      "inference-logits-meaning": {
+        "prompt": "Logitlar nima?",
+        "options": [
+          "Yakuniy ehtimolliklar",
+          "Softmax'dan oldin lug'atdagi har token uchun xom ballar",
+          "Attention og'irliklari",
+          "Siqilgan embeddinglar"
+        ],
+        "explain": "Modelning oxirgi qatlami lug'atning har bir elementi uchun bitta xom ball chiqaradi; softmax ularni ehtimolga aylantiradi."
+      },
+      "inference-temperature-effect": {
+        "prompt": "Temperaturani oshirish nima qiladi?",
+        "options": [
+          "Taqsimotni tekislaydi — tanlov xilma-xilroq va tavakkalroq",
+          "Javoblarni faktik aniqroq qiladi",
+          "Javobni qisqartiradi",
+          "VRAM sarfini oshiradi"
+        ],
+        "explain": "Temperatura logitlarni bo'ladi: u qancha yuqori bo'lsa, taqsimot shuncha tekis va kam ehtimolli tokenlar tez-tez tanlanadi."
+      },
+      "inference-kv-cache-why": {
+        "prompt": "Runtime'lar nega KV-kesh saqlaydi?",
+        "options": [
+          "Chat tarixini diskda saqlash uchun",
+          "Og'irliklarni jonli kvantlash uchun",
+          "Xavfli tokenlarni filtrlash uchun",
+          "O'tgan tokenlar uchun attention'ni qayta hisoblamaslik uchun"
+        ],
+        "explain": "Barcha o'tgan pozitsiyalarning kalit va qiymatlari bir marta saqlanadi — har yangi token ularni faqat o'qiydi."
+      },
+      "inference-stop-condition": {
+        "prompt": "Generatsiya qachon to'xtaydi?",
+        "options": [
+          "Roppa-rosa 100 tokendan keyin",
+          "GPU xotirasi tugaganda",
+          "Ketma-ketlik tugash tokenida yoki uzunlik limitida",
+          "Temperatura nolga yetganda"
+        ],
+        "explain": "Sikl model o'zining EOS-tokenini chiqarganda yoki sozlangan maksimal uzunlikka yetganda tugaydi."
+      },
+      "processes-quantization-tradeoff": {
+        "prompt": "Kvantizatsiyaning asosiy kelishuvi (trade-off) nima?",
+        "options": [
+          "Aniqlik evaziga sekinroq inference",
+          "Ozgina sifat yo'qotish evaziga kamroq xotira",
+          "Ko'proq ekspert, kamroq hisob",
+          "Uzunroq kontekst, ko'proq VRAM"
+        ],
+        "explain": "Og'irliklarni 8 yoki 4 bitda saqlash xotirani FP16'ga nisbatan ~2–4 barobar siqadi; agressiv darajalar sifatga sezilarli ta'sir qiladi."
+      },
+      "processes-distillation-goal": {
+        "prompt": "Bilim distillatsiyasi nima?",
+        "options": [
+          "Kichik «shogird» modelni katta «ustoz»ga taqlid qilishga o'rgatish",
+          "Korpusdan xavfli ma'lumotlarni olib tashlash",
+          "Ikki modelni bittaga birlashtirish",
+          "Tez-tez so'raladigan javoblarni keshlash"
+        ],
+        "explain": "Shogird ustozning to'liq chiqish taqsimotidan o'rganadi — oddiy javob belgilaridan ko'ra ko'proq signal oladi."
+      },
+      "processes-rag-benefit": {
+        "prompt": "RAG oddiy LLM'ga nima qo'shadi?",
+        "options": [
+          "Kattaroq lug'at",
+          "Tezroq token generatsiyasi",
+          "Javob paytida izlab topiladigan yangi tashqi bilim",
+          "Pastroq GPU harorati"
+        ],
+        "explain": "Retrieval-augmented generation har so'rovga mos hujjatlarni tortib keladi — javob model o'qimagan ma'lumotlarga tayana oladi."
+      },
+      "processes-lora-frozen": {
+        "prompt": "LoRA fine-tuning'da asosiy og'irliklar W₀ bilan nima bo'ladi?",
+        "options": [
+          "Ular noldan qayta o'qitiladi",
+          "Ular muzlatiladi; o'zgarishni kichik adapter matritsalari o'rganadi",
+          "Ular 1 bitgacha kvantlanadi",
+          "O'qitishdan keyin o'chiriladi"
+        ],
+        "explain": "LoRA muzlatilgan og'irliklar ustiga past rangli B·A tuzatmasini qo'shadi — parametrlarning ~1% gina o'qitiladi."
+      },
+      "processes-guardrails-where": {
+        "prompt": "Xavfsizlik guardrail'lari odatda qayerda turadi?",
+        "options": [
+          "Tokenizer ichida",
+          "Faqat o'quv ma'lumotlarida",
+          "GPU drayverida",
+          "Model atrofida — kirish va chiqishni tekshiradi"
+        ],
+        "explain": "Ishlab chiqarish tizimlari modelni kiruvchi so'rov va chiquvchi javobni tekshiradigan klassifikatorlar bilan o'raydi."
+      },
+      "evolution-perceptron-year": {
+        "prompt": "Perseptron qachon taqdim etilgan?",
+        "options": [
+          "1943",
+          "1958",
+          "1986",
+          "2012"
+        ],
+        "explain": "Frank Rosenblattning perseptroni (1958) — birinchi o'qitiladigan sun'iy neyron, barcha chuqur tarmoqlarning ajdodi."
+      },
+      "evolution-alexnet-milestone": {
+        "prompt": "AlexNet (2012) nega burilish nuqtasi bo'ldi?",
+        "options": [
+          "Birinchi chatbot edi",
+          "Backpropagation'ni ixtiro qildi",
+          "GPU'da o'qitilgan CNN ImageNet'ni yakson qildi",
+          "Birinchi ochiq kodli LLM edi"
+        ],
+        "explain": "AlexNet GPU va chuqur konvolyutsiyalar bilan ImageNet xatosini ikki baravar kamaytirib, chuqur o'rganish davrini boshlab berdi."
+      },
+      "evolution-attention-paper": {
+        "prompt": "Transformerni qaysi maqola taqdim etgan?",
+        "options": [
+          "«Attention Is All You Need» (2017)",
+          "«ImageNet Classification» (2012)",
+          "«Playing Atari with Deep RL» (2013)",
+          "«BERT» (2018)"
+        ],
+        "explain": "Vaswani va boshqalar (2017) rekurrensiyani self-attention bilan almashtirdi — barcha zamonaviy LLM'lar shu arxitekturaga qurilgan."
+      },
+      "evolution-rnn-limitation": {
+        "prompt": "Transformerlar RNN'larning qaysi asosiy cheklovini hal qildi?",
+        "options": [
+          "Ular GPU'da ishlamasdi",
+          "Parametrlari juda ko'p edi",
+          "Faqat tasvirlar bilan ishlardi",
+          "Ketma-ket ishlash — parallellik yo'q, uzoq kontekst unutiladi"
+        ],
+        "explain": "RNN har qadamda bitta token o'qiydi va uzoq kontekstni yo'qotadi; attention butun ketma-ketlikni birdan va parallel ko'radi."
+      },
+      "evolution-scaling-laws": {
+        "prompt": "LLM masshtablash qonunlari nimani tavsiflaydi?",
+        "options": [
+          "GPU'lar yuk ostida qanday qizishini",
+          "Model, ma'lumot va hisob o'sishi bilan loss qanday bashoratli kamayishini",
+          "Modellarni qanday siqishni",
+          "GPU'larning bozor narxini"
+        ],
+        "explain": "Kaplan et al. va Chinchilla loss silliq daraja qonunlariga bo'ysunishini ko'rsatdi — ulkan o'qitishlar hisoblangan garovga aylandi."
+      },
+      "learn-softmax-output": {
+        "prompt": "Softmax logitlarni nimaga aylantiradi?",
+        "options": [
+          "Butun sonlarga",
+          "Attention maskalariga",
+          "Yig'indisi 1 bo'lgan ehtimollik taqsimotiga",
+          "Gradient yangilanishlariga"
+        ],
+        "explain": "exp() va normalizatsiya: har token ehtimollik oladi va ularning yig'indisi roppa-rosa 1 bo'ladi."
+      },
+      "learn-gqa-saves": {
+        "prompt": "Grouped-query attention (GQA) nimani tejaydi?",
+        "options": [
+          "O'quv ma'lumotlarini",
+          "K/V head'larni query head'lar orasida bo'lishish orqali KV-kesh xotirasini",
+          "Lug'at hajmini",
+          "Checkpoint'lar uchun disk joyini"
+        ],
+        "explain": "Ko'p query head bir nechta K/V head'ni bo'lishadi — uzun kontekstda KV-kesh bir necha barobar kichrayadi."
+      },
+      "learn-rope-encodes": {
+        "prompt": "RoPE nimani kodlaydi?",
+        "options": [
+          "Token pozitsiyalarini — Q/K vektorlarining aylanishi sifatida",
+          "Token chastotalarini",
+          "Grammatika qoidalarini",
+          "Model litsenziyasini"
+        ],
+        "explain": "Rotary pozitsion embeddinglar query/key vektorlarini pozitsiyaga proporsional burchakka buradi — nisbiy tartib skalyar ko'paytmadan kelib chiqadi."
+      },
+      "learn-moe-active": {
+        "prompt": "Mixture-of-Experts qatlamida har token uchun qaysi ekspertlar ishlaydi?",
+        "options": [
+          "Hammasi birdan",
+          "Hech biri — ekspertlar faqat o'qitishda kerak",
+          "Butun so'rov uchun bitta doimiy ekspert",
+          "Router har token uchun tanlagan top-k ekspertlargina"
+        ],
+        "explain": "Router har token uchun barcha ekspertlarni baholab, faqat top-k'ni ishga tushiradi — hisob kichik, sig'im ulkan."
+      },
+      "learn-tokenizer-units": {
+        "prompt": "BPE tokenizer matnni qanday birliklarga bo'ladi?",
+        "options": [
+          "Butun gaplarga",
+          "O'rganilgan lug'atdagi subword bo'laklarga",
+          "Alohida bitlarga",
+          "4 belgilik qat'iy bo'laklarga"
+        ],
+        "explain": "Byte-pair encoding tez-tez uchraydigan belgi juftlarini subword'larga birlashtiradi: keng tarqalgan so'zlar bitta token, kamyoblari bo'linadi."
+      }
+    }
+  },
   "share": {
     "share": "Ulashish",
     "copyLink": "Havolani nusxalash",
