@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
@@ -8,7 +8,14 @@ import { pageMetadata, SITE_NAME } from "@/core/seo";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Analytics } from "@/components/seo/Analytics";
 import { graph, organizationNode, websiteNode } from "@/core/jsonld";
+
+// Dark-theme browser chrome; matches the manifest theme_color.
+export const viewport: Viewport = {
+  themeColor: "#0a0e1a",
+  colorScheme: "dark",
+};
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -64,6 +71,7 @@ export default async function LocaleLayout({
         <SiteHeader locale={locale} dict={dict} />
         <main className="flex-1 w-full">{children}</main>
         <SiteFooter dict={dict} />
+        <Analytics />
       </body>
     </html>
   );

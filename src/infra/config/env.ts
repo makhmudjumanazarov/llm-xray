@@ -14,6 +14,10 @@ const schema = z.object({
   // otherwise the db path falls back to embedded PGlite at PGLITE_DIR.
   DATABASE_URL: z.string().optional(),
   PGLITE_DIR: z.string().default(".pglite"),
+  // Optional cookieless analytics (Umami). Documented here for completeness;
+  // components read process.env.NEXT_PUBLIC_* directly (they can't import infra).
+  NEXT_PUBLIC_UMAMI_URL: z.string().url().optional(),
+  NEXT_PUBLIC_UMAMI_ID: z.string().optional(),
 });
 
 export const env = schema.parse(process.env);

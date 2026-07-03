@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { questionsForSection, type QuizSectionId } from "@/core/quiz/bank";
 import { scoreAnswers } from "@/core/quiz/progress";
+import { trackEvent } from "@/components/seo/analytics";
 import { useMounted } from "@/components/training/hooks";
 import { Trophy } from "@/components/ui/icons";
 import { useQuizProgress, useHydrateProgress } from "./progressStore";
@@ -67,6 +68,7 @@ export function SectionQuiz({
     }
     const { correct, total } = scoreAnswers(questions, answers);
     record(sectionId, correct, total);
+    trackEvent("quiz_complete", { section: sectionId, score: correct, total });
     setPhase("result");
   };
 
