@@ -14,7 +14,7 @@
   "stats": {
     "downloads": 1429137,
     "likes": 90,
-    "lastModified": "2026-06-11T00:05:07.000Z",
+    "lastModified": "2026-07-04T17:57:49.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -103,5 +103,5 @@
     "configUrl": "https://huggingface.co/nvidia/diffusiongemma-26B-A4B-it-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-29T13:21:35.908Z"
+  "generatedAt": "2026-07-04T18:53:55.722Z"
 }
