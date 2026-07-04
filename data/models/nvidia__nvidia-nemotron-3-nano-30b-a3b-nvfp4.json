@@ -1,28 +1,28 @@
 {
-  "id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
-  "slug": "nvidia__nvidia-nemotron-3-super-120b-a12b-bf16",
-  "name": "NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+  "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4",
+  "slug": "nvidia__nvidia-nemotron-3-nano-30b-a3b-nvfp4",
+  "name": "NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4",
   "family": "nemotron_h",
   "architecture": "NemotronHForCausalLM",
   "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 123.61,
+  "paramsB": 18.24,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 1271375,
-    "likes": 395,
-    "lastModified": "2026-04-29T16:15:40.000Z",
+    "downloads": 1094976,
+    "likes": 163,
+    "lastModified": "2026-03-15T04:27:10.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 4096,
-    "numLayers": 88,
+    "hiddenSize": 2688,
+    "numLayers": 52,
     "numHeads": 32,
     "numKVHeads": 2,
     "headDim": 128,
-    "intermediateSize": 2688,
+    "intermediateSize": 1856,
     "vocabSize": 131072,
     "contextLen": 262144,
     "activation": "silu",
@@ -33,8 +33,8 @@
       "partialRotaryFactor": 1
     },
     "moe": {
-      "numExperts": 512,
-      "topK": 22,
+      "numExperts": 128,
+      "topK": 6,
       "numSharedExperts": 1
     }
   },
@@ -61,8 +61,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/blob/main/config.json",
+    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-26T12:37:41.994Z"
+  "generatedAt": "2026-07-04T08:21:38.943Z"
 }
