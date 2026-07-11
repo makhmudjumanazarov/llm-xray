@@ -1,7 +1,7 @@
 {
-  "id": "HuggingFaceTB/SmolLM2-360M-Instruct",
-  "slug": "huggingfacetb__smollm2-360m-instruct",
-  "name": "SmolLM2-360M-Instruct",
+  "id": "HuggingFaceTB/SmolLM2-360M",
+  "slug": "huggingfacetb__smollm2-360m",
+  "name": "SmolLM2-360M",
   "family": "llama",
   "architecture": "LlamaForCausalLM",
   "license": "apache-2.0",
@@ -11,9 +11,9 @@
   "paramsB": 0.36,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 280249,
-    "likes": 202,
-    "lastModified": "2025-09-22T20:44:35.000Z",
+    "downloads": 99794,
+    "likes": 113,
+    "lastModified": "2025-02-06T10:34:16.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:59.094Z"
+  "generatedAt": "2026-07-11T12:51:49.196Z"
 }

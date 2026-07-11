@@ -1,36 +1,37 @@
 {
-  "id": "microsoft/phi-4",
-  "slug": "microsoft__phi-4",
-  "name": "phi-4",
-  "family": "phi3",
-  "architecture": "Phi3ForCausalLM",
+  "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+  "slug": "deepseek-ai__deepseek-r1-distill-qwen-32b",
+  "name": "DeepSeek-R1-Distill-Qwen-32B",
+  "family": "qwen2",
+  "architecture": "Qwen2ForCausalLM",
   "license": "mit",
   "modalities": [
     "text"
   ],
-  "paramsB": 14.66,
+  "paramsB": 32.76,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 891808,
-    "likes": 2274,
-    "lastModified": "2025-11-24T16:57:37.000Z",
+    "downloads": 972098,
+    "likes": 1576,
+    "lastModified": "2025-02-24T03:31:29.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 5120,
-    "numLayers": 40,
+    "numLayers": 64,
     "numHeads": 40,
-    "numKVHeads": 10,
+    "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 17920,
-    "vocabSize": 100352,
-    "contextLen": 16384,
+    "intermediateSize": 27648,
+    "vocabSize": 152064,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 250000
-    }
+      "theta": 1000000
+    },
+    "slidingWindow": 131072
   },
   "blockOps": [
     {
@@ -55,8 +56,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/microsoft/phi-4/blob/main/config.json",
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:51.003Z"
+  "generatedAt": "2026-07-11T12:51:49.064Z"
 }
