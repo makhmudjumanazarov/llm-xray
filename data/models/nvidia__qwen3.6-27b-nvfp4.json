@@ -1,30 +1,30 @@
 {
-  "id": "nvidia/Qwen3.6-35B-A3B-NVFP4",
-  "slug": "nvidia__qwen3.6-35b-a3b-nvfp4",
-  "name": "Qwen3.6-35B-A3B-NVFP4",
-  "family": "qwen3_5_moe",
-  "architecture": "Qwen3_5MoeForConditionalGeneration",
+  "id": "nvidia/Qwen3.6-27B-NVFP4",
+  "slug": "nvidia__qwen3.6-27b-nvfp4",
+  "name": "Qwen3.6-27B-NVFP4",
+  "family": "qwen3_5",
+  "architecture": "Qwen3_5ForConditionalGeneration",
   "license": "apache-2.0",
   "modalities": [
     "text",
     "image",
     "video"
   ],
-  "paramsB": 18.68,
+  "paramsB": 18.16,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 8493956,
-    "likes": 460,
-    "lastModified": "2026-06-12T21:32:12.000Z",
+    "downloads": 1018548,
+    "likes": 351,
+    "lastModified": "2026-06-30T14:40:07.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 2048,
-    "numLayers": 40,
-    "numHeads": 16,
-    "numKVHeads": 2,
+    "hiddenSize": 5120,
+    "numLayers": 64,
+    "numHeads": 24,
+    "numKVHeads": 4,
     "headDim": 256,
-    "intermediateSize": 8192,
+    "intermediateSize": 17408,
     "vocabSize": 248320,
     "contextLen": 262144,
     "activation": "silu",
@@ -33,11 +33,31 @@
     "rope": {
       "partialRotaryFactor": 0.25
     },
-    "moe": {
-      "numExperts": 256,
-      "topK": 8
-    },
     "layerTypes": [
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
       "linear_attention",
       "linear_attention",
       "linear_attention",
@@ -102,8 +122,8 @@
       "id": "post_attn_norm"
     },
     {
-      "kind": "moe",
-      "id": "moe"
+      "kind": "mlp",
+      "id": "mlp"
     },
     {
       "kind": "residual",
@@ -111,8 +131,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/nvidia/Qwen3.6-35B-A3B-NVFP4/blob/main/config.json",
+    "configUrl": "https://huggingface.co/nvidia/Qwen3.6-27B-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:02.308Z"
+  "generatedAt": "2026-07-13T08:44:46.724Z"
 }
