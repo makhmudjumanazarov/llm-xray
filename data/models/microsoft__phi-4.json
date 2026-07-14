@@ -12,8 +12,8 @@
   "dtype": "bfloat16",
   "stats": {
     "downloads": 845980,
-    "likes": 2276,
-    "lastModified": "2025-11-24T16:57:37.000Z",
+    "likes": 2275,
+    "lastModified": "2026-07-14T14:22:25.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -58,5 +58,5 @@
     "configUrl": "https://huggingface.co/microsoft/phi-4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:51.003Z"
+  "generatedAt": "2026-07-14T18:59:37.187Z"
 }
