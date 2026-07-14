@@ -11,7 +11,7 @@
   "paramsB": 7.22,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 891907,
+    "downloads": 926369,
     "likes": 1104,
     "lastModified": "2024-10-12T13:20:18.000Z",
     "benchmarks": {
@@ -61,5 +61,5 @@
     "configUrl": "https://huggingface.co/tiiuae/falcon-7b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-07-14T01:19:17.865Z"
+  "generatedAt": "2026-07-14T07:45:03.560Z"
 }
