@@ -15,7 +15,7 @@
   "stats": {
     "downloads": 2304871,
     "likes": 532,
-    "lastModified": "2026-05-08T03:33:34.000Z",
+    "lastModified": "2026-07-13T22:33:54.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -130,5 +130,5 @@
     "configUrl": "https://huggingface.co/nvidia/Gemma-4-31B-IT-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:02.576Z"
+  "generatedAt": "2026-07-14T01:19:20.410Z"
 }
