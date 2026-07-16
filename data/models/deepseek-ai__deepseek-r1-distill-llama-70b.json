@@ -1,41 +1,28 @@
 {
-  "id": "meta-llama/Llama-3.1-8B-Instruct",
-  "slug": "meta-llama__llama-3.1-8b-instruct",
-  "name": "Llama-3.1-8B-Instruct",
+  "id": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+  "slug": "deepseek-ai__deepseek-r1-distill-llama-70b",
+  "name": "DeepSeek-R1-Distill-Llama-70B",
   "family": "llama",
   "architecture": "LlamaForCausalLM",
-  "license": "llama3.1",
+  "license": "mit",
   "modalities": [
     "text"
   ],
-  "paramsB": 8.03,
+  "paramsB": 70.55,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 8221617,
-    "likes": 6313,
-    "lastModified": "2024-09-25T17:00:57.000Z",
-    "benchmarks": {
-      "mmlu": 68,
-      "gsm8k": 84.5,
-      "math": 47.2,
-      "humaneval": 72.6,
-      "mbpp": 69.4,
-      "arc_c": 60,
-      "hellaswag": 80,
-      "winogrande": 74,
-      "truthfulqa": 54,
-      "gpqa": 30.4,
-      "bbh": 64.2,
-      "ifeval": 80.4
-    }
+    "downloads": 955905,
+    "likes": 785,
+    "lastModified": "2025-02-24T03:31:15.000Z",
+    "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 4096,
-    "numLayers": 32,
-    "numHeads": 32,
+    "hiddenSize": 8192,
+    "numLayers": 80,
+    "numHeads": 64,
     "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 14336,
+    "intermediateSize": 28672,
     "vocabSize": 128256,
     "contextLen": 131072,
     "activation": "silu",
@@ -46,8 +33,8 @@
       "theta": 500000,
       "scaling": {
         "factor": 8,
-        "low_freq_factor": 1,
         "high_freq_factor": 4,
+        "low_freq_factor": 1,
         "original_max_position_embeddings": 8192,
         "rope_type": "llama3"
       }
@@ -76,9 +63,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/blob/main/config.json",
-    "gated": true,
-    "note": "gated upstream; metadata via ungated mirror"
+    "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B/blob/main/config.json",
+    "gated": false
   },
-  "generatedAt": "2026-07-16T07:53:16.979Z"
+  "generatedAt": "2026-07-16T07:53:18.931Z"
 }
