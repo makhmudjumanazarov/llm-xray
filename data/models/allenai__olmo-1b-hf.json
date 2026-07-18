@@ -1,19 +1,19 @@
 {
-  "id": "allenai/OLMoE-1B-7B-0125-Instruct",
-  "slug": "allenai__olmoe-1b-7b-0125-instruct",
-  "name": "OLMoE-1B-7B-0125-Instruct",
-  "family": "olmoe",
-  "architecture": "OlmoeForCausalLM",
+  "id": "allenai/OLMo-1B-hf",
+  "slug": "allenai__olmo-1b-hf",
+  "name": "OLMo-1B-hf",
+  "family": "olmo",
+  "architecture": "OlmoForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 6.92,
-  "dtype": "bfloat16",
+  "paramsB": 1.18,
+  "dtype": "float32",
   "stats": {
-    "downloads": 144221,
-    "likes": 68,
-    "lastModified": "2025-02-04T16:47:15.000Z",
+    "downloads": 62685,
+    "likes": 29,
+    "lastModified": "2024-08-14T17:49:51.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -22,18 +22,14 @@
     "numHeads": 16,
     "numKVHeads": 16,
     "headDim": 128,
-    "intermediateSize": 1024,
+    "intermediateSize": 8192,
     "vocabSize": 50304,
-    "contextLen": 4096,
+    "contextLen": 2048,
     "activation": "silu",
-    "normType": "rmsnorm",
+    "normType": "layernorm",
     "attentionType": "mha",
     "rope": {
       "theta": 10000
-    },
-    "moe": {
-      "numExperts": 64,
-      "topK": 8
     }
   },
   "blockOps": [
@@ -50,8 +46,8 @@
       "id": "post_attn_norm"
     },
     {
-      "kind": "moe",
-      "id": "moe"
+      "kind": "mlp",
+      "id": "mlp"
     },
     {
       "kind": "residual",
@@ -59,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/allenai/OLMo-1B-hf/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:57.728Z"
+  "generatedAt": "2026-07-18T12:46:43.057Z"
 }
