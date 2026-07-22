@@ -1,28 +1,28 @@
 {
-  "id": "Qwen/Qwen2.5-3B-Instruct",
-  "slug": "qwen__qwen2.5-3b-instruct",
-  "name": "Qwen2.5-3B-Instruct",
+  "id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "slug": "qwen__qwen2.5-0.5b-instruct",
+  "name": "Qwen2.5-0.5B-Instruct",
   "family": "qwen2",
   "architecture": "Qwen2ForCausalLM",
-  "license": "other",
+  "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 3.09,
+  "paramsB": 0.49,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 5895242,
-    "likes": 539,
-    "lastModified": "2024-09-25T12:33:00.000Z",
+    "downloads": 5211122,
+    "likes": 561,
+    "lastModified": "2024-09-25T12:32:56.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 2048,
-    "numLayers": 36,
-    "numHeads": 16,
+    "hiddenSize": 896,
+    "numLayers": 24,
+    "numHeads": 14,
     "numKVHeads": 2,
-    "headDim": 128,
-    "intermediateSize": 11008,
+    "headDim": 64,
+    "intermediateSize": 4864,
     "vocabSize": 151936,
     "contextLen": 32768,
     "activation": "silu",
@@ -56,8 +56,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:46.467Z"
+  "generatedAt": "2026-07-22T08:06:19.329Z"
 }
