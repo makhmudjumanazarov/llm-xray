@@ -11,9 +11,9 @@
   "paramsB": 31.58,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 1059758,
-    "likes": 787,
-    "lastModified": "2026-03-15T04:25:53.000Z",
+    "downloads": 1000729,
+    "likes": 812,
+    "lastModified": "2026-07-23T02:20:56.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -64,5 +64,5 @@
     "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:03.878Z"
+  "generatedAt": "2026-08-19T12:20:56.236Z"
 }
