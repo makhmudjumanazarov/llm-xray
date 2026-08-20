@@ -11,7 +11,7 @@
   "paramsB": 31.58,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 1000729,
+    "downloads": 998855,
     "likes": 812,
     "lastModified": "2026-07-23T02:20:56.000Z",
     "benchmarks": {}
