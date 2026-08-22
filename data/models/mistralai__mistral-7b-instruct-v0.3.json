@@ -11,7 +11,7 @@
   "paramsB": 7.25,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 3576934,
+    "downloads": 3527438,
     "likes": 2824,
     "lastModified": "2025-12-03T12:13:48.000Z",
     "benchmarks": {
@@ -71,5 +71,5 @@
     "configUrl": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-08-22T06:19:45.554Z"
+  "generatedAt": "2026-08-22T12:15:46.319Z"
 }
