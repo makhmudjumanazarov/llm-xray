@@ -13,7 +13,7 @@
   "stats": {
     "downloads": 1321021,
     "likes": 429,
-    "lastModified": "2026-05-01T16:54:19.000Z",
+    "lastModified": "2026-08-24T16:15:11.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -64,5 +64,5 @@
     "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:03.314Z"
+  "generatedAt": "2026-08-24T18:22:37.890Z"
 }
