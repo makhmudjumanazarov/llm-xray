@@ -13,7 +13,7 @@
   "stats": {
     "downloads": 1023913,
     "likes": 423,
-    "lastModified": "2026-08-24T23:48:09.000Z",
+    "lastModified": "2026-08-25T15:48:50.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -64,5 +64,5 @@
     "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-08-25T00:35:29.305Z"
+  "generatedAt": "2026-08-25T18:21:53.268Z"
 }
