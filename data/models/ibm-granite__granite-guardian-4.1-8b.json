@@ -13,7 +13,7 @@
   "stats": {
     "downloads": 78526,
     "likes": 35,
-    "lastModified": "2026-04-29T14:48:23.000Z",
+    "lastModified": "2026-08-26T18:07:35.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -58,5 +58,5 @@
     "configUrl": "https://huggingface.co/ibm-granite/granite-guardian-4.1-8b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-08-17T12:19:24.432Z"
+  "generatedAt": "2026-08-26T19:29:48.307Z"
 }
