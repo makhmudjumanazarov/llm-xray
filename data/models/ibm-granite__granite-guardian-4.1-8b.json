@@ -11,9 +11,9 @@
   "paramsB": 8.38,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 78526,
+    "downloads": 67622,
     "likes": 37,
-    "lastModified": "2026-08-26T18:07:35.000Z",
+    "lastModified": "2026-08-27T15:08:53.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -58,5 +58,5 @@
     "configUrl": "https://huggingface.co/ibm-granite/granite-guardian-4.1-8b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-08-26T19:29:48.307Z"
+  "generatedAt": "2026-08-28T17:49:59.603Z"
 }
