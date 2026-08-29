@@ -13,9 +13,9 @@
   "paramsB": 18.68,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 11211376,
+    "downloads": 11253159,
     "likes": 572,
-    "lastModified": "2026-06-12T21:32:12.000Z",
+    "lastModified": "2026-08-29T02:26:14.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -114,5 +114,5 @@
     "configUrl": "https://huggingface.co/nvidia/Qwen3.6-35B-A3B-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:02.308Z"
+  "generatedAt": "2026-08-29T11:54:21.055Z"
 }
