@@ -13,7 +13,7 @@
   "stats": {
     "downloads": 1186756,
     "likes": 319,
-    "lastModified": "2026-06-26T23:49:20.000Z",
+    "lastModified": "2026-08-30T19:25:54.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -141,5 +141,5 @@
     "configUrl": "https://huggingface.co/nvidia/GLM-5.2-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-07-16T13:15:58.111Z"
+  "generatedAt": "2026-08-30T20:13:02.307Z"
 }
