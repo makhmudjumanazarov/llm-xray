@@ -1,35 +1,35 @@
 {
-  "id": "HuggingFaceTB/SmolLM2-360M",
-  "slug": "huggingfacetb__smollm2-360m",
-  "name": "SmolLM2-360M",
+  "id": "tiiuae/Falcon3-7B-Base",
+  "slug": "tiiuae__falcon3-7b-base",
+  "name": "Falcon3-7B-Base",
   "family": "llama",
   "architecture": "LlamaForCausalLM",
-  "license": "apache-2.0",
+  "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 0.36,
+  "paramsB": 7.46,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 403104,
-    "likes": 126,
-    "lastModified": "2025-02-06T10:34:16.000Z",
+    "downloads": 13323,
+    "likes": 40,
+    "lastModified": "2024-12-17T16:23:16.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 960,
-    "numLayers": 32,
-    "numHeads": 15,
-    "numKVHeads": 5,
-    "headDim": 64,
-    "intermediateSize": 2560,
-    "vocabSize": 49152,
-    "contextLen": 8192,
+    "hiddenSize": 3072,
+    "numLayers": 28,
+    "numHeads": 12,
+    "numKVHeads": 4,
+    "headDim": 256,
+    "intermediateSize": 23040,
+    "vocabSize": 131072,
+    "contextLen": 32768,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 100000
+      "theta": 1000042
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M/blob/main/config.json",
+    "configUrl": "https://huggingface.co/tiiuae/Falcon3-7B-Base/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-07-11T12:51:49.196Z"
+  "generatedAt": "2026-08-31T12:02:25.249Z"
 }

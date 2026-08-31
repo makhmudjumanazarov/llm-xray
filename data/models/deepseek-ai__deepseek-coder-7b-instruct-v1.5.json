@@ -1,35 +1,35 @@
 {
-  "id": "HuggingFaceTB/SmolLM2-1.7B",
-  "slug": "huggingfacetb__smollm2-1.7b",
-  "name": "SmolLM2-1.7B",
+  "id": "deepseek-ai/deepseek-coder-7b-instruct-v1.5",
+  "slug": "deepseek-ai__deepseek-coder-7b-instruct-v1.5",
+  "name": "deepseek-coder-7b-instruct-v1.5",
   "family": "llama",
   "architecture": "LlamaForCausalLM",
-  "license": "apache-2.0",
+  "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 1.71,
+  "paramsB": 6.91,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 314626,
-    "likes": 159,
-    "lastModified": "2025-02-06T10:31:23.000Z",
+    "downloads": 813709,
+    "likes": 160,
+    "lastModified": "2024-02-05T03:38:36.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 2048,
-    "numLayers": 24,
+    "hiddenSize": 4096,
+    "numLayers": 30,
     "numHeads": 32,
     "numKVHeads": 32,
-    "headDim": 64,
-    "intermediateSize": 8192,
-    "vocabSize": 49152,
-    "contextLen": 8192,
+    "headDim": 128,
+    "intermediateSize": 11008,
+    "vocabSize": 102400,
+    "contextLen": 4096,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "mha",
     "rope": {
-      "theta": 130000
+      "theta": 10000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B/blob/main/config.json",
+    "configUrl": "https://huggingface.co/deepseek-ai/deepseek-coder-7b-instruct-v1.5/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:59.879Z"
+  "generatedAt": "2026-08-31T12:02:25.150Z"
 }
