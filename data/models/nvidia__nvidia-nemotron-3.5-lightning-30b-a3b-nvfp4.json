@@ -13,7 +13,7 @@
   "stats": {
     "downloads": 1321195,
     "likes": 404,
-    "lastModified": "2026-08-24T23:45:48.000Z",
+    "lastModified": "2026-09-10T14:41:52.000Z",
     "benchmarks": {}
   },
   "text": {
@@ -64,5 +64,5 @@
     "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-08-29T11:54:21.124Z"
+  "generatedAt": "2026-09-10T15:24:02.804Z"
 }

@@ -12,7 +12,7 @@
   "dtype": "bfloat16",
   "stats": {
     "downloads": 10210137,
-    "likes": 1589,
+    "likes": 1588,
     "lastModified": "2025-01-12T02:10:10.000Z",
     "benchmarks": {
       "mmlu": 74.2,
@@ -72,5 +72,5 @@
     "configUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-09-10T10:11:21.912Z"
+  "generatedAt": "2026-09-10T15:24:01.968Z"
 }
