@@ -11,7 +11,7 @@
   "paramsB": 46.7,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 235912,
+    "downloads": 229054,
     "likes": 4726,
     "lastModified": "2025-07-24T16:41:06.000Z",
     "benchmarks": {
@@ -75,5 +75,5 @@
     "configUrl": "https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-09-10T01:54:02.269Z"
+  "generatedAt": "2026-09-10T10:11:21.973Z"
 }
