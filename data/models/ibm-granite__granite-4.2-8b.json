@@ -1,35 +1,35 @@
 {
-  "id": "ibm-granite/granite-4.1-30b",
-  "slug": "ibm-granite__granite-4.1-30b",
-  "name": "granite-4.1-30b",
+  "id": "ibm-granite/granite-4.2-8b",
+  "slug": "ibm-granite__granite-4.2-8b",
+  "name": "granite-4.2-8b",
   "family": "granite",
   "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 28.87,
+  "paramsB": 8.79,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 609216,
-    "likes": 146,
-    "lastModified": "2026-05-04T17:31:52.000Z",
+    "downloads": 61710,
+    "likes": 77,
+    "lastModified": "2026-09-04T21:02:25.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 4096,
-    "numLayers": 64,
+    "numLayers": 40,
     "numHeads": 32,
     "numKVHeads": 8,
     "headDim": 128,
-    "intermediateSize": 32768,
+    "intermediateSize": 12800,
     "vocabSize": 100352,
     "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 50000000
+      "theta": 10000000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/ibm-granite/granite-4.1-30b/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-4.2-8b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-07-02T08:40:18.509Z"
+  "generatedAt": "2026-09-15T10:37:13.371Z"
 }
