@@ -1,37 +1,36 @@
 {
-  "id": "Qwen/Qwen2.5-3B-Instruct",
-  "slug": "qwen__qwen2.5-3b-instruct",
-  "name": "Qwen2.5-3B-Instruct",
-  "family": "qwen2",
-  "architecture": "Qwen2ForCausalLM",
+  "id": "tiiuae/Falcon-H1-1.5B-Base",
+  "slug": "tiiuae__falcon-h1-1.5b-base",
+  "name": "Falcon-H1-1.5B-Base",
+  "family": "falcon_h1",
+  "architecture": "FalconH1ForCausalLM",
   "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 3.09,
+  "paramsB": 1.55,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 4103322,
-    "likes": 586,
-    "lastModified": "2024-09-25T12:33:00.000Z",
+    "downloads": 11558,
+    "likes": 3,
+    "lastModified": "2025-07-31T03:54:55.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 2048,
-    "numLayers": 36,
-    "numHeads": 16,
+    "numLayers": 24,
+    "numHeads": 8,
     "numKVHeads": 2,
     "headDim": 128,
-    "intermediateSize": 11008,
-    "vocabSize": 151936,
-    "contextLen": 32768,
+    "intermediateSize": 4608,
+    "vocabSize": 65536,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
     "rope": {
-      "theta": 1000000
-    },
-    "slidingWindow": 32768
+      "theta": 100000000000
+    }
   },
   "blockOps": [
     {
@@ -56,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/tiiuae/Falcon-H1-1.5B-Base/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:46.467Z"
+  "generatedAt": "2026-10-01T11:59:22.598Z"
 }
