@@ -1,30 +1,30 @@
 {
-  "id": "tiiuae/Falcon-H1-0.5B-Base",
-  "slug": "tiiuae__falcon-h1-0.5b-base",
-  "name": "Falcon-H1-0.5B-Base",
+  "id": "tiiuae/Falcon-H1-3B-Instruct",
+  "slug": "tiiuae__falcon-h1-3b-instruct",
+  "name": "Falcon-H1-3B-Instruct",
   "family": "falcon_h1",
   "architecture": "FalconH1ForCausalLM",
   "license": "other",
   "modalities": [
     "text"
   ],
-  "paramsB": 0.52,
+  "paramsB": 3.15,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 62955,
-    "likes": 17,
-    "lastModified": "2025-07-31T03:51:29.000Z",
+    "downloads": 14851,
+    "likes": 15,
+    "lastModified": "2025-07-31T03:59:30.000Z",
     "benchmarks": {}
   },
   "text": {
-    "hiddenSize": 1024,
-    "numLayers": 36,
-    "numHeads": 8,
+    "hiddenSize": 2560,
+    "numLayers": 32,
+    "numHeads": 10,
     "numKVHeads": 2,
-    "headDim": 64,
-    "intermediateSize": 2048,
-    "vocabSize": 32784,
-    "contextLen": 16384,
+    "headDim": 128,
+    "intermediateSize": 6144,
+    "vocabSize": 65537,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
     "attentionType": "gqa",
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/tiiuae/Falcon-H1-0.5B-Base/blob/main/config.json",
+    "configUrl": "https://huggingface.co/tiiuae/Falcon-H1-3B-Instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:12:53.377Z"
+  "generatedAt": "2026-10-04T11:28:02.681Z"
 }
