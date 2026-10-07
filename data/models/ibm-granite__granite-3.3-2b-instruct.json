@@ -1,35 +1,35 @@
 {
-  "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
-  "slug": "huggingfacetb__smollm2-1.7b-instruct",
-  "name": "SmolLM2-1.7B-Instruct",
-  "family": "llama",
-  "architecture": "LlamaForCausalLM",
+  "id": "ibm-granite/granite-3.3-2b-instruct",
+  "slug": "ibm-granite__granite-3.3-2b-instruct",
+  "name": "granite-3.3-2b-instruct",
+  "family": "granite",
+  "architecture": "GraniteForCausalLM",
   "license": "apache-2.0",
   "modalities": [
     "text"
   ],
-  "paramsB": 1.71,
+  "paramsB": 2.53,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 201197,
-    "likes": 762,
-    "lastModified": "2025-04-21T20:51:14.000Z",
+    "downloads": 152209,
+    "likes": 87,
+    "lastModified": "2025-05-08T15:01:59.000Z",
     "benchmarks": {}
   },
   "text": {
     "hiddenSize": 2048,
-    "numLayers": 24,
+    "numLayers": 40,
     "numHeads": 32,
-    "numKVHeads": 32,
+    "numKVHeads": 8,
     "headDim": 64,
     "intermediateSize": 8192,
-    "vocabSize": 49152,
-    "contextLen": 8192,
+    "vocabSize": 49159,
+    "contextLen": 131072,
     "activation": "silu",
     "normType": "rmsnorm",
-    "attentionType": "mha",
+    "attentionType": "gqa",
     "rope": {
-      "theta": 130000
+      "theta": 10000000
     }
   },
   "blockOps": [
@@ -55,8 +55,8 @@
     }
   ],
   "source": {
-    "configUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/blob/main/config.json",
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3.3-2b-instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-06-19T07:13:00.433Z"
+  "generatedAt": "2026-10-07T12:14:00.247Z"
 }
