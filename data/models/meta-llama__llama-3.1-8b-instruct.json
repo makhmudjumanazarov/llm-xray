@@ -11,8 +11,8 @@
   "paramsB": 8.03,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 6065265,
-    "likes": 8315,
+    "downloads": 6015326,
+    "likes": 8320,
     "lastModified": "2024-09-25T17:00:57.000Z",
     "benchmarks": {
       "mmlu": 68,
@@ -80,5 +80,5 @@
     "gated": true,
     "note": "gated upstream; metadata via ungated mirror"
   },
-  "generatedAt": "2026-10-10T03:08:25.633Z"
+  "generatedAt": "2026-10-10T11:31:06.727Z"
 }
