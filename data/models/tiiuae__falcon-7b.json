@@ -12,7 +12,7 @@
   "dtype": "bfloat16",
   "stats": {
     "downloads": 315783,
-    "likes": 1108,
+    "likes": 1109,
     "lastModified": "2024-10-12T13:20:18.000Z",
     "benchmarks": {
       "mmlu": 27.8,
@@ -61,5 +61,5 @@
     "configUrl": "https://huggingface.co/tiiuae/falcon-7b/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-10-12T13:46:52.799Z"
+  "generatedAt": "2026-10-12T23:54:48.215Z"
 }
