@@ -12,7 +12,7 @@
   "dtype": "bfloat16",
   "stats": {
     "downloads": 169196,
-    "likes": 202,
+    "likes": 205,
     "lastModified": "2024-06-25T08:37:17.000Z",
     "benchmarks": {
       "mmlu": 58.3,
@@ -83,5 +83,5 @@
     "configUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V2-Lite/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-10-13T13:06:08.810Z"
+  "generatedAt": "2026-10-13T22:02:55.416Z"
 }
