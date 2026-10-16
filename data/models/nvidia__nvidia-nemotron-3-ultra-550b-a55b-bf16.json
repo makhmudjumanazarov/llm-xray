@@ -1,0 +1,68 @@
+{
+  "id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+  "slug": "nvidia__nvidia-nemotron-3-ultra-550b-a55b-bf16",
+  "name": "NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+  "family": "nemotron_h",
+  "architecture": "NemotronHForCausalLM",
+  "license": "other",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 560.52,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 956936,
+    "likes": 367,
+    "lastModified": "2026-08-24T23:47:18.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 8192,
+    "numLayers": 0,
+    "numHeads": 64,
+    "numKVHeads": 2,
+    "headDim": 128,
+    "intermediateSize": 5120,
+    "vocabSize": 131072,
+    "contextLen": 262144,
+    "activation": "silu",
+    "normType": "layernorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000,
+      "partialRotaryFactor": 1
+    },
+    "moe": {
+      "numExperts": 512,
+      "topK": 22,
+      "numSharedExperts": 1
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-10-16T10:17:14.571Z"
+}
