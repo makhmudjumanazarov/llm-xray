@@ -10,8 +10,8 @@
   ],
   "paramsB": 0.09,
   "stats": {
-    "downloads": 1765254,
-    "likes": 658,
+    "downloads": 1707439,
+    "likes": 660,
     "lastModified": "2024-02-19T11:09:53.000Z",
     "benchmarks": {}
   },
@@ -54,5 +54,5 @@
     "configUrl": "https://huggingface.co/distilbert/distilgpt2/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-10-23T02:22:23.540Z"
+  "generatedAt": "2026-10-23T10:39:11.131Z"
 }
