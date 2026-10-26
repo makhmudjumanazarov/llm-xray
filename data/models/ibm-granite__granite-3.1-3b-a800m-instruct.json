@@ -1,0 +1,66 @@
+{
+  "id": "ibm-granite/granite-3.1-3b-a800m-instruct",
+  "slug": "ibm-granite__granite-3.1-3b-a800m-instruct",
+  "name": "granite-3.1-3b-a800m-instruct",
+  "family": "granitemoe",
+  "architecture": "GraniteMoeForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.3,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 47796,
+    "likes": 32,
+    "lastModified": "2025-01-31T04:05:57.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 1536,
+    "numLayers": 32,
+    "numHeads": 24,
+    "numKVHeads": 8,
+    "headDim": 64,
+    "intermediateSize": 512,
+    "vocabSize": 49155,
+    "contextLen": 131072,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "gqa",
+    "rope": {
+      "theta": 10000000
+    },
+    "moe": {
+      "numExperts": 40,
+      "topK": 8
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "moe",
+      "id": "moe"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3.1-3b-a800m-instruct/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-10-26T11:46:15.936Z"
+}

@@ -11,8 +11,8 @@
   "paramsB": 3.82,
   "dtype": "bfloat16",
   "stats": {
-    "downloads": 341977,
-    "likes": 1480,
+    "downloads": 338205,
+    "likes": 1481,
     "lastModified": "2025-12-10T20:22:18.000Z",
     "benchmarks": {
       "mmlu": 68.8,
@@ -69,5 +69,5 @@
     "configUrl": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/blob/main/config.json",
     "gated": false
   },
-  "generatedAt": "2026-10-26T02:08:10.203Z"
+  "generatedAt": "2026-10-26T11:46:14.332Z"
 }
