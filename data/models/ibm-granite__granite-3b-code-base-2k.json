@@ -1,0 +1,62 @@
+{
+  "id": "ibm-granite/granite-3b-code-base-2k",
+  "slug": "ibm-granite__granite-3b-code-base-2k",
+  "name": "granite-3b-code-base-2k",
+  "family": "llama",
+  "architecture": "LlamaForCausalLM",
+  "license": "apache-2.0",
+  "modalities": [
+    "text"
+  ],
+  "paramsB": 3.48,
+  "dtype": "bfloat16",
+  "stats": {
+    "downloads": 42800,
+    "likes": 38,
+    "lastModified": "2026-04-25T12:30:36.000Z",
+    "benchmarks": {}
+  },
+  "text": {
+    "hiddenSize": 2560,
+    "numLayers": 32,
+    "numHeads": 32,
+    "numKVHeads": 32,
+    "headDim": 80,
+    "intermediateSize": 10240,
+    "vocabSize": 49152,
+    "contextLen": 2048,
+    "activation": "silu",
+    "normType": "rmsnorm",
+    "attentionType": "mha",
+    "rope": {
+      "theta": 10000
+    }
+  },
+  "blockOps": [
+    {
+      "kind": "norm",
+      "id": "input_norm"
+    },
+    {
+      "kind": "attention",
+      "id": "self_attn"
+    },
+    {
+      "kind": "norm",
+      "id": "post_attn_norm"
+    },
+    {
+      "kind": "mlp",
+      "id": "mlp"
+    },
+    {
+      "kind": "residual",
+      "id": "residual"
+    }
+  ],
+  "source": {
+    "configUrl": "https://huggingface.co/ibm-granite/granite-3b-code-base-2k/blob/main/config.json",
+    "gated": false
+  },
+  "generatedAt": "2026-10-31T11:22:35.513Z"
+}
